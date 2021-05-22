@@ -63,4 +63,4 @@ wget https://raw.githubusercontent.com/icohigh/node-tools/main/cosmovisor/cosmov
 && chmod +x cosmovisor.sh \
 && ./cosmovisor.sh v0.42.4 desmos-labs desmos desmos v0.16.0
 ```
-### DONE
+#### DONE
