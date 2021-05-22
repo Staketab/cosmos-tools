@@ -37,7 +37,7 @@ WorkingDirectory=$HOME
 Restart=on-failure
 RestartSec=3
 LimitNOFILE=4096
-ExecStart=$HOME/ava-node/avalanchego --plugin-dir=$HOME/ava-node/avalanchego-latest/plugins --public-ip=${SERVERIP} --http-host=
+ExecStart=$HOME/ava-node/avalanchego --plugin-dir=$HOME/ava-node/plugins --public-ip=${SERVERIP} --http-host=
 [Install]
 WantedBy=multi-user.target
 " >/etc/systemd/system/avalanchego.service

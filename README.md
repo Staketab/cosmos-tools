@@ -30,11 +30,11 @@ wget https://raw.githubusercontent.com/icohigh/node-tools/main/mina/libs-20.04/i
 # AVALANCHE
 Script for installing and updating Avalanche node from binary.
 Specify TAG and VERSION in this line `./install-upd.sh TAG VERSION`
-Example `./install-upd.sh 1.4.5 1.4.5`
+Example `./install-upd.sh 1.4.4 1.4.4`
 ```
 wget https://raw.githubusercontent.com/icohigh/node-tools/main/avalanche/install-upd.sh \
 && chmod +x install-upd.sh \
-&& ./install-upd.sh 1.4.5 1.4.5 \
+&& ./install-upd.sh 1.4.4 1.4.4 \
 && rm -rf install-upd.sh
 ```
 
