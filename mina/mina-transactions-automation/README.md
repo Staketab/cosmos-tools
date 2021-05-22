@@ -40,4 +40,4 @@ Where `100/333=0.3` - range is from 0 to 0.3 tokens;
 
 Done
 
-![Screenshot of transactions](scr.png)
+![Screenshot of transactions](scr.png)1
