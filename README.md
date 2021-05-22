@@ -1,5 +1,5 @@
-# Mina Tools
-List of tools for Mina Protocol.
+# Node Tools
+List of tools for Node projects.
 
 # GOLANG #GO
 Install custom version of Golang #GO.  
