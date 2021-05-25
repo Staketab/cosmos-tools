@@ -36,6 +36,7 @@ function preparation {
     echo "                 Packages                "
     echo "-----------------------------------------"
     sudo apt-get install build-essential ocaml ocamlbuild automake autoconf libtool wget python libssl-dev git cmake perl tmux ufw gcc unzip zip jq make -y
+    sudo apt-get install golang-statik -y
 }
 
 function scan {
