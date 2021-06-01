@@ -37,15 +37,11 @@ Run the command `docker-compose up -d` to start the node.
 Start new TMUX session `tmux new -s trust`.  
 And then run the command with your wirkers IP:
 ```
-wget https://raw.githubusercontent.com/icohigh/node-tools/main/mina/snark-coordinator/trust.sh \
-&& chmod +x trust.sh \
-&& ./trust.sh IP1 IP2 IP3 IP4
+curl -s https://raw.githubusercontent.com/icohigh/node-tools/main/mina/snark-coordinator/trust.sh | bash -s - IP1 IP2 IP3 IP4
 ```
 Example:
 ```
-wget https://raw.githubusercontent.com/icohigh/node-tools/main/mina/snark-coordinator/trust.sh \
-&& chmod +x trust.sh \
-&& ./trust.sh 1.1.1.1 2.2.2.2 3.3.3.3 4.4.4.4
+curl -s https://raw.githubusercontent.com/icohigh/node-tools/main/mina/snark-coordinator/trust.sh | bash -s - 1.1.1.1 2.2.2.2 3.3.3.3 4.4.4.4
 ```
 
 ### COORDINATOR CONFIGURED
