@@ -5,19 +5,19 @@ GREEN="\033[0;32m"
 ST="\033[0m"
 
 if [ "$IP" == "" ]; then
-    exit
+    IP=""
 fi
 
 if [ "$IP2" == "" ]; then
-    exit
+    IP2=""
 fi
 
 if [ "$IP3" == "" ]; then
-    exit
+    IP3=""
 fi
 
 if [ "$IP4" == "" ]; then
-    exit
+    IP4=""
 fi
 
 echo "---------------"
@@ -26,10 +26,14 @@ echo "---------------"
 
 while true; do
 
-docker exec root_coordinator_1 mina advanced client-trustlist add -ip-address ${IP}/32 \n
-docker exec root_coordinator_1 mina advanced client-trustlist add -ip-address ${IP2}/32 \n
-docker exec root_coordinator_1 mina advanced client-trustlist add -ip-address ${IP3}/32 \n
-docker exec root_coordinator_1 mina advanced client-trustlist add -ip-address ${IP4}/32 \n
+sudo docker exec root_coordinator_1 mina advanced client-trustlist add -ip-address ${IP}/32
+echo""
+sudo docker exec root_coordinator_1 mina advanced client-trustlist add -ip-address ${IP2}/32
+echo""
+sudo docker exec root_coordinator_1 mina advanced client-trustlist add -ip-address ${IP3}/32
+echo""
+sudo docker exec root_coordinator_1 mina advanced client-trustlist add -ip-address ${IP4}/32
+echo""
 
 echo "---------------"
 echo -e "$GREEN Trust list updated.$ST"
