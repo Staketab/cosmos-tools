@@ -17,7 +17,7 @@ PEER_LIST=https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
 WORKER_FEE=0.0025
 WORLER_SEL=rand
 MINA_PUBLIC_KEY=B62qmw8X...
-" > ~/.env
+" > /.env
 ```
 Need to specify:  
 `TAG` - docker image version.  
@@ -33,9 +33,23 @@ wget https://raw.githubusercontent.com/icohigh/node-tools/main/mina/snark-coordi
 ## 5. Start the Node
 Run the command `docker-compose up -d` to start the node.
 
+Other commands:
+1. Check status
+```
+docker exec -it root_coordinator_1 mina client status
+```
+2. Stop docker-compose
+```
+docker-compose down
+```
+3. Docker-compose logs
+```
+docker-compose logs -f
+```
+
 ## 6. Add Workers servers to the Trust-list.
 Start new TMUX session `tmux new -s trust`.  
-And then run the command with your wirkers IP:
+And then run the command with your workers IP:
 ```
 curl -s https://raw.githubusercontent.com/icohigh/node-tools/main/mina/snark-coordinator/trust.sh | bash -s - IP1 IP2 IP3 IP4
 ```
@@ -43,6 +57,7 @@ Example:
 ```
 curl -s https://raw.githubusercontent.com/icohigh/node-tools/main/mina/snark-coordinator/trust.sh | bash -s - 1.1.1.1 2.2.2.2 3.3.3.3 4.4.4.4
 ```
+You can specify one or more IPs. MAX four in script.
 
 ### COORDINATOR CONFIGURED
 
