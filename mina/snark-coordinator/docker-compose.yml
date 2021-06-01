@@ -10,7 +10,7 @@ services:
     restart: always
     volumes:
       - "$HOME/.mina-config:$HOME/.mina-config"
-    command: daemon -peer-list-url ${PEER_LIST} -snark-worker-fee ${WORKER_FEE} -run-snark-coordinator ${MINA_PUBLIC_KEY} -work-selection ${WORLER_SEL} -file-log-level Debug -log-level Info
+    command: daemon -peer-list-url ${PEER_LIST} -snark-worker-fee ${WORKER_FEE} -run-snark-coordinator ${MINA_PUBLIC_KEY} -work-selection ${WORKER_SEL} -file-log-level Debug -log-level Info
     networks:
       - snarker
 
