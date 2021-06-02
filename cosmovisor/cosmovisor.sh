@@ -72,10 +72,14 @@ ln -s -T ${HOME}/.${BIN_NAME}/cosmovisor/upgrades/Gir ${HOME}/.${BIN_NAME}/cosmo
 cd
 echo "export PATH=$HOME/.${BIN_NAME}/cosmovisor/current/bin:\$PATH" >> ~/.profile
 echo "export BIN_NAME=${BIN_NAME}" >> ~/.profile
+echo "export DAEMON_NAME=${BIN_NAME}" >> ~/.profile
+echo "export DAEMON_HOME=${HOME}/.${BIN_NAME}" >> ~/.profile
+echo "export DAEMON_ALLOW_DOWNLOAD_BINARIES=true" >> ~/.profile
+echo "export DAEMON_RESTART_AFTER_UPGRADE=true" >> ~/.profile
 . ~/.profile
 
 echo "[Unit]
-Description=${BIN_NAME}
+Description=${BIN_NAME} Node Service
 After=network-online.target
 [Service]
 User=${USER}
