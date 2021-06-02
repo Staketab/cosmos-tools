@@ -70,7 +70,8 @@ fi
 ln -s -T ${HOME}/.${BIN_NAME}/cosmovisor/upgrades/Gir ${HOME}/.${BIN_NAME}/cosmovisor/current
 
 cd
-echo "export PATH=/root/.${BIN_NAME}/cosmovisor/current/bin:\$PATH" >> ~/.profile
+echo "export PATH=$HOME/.${BIN_NAME}/cosmovisor/current/bin:\$PATH" >> ~/.profile
+echo "export BIN_NAME=${BIN_NAME}" >> ~/.profile
 . ~/.profile
 
 echo "[Unit]
