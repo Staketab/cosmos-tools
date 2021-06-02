@@ -79,6 +79,7 @@ After=network-online.target
 [Service]
 User=${USER}
 Environment=DAEMON_NAME=${BIN_NAME}
+Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=true
 Environment=DAEMON_RESTART_AFTER_UPGRADE=true
 Environment=DAEMON_HOME=${HOME}/.${BIN_NAME}
 ExecStart=$(which cosmovisor) start
