@@ -15,7 +15,7 @@ sudo iptables -A INPUT -p tcp --dport 8301:8302 -j ACCEPT
 echo "TAG=mina-daemon-baked:1.1.5-a42bdee
 PEER_LIST=https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
 WORKER_FEE=0.0025
-WORLER_SEL=rand
+WORKER_SEL=rand
 MINA_PUBLIC_KEY=B62qmw8X...
 " > /.env
 ```
