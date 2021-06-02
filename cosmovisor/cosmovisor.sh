@@ -108,7 +108,7 @@ echo "---------------"
 echo -e "$YELLOW Your Moniker: ${MONIKER}, initialised.\033[0m"
 echo "---------------"
 
-echo -e "$GREEN Enter link to Genesis file (Example: https://raw.githubusercontent.com/desmos-labs/morpheus/master/morpheus-apollo-1/genesis.json)\033[0m"
+echo -e "$GREEN Enter RAW link to Genesis file (Example: https://raw.githubusercontent.com/desmos-labs/morpheus/master/morpheus-apollo-1/genesis.json)\033[0m"
 read -p "Genesis link: " GENESIS
 curl $GENESIS > ~/.${BIN_NAME}/config/genesis.json
 
@@ -137,7 +137,7 @@ echo "---------------"
 echo -e "$YELLOW Waiting for start the chain!\033[0m"
 echo "---------------"
 
-sleep 5
+sleep 2
 
 sudo systemctl start cosmovisor.service
 
