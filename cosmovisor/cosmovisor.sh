@@ -104,13 +104,28 @@ echo "---------------"
 echo -e "$YELLOW cosmovisor.service installed.\033[0m"
 echo "---------------"
 
-echo -e "$GREEN Enter your Moniker\033[0m"
-read -p "Moniker: " MONIKER
-${BIN_NAME} init $MONIKER
-
 echo "---------------"
 echo -e "$YELLOW Your Moniker: ${MONIKER}, initialised.\033[0m"
 echo "---------------"
+
+sleep 1
+
+echo -e "$YELLOW Next you need to provide CHAIN data.\033[0m"
+echo -e "$YELLOW If some data is not needed, just press ENTER to go next.\033[0m"
+echo "---------------"
+
+sleep 3
+
+echo -e "$GREEN Enter CHAIN-ID\033[0m"
+read -p "Chain-id: " CHAIN
+
+echo -e "$GREEN Enter your Moniker\033[0m"
+read -p "Moniker: " MONIKER
+if [ "$CHAIN" == "" ]; then
+    ${BIN_NAME} init $MONIKER
+else
+    ${BIN_NAME} init $MONIKER --chain-id $CHAIN
+fi
 
 echo -e "$GREEN Enter RAW link to Genesis file (Example: https://raw.githubusercontent.com/desmos-labs/morpheus/master/morpheus-apollo-1/genesis.json)\033[0m"
 read -p "Genesis link: " GENESIS
@@ -131,12 +146,7 @@ sed -i.bak -E 's#^(minimum-gas-prices[[:space:]]+=[[:space:]]+).*$#\1"'$GAS_PRIC
 echo "---------------"
 echo -e "$YELLOW ${BIN_NAME} Configured and waiting to start.\033[0m"
 echo "---------------"
-
-echo "---------------"
-echo "---------------"
 echo -e "$YELLOW Installation of ${BIN_NAME}, and cosmovisor complete.\033[0m"
-
-echo ""
 echo "---------------"
 echo -e "$YELLOW Waiting for start the chain!\033[0m"
 echo "---------------"
