@@ -31,7 +31,7 @@ wget https://raw.githubusercontent.com/icohigh/node-tools/main/cosmovisor/cosmov
 
 ## 3. Data for start the chain. 
 Chain-id - `sifchain`  
-Genesis file - [Link](https://raw.githubusercontent.com/icohigh/node-tools/cosmovisor/sifchain/genesis.json)  
+Genesis file - [Link](https://raw.githubusercontent.com/icohigh/node-tools/main/cosmovisor/sifchain/genesis.json)  
 Peers - `8c240f71f9e060277ce18dc09d82d3bbb05d1972@13.211.43.177:26656,0120f0a48e7e81cc98829ef4f5b39480f11ecd5a@52.76.185.17:26656,bcc2d07a14a8a0b3aa202e9ac106dec0bef91fda@13.55.247.60:26656,8c240f71f9e060277ce18dc09d82d3bbb05d1972@13.211.43.177:26656`  
 Seed - `None`  
 minimum-gas-prices - `0.025rowan`  
