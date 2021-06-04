@@ -1,5 +1,5 @@
 # COSMOVISOR
-Setup COSMOVISOR for DESMOS project.
+Setup COSMOVISOR for DESMOS APOLLO TESTNET.
 
 ## 1. Install GOLANG.
 Install custom version of Golang #GO. 
@@ -28,4 +28,12 @@ wget https://raw.githubusercontent.com/icohigh/node-tools/main/cosmovisor/cosmov
 && chmod +x cosmovisor.sh \
 && ./cosmovisor.sh v0.42.4 desmos-labs desmos desmos v0.16.0
 ```
+
+## 3. Data for start the chain. 
+Chain-id - `morpheus-apollo-1`  
+Genesis file - [Link](https://raw.githubusercontent.com/desmos-labs/morpheus/master/morpheus-apollo-1/genesis.json)  
+Peers - `None`  
+Seed - `be3db0fe5ee7f764902dbcc75126a2e082cbf00c@seed-1.morpheus.desmos.network:26656,4659ab47eef540e99c3ee4009ecbe3fbf4e3eaff@seed-2.morpheus.desmos.network:26656,1d9cc23eedb2d812d30d99ed12d5c5f21ff40c23@seed-3.morpheus.desmos.network:26656`  
+minimum-gas-prices - `0.025udaric`  
+
 ## DONE
