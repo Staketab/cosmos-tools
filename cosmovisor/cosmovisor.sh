@@ -229,12 +229,12 @@ echo -e "$YELLOW Next, you need to choose which type of node to configure.\033[0
 echo -e "$YELLOW If you have to configure SENTRY node type$RED yes\033[0m.\033[0m"
 echo -e "$YELLOW If you have to configure VALIDATOR node type$RED no\033[0m.\033[0m"
 read -p "Your answer: " ANSWER
-if [ "$ANSWER" == "yes|YES|Yes" ]; then
+if [ "$ANSWER" == "yes" ]; then
     sentry
-elif [ "$ANSWER" == "no|No" ]; then
+elif [ "$ANSWER" == "no" ]; then
     validator
 else
-    echo "$RED Answer wrong. Exited...\033[0m"
+    echo -e "$RED Answer wrong. Exited...\033[0m"
     exit 0
 fi
 
