@@ -20,7 +20,7 @@ Enter Enviroments on the example of the Desmos project:
 `GIT_NAME = desmos-labs`  
 `GIT_FOLDER = desmos`  
 `BIN_NAME = desmos`  
-`BIN_FOLDER = desmos`  
+`CONFIG_FOLDER = desmos`  
 `BIN_VER = v0.16.0`
 
 The run command should look like this:

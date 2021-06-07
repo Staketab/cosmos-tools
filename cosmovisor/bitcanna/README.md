@@ -20,7 +20,7 @@ Enter Enviroments on the example of the Desmos project:
 `GIT_NAME = BitCannaGlobal`  
 `GIT_FOLDER = testnet-bcna-cosmos`  
 `BIN_NAME = bcnad`  
-`BIN_FOLDER = bcna`  
+`CONFIG_FOLDER = bcna`  
 `BIN_VER = v0.testnet6`
 
 The run command should look like this:

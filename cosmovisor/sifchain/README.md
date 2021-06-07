@@ -20,7 +20,7 @@ Enter Enviroments on the example of the Sifchain project:
 `GIT_NAME = Sifchain`  
 `GIT_FOLDER = sifnode`  
 `BIN_NAME = sifnoded`  
-`BIN_FOLDER = sifnoded`  
+`CONFIG_FOLDER = sifnoded`  
 `BIN_VER = mainnet-genesis`
 
 The run command should look like this:

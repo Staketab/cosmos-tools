@@ -26,12 +26,13 @@ wget https://raw.githubusercontent.com/Staketab/tools/main/cosmovisor/cosmovisor
 `GIT_NAME = desmos-labs`  
 `GIT_FOLDER = desmos`  
 `BIN_NAME = desmos`  
+`CONFIG_FOLDER = desmos`   
 `BIN_VER = v0.16.0`
 
 The run command should look like this:  
 ```
 wget https://raw.githubusercontent.com/Staketab/tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh v0.42.4 desmos-labs desmos desmos v0.16.0
+&& ./cosmovisor.sh v0.42.4 desmos-labs desmos desmos desmos v0.16.0
 ```
 ### DONE
