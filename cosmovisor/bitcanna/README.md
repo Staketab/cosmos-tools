@@ -25,7 +25,7 @@ Enter Enviroments on the example of the Desmos project:
 
 The run command should look like this:
 ```
-wget https://raw.githubusercontent.com/icohigh/node-tools/main/cosmovisor/cosmovisor.sh \
+wget https://raw.githubusercontent.com/Staketab/tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
 && ./cosmovisor.sh v0.42.4 BitCannaGlobal testnet-bcna-cosmos bcnad bcna v0.testnet6
 ```
