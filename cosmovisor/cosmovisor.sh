@@ -19,7 +19,7 @@ COSMOVISOR=$1
 GIT_NAME=$2
 GIT_FOLDER=$3
 BIN_NAME=$4
-BIN_FOLDER=$5
+CONFIG_FOLDER=$5
 BIN_VER=$6
 
 if [ "$COSMOVISOR" == "" ]; then
@@ -38,7 +38,7 @@ if [ "$BIN_NAME" == "" ]; then
     exit
 fi
 
-if [ "$BIN_FOLDER" == "" ]; then
+if [ "$CONFIG_FOLDER" == "" ]; then
     exit
 fi
 
@@ -55,7 +55,7 @@ User=${USER}
 Environment=DAEMON_NAME=${BIN_NAME}
 Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=true
 Environment=DAEMON_RESTART_AFTER_UPGRADE=true
-Environment=DAEMON_HOME=${HOME}/.${BIN_FOLDER}
+Environment=DAEMON_HOME=${HOME}/.${CONFIG_FOLDER}
 ExecStart=$(which cosmovisor) start
 Restart=always
 RestartSec=3
@@ -74,22 +74,22 @@ echo "---------------"
 function genesis {
 echo -e "$GREEN Enter RAW link to Genesis file (Example: https://raw.githubusercontent.com/desmos-labs/morpheus/master/morpheus-apollo-1/genesis.json)\033[0m"
 read -p "Genesis link: " GENESIS
-curl $GENESIS > ~/.${BIN_FOLDER}/config/genesis.json
+curl $GENESIS > ~/.${CONFIG_FOLDER}/config/genesis.json
 }
 function seeds {
 echo -e "$GREEN Enter Seeds (Example: be3db0fe5ee7f764902dbcc75126a2e082cbf00c@seed-1.morpheus.desmos.network:26656)\033[0m"
 read -p "Seed: " SEED
-sed -i.bak -E 's#^(seeds[[:space:]]+=[[:space:]]+).*$#\1"'$SEED'"#' ~/.${BIN_FOLDER}/config/config.toml
+sed -i.bak -E 's#^(seeds[[:space:]]+=[[:space:]]+).*$#\1"'$SEED'"#' ~/.${CONFIG_FOLDER}/config/config.toml
 }
 function peers {
 echo -e "$GREEN Enter Peers (Validator or Sentry PEER) (Example: 728d59298dce64c72f13001f67a5b3e7fc080f91@135.181.201.2:26656)\033[0m"
 read -p "Persistent_peers: " PEERS
-sed -i.bak -E 's#^(persistent_peers[[:space:]]+=[[:space:]]+).*$#\1"'$PEERS'"#' ~/.${BIN_FOLDER}/config/config.toml
+sed -i.bak -E 's#^(persistent_peers[[:space:]]+=[[:space:]]+).*$#\1"'$PEERS'"#' ~/.${CONFIG_FOLDER}/config/config.toml
 }
 function gas {
 echo -e "$GREEN Enter minimum-gas-prices (Example: 0.025udaric)\033[0m"
 read -p "minimum-gas-prices: " GAS_PRICE
-sed -i.bak -E 's#^(minimum-gas-prices[[:space:]]+=[[:space:]]+).*$#\1"'$GAS_PRICE'"#' ~/.${BIN_FOLDER}/config/app.toml
+sed -i.bak -E 's#^(minimum-gas-prices[[:space:]]+=[[:space:]]+).*$#\1"'$GAS_PRICE'"#' ~/.${CONFIG_FOLDER}/config/app.toml
 }
 
 function sentry {
@@ -125,8 +125,8 @@ seeds
 peers
 gas
 
-sed -i.bak -E 's#^(pex[[:space:]]+=[[:space:]]+).*$#\1'true'#' ~/.${BIN_FOLDER}/config/config.toml
-sed -i.bak -E 's#^(addr_book_strict[[:space:]]+=[[:space:]]+).*$#\1'false'#' ~/.${BIN_FOLDER}/config/config.toml
+sed -i.bak -E 's#^(pex[[:space:]]+=[[:space:]]+).*$#\1'true'#' ~/.${CONFIG_FOLDER}/config/config.toml
+sed -i.bak -E 's#^(addr_book_strict[[:space:]]+=[[:space:]]+).*$#\1'false'#' ~/.${CONFIG_FOLDER}/config/config.toml
 
 echo "---------------"
 echo -e "$YELLOW ${BIN_NAME} Configured and waiting to start.\033[0m"
@@ -170,7 +170,7 @@ seeds
 peers
 gas
 
-sed -i.bak -E 's#^(pex[[:space:]]+=[[:space:]]+).*$#\1'false'#' ~/.${BIN_FOLDER}/config/config.toml
+sed -i.bak -E 's#^(pex[[:space:]]+=[[:space:]]+).*$#\1'false'#' ~/.${CONFIG_FOLDER}/config/config.toml
 
 echo "---------------"
 echo -e "$YELLOW ${BIN_NAME} Configured and waiting to start.\033[0m"
@@ -183,7 +183,7 @@ echo "---------------"
 
 function configuring {
 
-mkdir -p $GOBIN ${HOME}/.${BIN_FOLDER}/cosmovisor/genesis/bin ${HOME}/.${BIN_FOLDER}/cosmovisor/upgrades/Gir/bin
+mkdir -p $GOBIN ${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin
 
 mkdir -p $GOPATH/src/github.com/cosmos && cd $GOPATH/src/github.com/cosmos && git clone https://github.com/cosmos/cosmos-sdk && cd cosmos-sdk/cosmovisor && git checkout ${COSMOVISOR} && make cosmovisor
 
@@ -200,20 +200,20 @@ echo -e "$YELLOW ${BIN_NAME} built and installed.\033[0m"
 echo "---------------"
 
 if [ -e $GOPATH/src/github.com/${GIT_FOLDER}/${GIT_FOLDER}/build/${BIN_NAME} ]; then
-  cp build/${BIN_NAME} ${HOME}/.${BIN_FOLDER}/cosmovisor/genesis/bin
-  cp build/${BIN_NAME} ${HOME}/.${BIN_FOLDER}/cosmovisor/upgrades/Gir/bin
+  cp build/${BIN_NAME} ${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin
+  cp build/${BIN_NAME} ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin
 else
   cd
-  cp $GOBIN/${BIN_NAME} ${HOME}/.${BIN_FOLDER}/cosmovisor/genesis/bin
-  cp $GOBIN/${BIN_NAME} ${HOME}/.${BIN_FOLDER}/cosmovisor/upgrades/Gir/bin
+  cp $GOBIN/${BIN_NAME} ${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin
+  cp $GOBIN/${BIN_NAME} ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin
 fi
 
-ln -s -T ${HOME}/.${BIN_FOLDER}/cosmovisor/upgrades/Gir ${HOME}/.${BIN_FOLDER}/cosmovisor/current
+ln -s -T ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir ${HOME}/.${CONFIG_FOLDER}/cosmovisor/current
 
 cd
 echo "export PATH=$HOME/.${BIN_NAME}/cosmovisor/current/bin:\$PATH" >> ~/.profile
 echo "export BIN_NAME=${BIN_NAME}" >> ~/.profile
-echo "export BIN_FOLDER=${BIN_FOLDER}" >> ~/.profile
+echo "export CONFIG_FOLDER=${CONFIG_FOLDER}" >> ~/.profile
 echo "export DAEMON_NAME=${BIN_NAME}" >> ~/.profile
 echo "export DAEMON_HOME=${HOME}/.${BIN_NAME}" >> ~/.profile
 echo "export DAEMON_ALLOW_DOWNLOAD_BINARIES=true" >> ~/.profile
