@@ -125,7 +125,7 @@ seeds
 peers
 gas
 
-sed -i.bak -E 's#^(pex[[:space:]]+=[[:space:]]+).*$#\1'false'#' ~/.${BIN_FOLDER}/config/config.toml
+sed -i.bak -E 's#^(pex[[:space:]]+=[[:space:]]+).*$#\1'true'#' ~/.${BIN_FOLDER}/config/config.toml
 sed -i.bak -E 's#^(addr_book_strict[[:space:]]+=[[:space:]]+).*$#\1'false'#' ~/.${BIN_FOLDER}/config/config.toml
 
 echo "---------------"
