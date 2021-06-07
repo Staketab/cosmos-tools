@@ -20,13 +20,14 @@ Enter Enviroments on the example of the Sifchain project:
 `GIT_NAME = Sifchain`  
 `GIT_FOLDER = sifnode`  
 `BIN_NAME = sifnoded`  
+`BIN_FOLDER = sifnoded`  
 `BIN_VER = mainnet-genesis`
 
 The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh v0.42.4 Sifchain sifnode sifnoded mainnet-genesis
+&& ./cosmovisor.sh v0.42.4 Sifchain sifnode sifnoded sifnoded mainnet-genesis
 ```
 
 ## 3. Data for start the chain. 

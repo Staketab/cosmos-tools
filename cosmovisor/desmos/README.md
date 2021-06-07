@@ -20,13 +20,14 @@ Enter Enviroments on the example of the Desmos project:
 `GIT_NAME = desmos-labs`  
 `GIT_FOLDER = desmos`  
 `BIN_NAME = desmos`  
+`BIN_FOLDER = desmos`  
 `BIN_VER = v0.16.0`
 
 The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh v0.42.4 desmos-labs desmos desmos v0.16.0
+&& ./cosmovisor.sh v0.42.4 desmos-labs desmos desmos desmos v0.16.0
 ```
 
 ## 3. Data for start the chain. 
