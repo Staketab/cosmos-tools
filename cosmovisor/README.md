@@ -15,13 +15,13 @@ wget https://raw.githubusercontent.com/Staketab/tools/main/golang/install.sh \
 Reboot your terminal after installing.
 
 ### 2. Run COSMOVISOR setup and build.
-Enter Enviroments `COSMOVISOR_VER GIT_NAME GIT_FOLDER BIN_NAME BIN_VER` and run this script to setup and build.  
+Enter Enviroments `COSMOVISOR_VER GIT_NAME GIT_FOLDER BIN_NAME CONFIG_FOLDER BIN_VER` and run this script to setup and build.  
 ```
 wget https://raw.githubusercontent.com/Staketab/tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
 && ./cosmovisor.sh COSMOVISOR_VER GIT_NAME GIT_FOLDER BIN_NAME BIN_VER
 ```
-#### On the example of the Desmos project:
+#### On the example of the Desmos project:  
 `COSMOVISOR_VER = v0.42.4`  
 `GIT_NAME = desmos-labs`  
 `GIT_FOLDER = desmos`  

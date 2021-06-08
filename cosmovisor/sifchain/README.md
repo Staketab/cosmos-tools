@@ -15,7 +15,7 @@ wget https://raw.githubusercontent.com/icohigh/node-tools/main/golang/install.sh
 Reboot your terminal after installing.
 
 ## 2. Run COSMOVISOR setup and build.
-Enter Enviroments on the example of the Sifchain project:
+Enter Enviroments on the example of the Sifchain project:  
 `COSMOVISOR_VER = v0.42.4`  
 `GIT_NAME = Sifchain`  
 `GIT_FOLDER = sifnode`  
