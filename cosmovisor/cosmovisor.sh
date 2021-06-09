@@ -203,10 +203,13 @@ echo "---------------"
 if [ -e $GOPATH/src/github.com/${GIT_FOLDER}/${GIT_FOLDER}/build/${BIN_NAME} ]; then
   cp build/${BIN_NAME} ${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin
   cp build/${BIN_NAME} ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin
-else
+elif [ -e $GOBIN/${BIN_NAME} ]; then
   cd
   cp $GOBIN/${BIN_NAME} ${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin
   cp $GOBIN/${BIN_NAME} ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin
+else
+  cp $(which ${BIN_NAME}) ${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin
+  cp $(which ${BIN_NAME}) ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin
 fi
 
 ln -s -T ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir ${HOME}/.${CONFIG_FOLDER}/cosmovisor/current
