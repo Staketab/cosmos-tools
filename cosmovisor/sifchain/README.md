@@ -37,4 +37,10 @@ Peers - `8c240f71f9e060277ce18dc09d82d3bbb05d1972@13.211.43.177:26656,0120f0a48e
 Seed - `None`  
 minimum-gas-prices - `0.025rowan`  
 
+### 4. Service commands.
+Reload configuration change - `systemctl daemon-reload`  
+Restart Cosmovisor service - `systemctl restart cosmovisor.service`  
+Cosmovisor service logs - `journalctl -u cosmovisor.service -f`  
+Stop Cosmovisor service - `systemctl stop cosmovisor.service`  
+
 ## DONE

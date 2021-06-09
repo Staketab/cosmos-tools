@@ -37,4 +37,10 @@ Peers - `d6aa4c9f3ccecb0cc52109a95962b4618d69dd3f@seed1.bitcanna.io:26656,41d373
 Seed - `d6aa4c9f3ccecb0cc52109a95962b4618d69dd3f@seed1.bitcanna.io:26656,41d373d03f93a3dc883ba4c1b9b7a781ead53d76@seed2.bitcanna.io:16656`  
 minimum-gas-prices - `0.01ubcna`  
 
+### 4. Service commands.
+Reload configuration change - `systemctl daemon-reload`  
+Restart Cosmovisor service - `systemctl restart cosmovisor.service`  
+Cosmovisor service logs - `journalctl -u cosmovisor.service -f`  
+Stop Cosmovisor service - `systemctl stop cosmovisor.service`  
+
 ## DONE
