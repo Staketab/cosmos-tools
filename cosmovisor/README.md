@@ -36,7 +36,7 @@ wget https://raw.githubusercontent.com/Staketab/tools/main/cosmovisor/cosmovisor
 && ./cosmovisor.sh v0.42.4 desmos-labs desmos desmos desmos v0.16.0
 ```
 
-### 3. Service commands.
+## 3. Service commands.
 Reload configuration change - `systemctl daemon-reload`  
 Restart Cosmovisor service - `systemctl restart cosmovisor.service`  
 Cosmovisor service logs - `journalctl -u cosmovisor.service -f`  
