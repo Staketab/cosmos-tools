@@ -17,7 +17,7 @@ PEER_LIST=https://storage.googleapis.com/mina-seed-lists/mainnet_seeds.txt
 WORKER_FEE=0.0025
 WORKER_SEL=rand
 MINA_PUBLIC_KEY=B62qmw8X...
-" > /.env
+" > ~/.env
 ```
 Need to specify:  
 `TAG` - docker image version.  
