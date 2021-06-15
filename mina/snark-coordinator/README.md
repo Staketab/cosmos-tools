@@ -3,7 +3,7 @@ First server setup.
 
 ## 1. Installing components
 ```
-curl -s https://raw.githubusercontent.com/icohigh/node-tools/main/components/install.sh | bash
+curl -s https://raw.githubusercontent.com/Staketab/tools/main/mina/libs-20.04/install.sh | bash
 ```
 ## 2. Ports
 Need to open 8301 and 8302 ports.  
@@ -28,7 +28,7 @@ Need to specify:
 
 ## 4. Download docker-compose.yml
 ```
-wget https://raw.githubusercontent.com/icohigh/node-tools/main/mina/snark-coordinator/docker-compose.yml
+wget https://raw.githubusercontent.com/Staketab/tools/main/mina/snark-coordinator/docker-compose.yml
 ```
 ## 5. Start the Node
 Run the command `docker-compose up -d` to start the node.
@@ -51,11 +51,11 @@ docker-compose logs -f
 Start new TMUX session `tmux new -s trust`.  
 And then run the command with your workers IP:
 ```
-curl -s https://raw.githubusercontent.com/icohigh/node-tools/main/mina/snark-coordinator/trust.sh | bash -s - IP1 IP2 IP3 IP4
+curl -s https://raw.githubusercontent.com/Staketab/tools/main/mina/snark-coordinator/trust.sh | bash -s - IP1 IP2 IP3 IP4
 ```
 Example:
 ```
-curl -s https://raw.githubusercontent.com/icohigh/node-tools/main/mina/snark-coordinator/trust.sh | bash -s - 1.1.1.1 2.2.2.2 3.3.3.3 4.4.4.4
+curl -s https://raw.githubusercontent.com/Staketab/tools/main/mina/snark-coordinator/trust.sh | bash -s - 1.1.1.1 2.2.2.2 3.3.3.3 4.4.4.4
 ```
 You can specify one or more IPs. MAX four in script.
 
