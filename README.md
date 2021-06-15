@@ -21,10 +21,7 @@ Link to the [Guide](https://icohigh.gitbook.io/mina-node-testnet/).
 ## 2. Install libraries for Ubuntu 20.04
 
 ```
-wget https://raw.githubusercontent.com/Staketab/tools/main/mina/libs-20.04/install.sh \
-&& chmod +x install.sh \
-&& ./install.sh \
-&& rm -rf install.sh
+curl -s https://raw.githubusercontent.com/Staketab/tools/main/mina/libs-20.04/install.sh | bash
 ```
 
 # AVALANCHE
@@ -44,23 +41,24 @@ Setup COSMOVISOR for all Cosmos projects.
 ### 1. Install GOLANG.
 
 ### 2. Run COSMOVISOR setup and build.
-Enter Enviroments `COSMOVISOR_VER GIT_NAME GIT_FOLDER BIN_NAME BIN_VER` and run this script to setup and build.  
+Enter Enviroments `COSMOVISOR_VER GIT_NAME GIT_FOLDER BIN_NAME CONFIG_FOLDER BIN_VER` and run this script to setup and build.  
 ```
 wget https://raw.githubusercontent.com/Staketab/tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh COSMOVISOR_VER GIT_NAME GIT_FOLDER BIN_NAME BIN_VER
+&& ./cosmovisor.sh COSMOVISOR_VER GIT_NAME GIT_FOLDER BIN_NAME CONFIG_FOLDER BIN_VER
 ```
-#### On the example of the Desmos project:
+#### On the example of the Desmos project:  
 `COSMOVISOR_VER = v0.42.4`  
 `GIT_NAME = desmos-labs`  
 `GIT_FOLDER = desmos`  
 `BIN_NAME = desmos`  
+`CONFIG_FOLDER = desmos`   
 `BIN_VER = v0.16.0`
 
 The run command should look like this:  
 ```
 wget https://raw.githubusercontent.com/Staketab/tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh v0.42.4 desmos-labs desmos desmos v0.16.0
+&& ./cosmovisor.sh v0.42.4 desmos-labs desmos desmos desmos v0.16.0
 ```
 ### DONE
