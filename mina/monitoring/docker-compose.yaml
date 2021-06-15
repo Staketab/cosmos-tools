@@ -1,0 +1,107 @@
+version: "3"
+
+services:
+    mina:
+        image: minaprotocol/${MINA_TAG}
+        container_name: mina
+        ports:
+          - "8302:8303"
+          - "6060:6060"
+          - "127.0.0.1:3085:3085"
+        logging:
+            driver: "json-file"
+            options:
+                tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"
+        restart: always
+        volumes:
+          - "$HOME/keys:$HOME/keys:ro"
+          - "$HOME/.mina-config:$HOME/.mina-config"
+        command: daemon -peer-list-url ${PEER_LIST} -block-producer-key ${KEYPATH} -block-producer-password ${PASS} --coinbase-receiver ${RECEIVER} --metrics-port 6060 --archive-address 127.0.0.1:3086 --upload-blocks-to-gcloud ${GCLOUD_SET} --insecure-rest-server --open-limited-graphql-port --limited-graphql-port 3095 -file-log-level Debug -log-level Info
+        networks:
+            - node
+            - world
+            - loki
+    sidecar:
+        image: minaprotocol/${SIDECAR_TAG}
+        container_name: sidecar
+        pid: host
+        logging:
+            driver: "json-file"
+            options:
+                tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"
+        restart: always
+        volumes:
+            - "$HOME/tmp/mina-sidecar.json:/etc/mina-sidecar.json"
+        networks:
+            - node
+            - world
+            - loki
+
+    loki:
+        image: grafana/loki:2.0.0
+        container_name: loki
+        ports:
+            - "3100:3100"
+        command: -config.file=/etc/loki/local-config.yaml
+        networks:
+            - node
+            - world
+            - loki
+
+    promtail:
+        image: grafana/promtail:1.4.1
+        container_name: promtail
+        volumes:
+            - /var/log:/var/log
+            - /var/lib/docker/containers:/var/lib/docker/containers:ro
+            - $HOME/tmp/docker.yml:/etc/promtail/docker-config.yml
+        command: -config.file=/etc/promtail/docker-config.yml
+        networks:
+            - node
+            - world
+            - loki
+
+    prometheus:
+        image: prom/prometheus
+        container_name: prometheus
+        ports:
+            - "9090:9090"
+        volumes:
+            - $HOME/tmp/prometheus-mina.yml:/etc/prometheus/prometheus.yml
+        networks:
+            - node
+            - world
+        command: >-
+            --config.file=/etc/prometheus/prometheus.yml
+
+    grafana:
+        image: grafana/grafana
+        container_name: grafana
+        ports:
+            - "3000:3000"
+        environment:
+            GF_INSTALL_PLUGINS: fifemon-graphql-datasource
+        networks:
+            - node
+            - world
+
+    node-exporter:
+        image: quay.io/prometheus/node-exporter:latest
+        container_name: node_exporter
+        command:
+            - '--path.rootfs=/host'
+        pid: host
+        restart: unless-stopped
+        volumes:
+            - '/:/host:ro,rslave'
+        networks:
+            - node
+            - world
+
+networks:
+    node:
+      driver: bridge
+    world:
+      driver: bridge
+    loki:
+      driver: bridge
