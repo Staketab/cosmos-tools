@@ -92,6 +92,14 @@ echo -e "$GREEN Enter minimum-gas-prices (Example: 0.025udaric)$NORMAL"
 read -p "minimum-gas-prices: " GAS_PRICE
 sed -i.bak -E 's#^(minimum-gas-prices[[:space:]]+=[[:space:]]+).*$#\1"'$GAS_PRICE'"#' ~/.${CONFIG_FOLDER}/config/app.toml
 }
+function fastsync {
+echo -e "$GREEN Enter fastsync version (Example: v0, v1, v2)$NORMAL"
+echo -e "$YELLOW v0 (default) - the legacy fast sync implementation$NORMAL"
+echo -e "$YELLOW v1 - refactor of v0 version for better testability$NORMAL"
+echo -e "$YELLOW v2 - complete redesign of v0, optimized for testability & readability$NORMAL"
+read -p "version: " FASTSYNC
+sed -i.bak -E 's#^(version[[:space:]]+=[[:space:]]+).*$#\1"'$FASTSYNC'"#' ~/.${CONFIG_FOLDER}/config/config.toml
+}
 
 function sentry {
 
@@ -125,6 +133,7 @@ genesis
 seeds
 peers
 gas
+fastsync
 
 sed -i.bak -E 's#^(pex[[:space:]]+=[[:space:]]+).*$#\1'true'#' ~/.${CONFIG_FOLDER}/config/config.toml
 sed -i.bak -E 's#^(addr_book_strict[[:space:]]+=[[:space:]]+).*$#\1'false'#' ~/.${CONFIG_FOLDER}/config/config.toml
@@ -170,6 +179,7 @@ genesis
 seeds
 peers
 gas
+fastsync
 
 sed -i.bak -E 's#^(pex[[:space:]]+=[[:space:]]+).*$#\1'false'#' ~/.${CONFIG_FOLDER}/config/config.toml
 
