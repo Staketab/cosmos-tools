@@ -48,7 +48,7 @@ if [ "$BIN_VER" == "" ]; then
 fi
 
 function service {
-echo "[Unit]
+sudo /bin/bash -c  'echo "[Unit]
 Description=${BIN_NAME} Node Service
 After=network-online.target
 [Service]
@@ -63,7 +63,7 @@ RestartSec=3
 LimitNOFILE=4096
 [Install]
 WantedBy=multi-user.target
-" >/etc/systemd/system/cosmovisor.service
+" >/etc/systemd/system/cosmovisor.service'
 
 sudo systemctl daemon-reload && sudo systemctl enable cosmovisor.service
 
