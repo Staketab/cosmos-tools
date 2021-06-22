@@ -15,8 +15,8 @@ wget https://raw.githubusercontent.com/Staketab/tools/main/golang/install.sh \
 Reboot your terminal after installing.
 
 ## 2. Run COSMOVISOR setup and build.
-Enter Enviroments on the example of the Desmos project:  
-`COSMOVISOR_VER = v0.42.4`  
+Enter Enviroments on the example of the BitCanna project:  
+`COSMOVISOR_VER = indica`  
 `GIT_NAME = BitCannaGlobal`  
 `GIT_FOLDER = testnet-bcna-cosmos`  
 `BIN_NAME = bcnad`  
@@ -27,7 +27,7 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh v0.42.4 BitCannaGlobal testnet-bcna-cosmos bcnad bcna v0.testnet6
+&& ./cosmovisor.sh indica BitCannaGlobal testnet-bcna-cosmos bcnad bcna v0.testnet6
 ```
 
 ## 3. Data for start the chain. 
