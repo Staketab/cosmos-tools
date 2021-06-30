@@ -32,7 +32,7 @@ wget https://raw.githubusercontent.com/Staketab/tools/main/cosmovisor/cosmovisor
 
 ## 3. Data for start the chain. 
 Chain-id - `bitcanna-testnet-4`  
-Genesis file - [Link](https://raw.githubusercontent.com/BitCannaGlobal/testnet-bcna-cosmos/main/instructions/stage2/genesis.json)  
+Genesis file - [Link](https://raw.githubusercontent.com/BitCannaGlobal/testnet-bcna-cosmos/main/instructions/stage4/genesis.json)  
 Peers - `d6aa4c9f3ccecb0cc52109a95962b4618d69dd3f@seed1.bitcanna.io:26656,41d373d03f93a3dc883ba4c1b9b7a781ead53d76@seed2.bitcanna.io:16656`  
 Seed - `42dd0eeb50510e5ad71ea7c9183bd2a0619000e6@135.181.73.109:26656,a60f5ce8cd0705c8b9e052dd91ab7d58ccdbbfd9@94.130.136.77:46656,d6aa4c9f3ccecb0cc52109a95962b4618d69dd3f@seed1.bitcanna.io:26656,41d373d03f93a3dc883ba4c1b9b7a781ead53d76@seed2.bitcanna.io:16656,acc177d5af9fad3064c1831bba41718d5f0ef2ce@167.71.0.53:26656,0f42474822f65d3955d91b910f172b8708418324@176.223.140.165:26656,14b89bebb8d380b15cc8c1fa6b1c53e3caa0a0c2@157.90.240.131:26656,42dd0eeb50510e5ad71ea7c9183bd2a0619000e6@135.181.73.109:26656,a60f5ce8cd0705c8b9e052dd91ab7d58ccdbbfd9@94.130.136.77:46656`  
 minimum-gas-prices - `0.01ubcna`  
