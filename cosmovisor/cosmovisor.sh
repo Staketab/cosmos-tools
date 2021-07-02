@@ -225,11 +225,11 @@ fi
 ln -s -T ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir ${HOME}/.${CONFIG_FOLDER}/cosmovisor/current
 
 cd
-echo "export PATH=$HOME/.${BIN_NAME}/cosmovisor/current/bin:\$PATH" >> ~/.profile
+echo "export PATH=$HOME/.${CONFIG_FOLDER}/cosmovisor/current/bin:\$PATH" >> ~/.profile
 echo "export BIN_NAME=${BIN_NAME}" >> ~/.profile
 echo "export CONFIG_FOLDER=${CONFIG_FOLDER}" >> ~/.profile
 echo "export DAEMON_NAME=${BIN_NAME}" >> ~/.profile
-echo "export DAEMON_HOME=${HOME}/.${BIN_NAME}" >> ~/.profile
+echo "export DAEMON_HOME=${HOME}/.${CONFIG_FOLDER}" >> ~/.profile
 echo "export DAEMON_ALLOW_DOWNLOAD_BINARIES=true" >> ~/.profile
 echo "export DAEMON_RESTART_AFTER_UPGRADE=true" >> ~/.profile
 . ~/.profile
