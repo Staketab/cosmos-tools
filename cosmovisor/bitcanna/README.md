@@ -16,7 +16,7 @@ Reboot your terminal after installing.
 
 ## 2. Run COSMOVISOR setup and build.
 Enter Enviroments on the example of the Desmos project:  
-`COSMOVISOR_VER = v0.42.4`  
+`COSMOVISOR_VER = v0.42.6`  
 `GIT_NAME = BitCannaGlobal`  
 `GIT_FOLDER = testnet-bcna-cosmos`  
 `BIN_NAME = bcnad`  
