@@ -65,7 +65,7 @@ LimitNOFILE=4096
 WantedBy=multi-user.target
 " >/etc/systemd/system/${BIN_NAME}.service'
 
-sudo systemctl daemon-reload && sudo systemctl enable cosmovisor.service
+sudo systemctl daemon-reload && sudo systemctl enable ${BIN_NAME}.service
 
 echo "---------------"
 echo -e "$YELLOW Cosmovisor service installed.$NORMAL"
