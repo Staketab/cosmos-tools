@@ -63,7 +63,7 @@ RestartSec=3
 LimitNOFILE=4096
 [Install]
 WantedBy=multi-user.target
-" >/etc/systemd/system/${BIN_NAME}.service'
+" >/etc/systemd/system/'${BIN_NAME}'.service'
 
 sudo systemctl daemon-reload && sudo systemctl enable ${BIN_NAME}.service
 
