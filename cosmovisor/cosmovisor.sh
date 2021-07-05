@@ -63,12 +63,12 @@ RestartSec=3
 LimitNOFILE=4096
 [Install]
 WantedBy=multi-user.target
-" >/etc/systemd/system/cosmovisor.service'
+" >/etc/systemd/system/${BIN_NAME}.service'
 
 sudo systemctl daemon-reload && sudo systemctl enable cosmovisor.service
 
 echo "---------------"
-echo -e "$YELLOW cosmovisor.service installed.$NORMAL"
+echo -e "$YELLOW Cosmovisor service installed.$NORMAL"
 echo "---------------"
 }
 
@@ -257,9 +257,9 @@ fi
 function start {
 sleep 2
 
-sudo systemctl start cosmovisor.service
+sudo systemctl start ${BIN_NAME}.service
 
-journalctl -u cosmovisor.service -f
+journalctl -u ${BIN_NAME}.service -f
 }
 
 configuring
