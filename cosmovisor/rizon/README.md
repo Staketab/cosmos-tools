@@ -39,8 +39,8 @@ minimum-gas-prices - `0.025uatolo`
 
 ## 4. Service commands.
 Reload configuration change - `systemctl daemon-reload`  
-Restart Cosmovisor service - `systemctl restart cosmovisor.service`  
-Cosmovisor service logs - `journalctl -u cosmovisor.service -f`  
-Stop Cosmovisor service - `systemctl stop cosmovisor.service`  
+Restart Cosmovisor service - `systemctl restart rizond.service`  
+Cosmovisor service logs - `journalctl -u rizond.service -f`  
+Stop Cosmovisor service - `systemctl stop rizond.service`  
 
 ## DONE

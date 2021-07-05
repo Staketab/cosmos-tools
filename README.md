@@ -25,7 +25,7 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cos
 && ./cosmovisor.sh COSMOVISOR_VER GIT_NAME GIT_FOLDER BIN_NAME CONFIG_FOLDER BIN_VER
 ```
 #### On the example of the Desmos project:  
-`COSMOVISOR_VER = v0.42.4`  
+`COSMOVISOR_VER = v0.42.6`  
 `GIT_NAME = desmos-labs`  
 `GIT_FOLDER = desmos`  
 `BIN_NAME = desmos`  
