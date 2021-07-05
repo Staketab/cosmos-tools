@@ -49,18 +49,18 @@ fi
 
 function service {
 sudo /bin/bash -c  'echo "[Unit]
-Description=${BIN_NAME} Node Service
+Description='${BIN_NAME}' Node Service
 After=network-online.target
 [Service]
 User=${USER}
-Environment=DAEMON_NAME=${BIN_NAME}
+Environment=DAEMON_NAME='${BIN_NAME}'
 Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=true
 Environment=DAEMON_RESTART_AFTER_UPGRADE=true
-Environment=DAEMON_HOME=${HOME}/.${CONFIG_FOLDER}
-ExecStart=$(which cosmovisor) start
+Environment=DAEMON_HOME='${HOME}'/.'${CONFIG_FOLDER}'
+ExecStart='$(which cosmovisor)' start
 Restart=always
 RestartSec=3
-LimitNOFILE=4096
+LimitNOFILE=50000
 [Install]
 WantedBy=multi-user.target
 " >/etc/systemd/system/'${BIN_NAME}'.service'
