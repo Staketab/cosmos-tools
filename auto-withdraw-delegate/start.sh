@@ -18,19 +18,18 @@ NORMAL="\033[0m"
 
 BINARY=$1
 KEY_NAME=$2
-
-if [ "$BINARY" == "" ]; then
-    exit
+RPC_PORT=$3
+if [[ ${RPC_PORT} == "" ]]; then
+  RPC_PORT=26657
 fi
 
-if [ "$KEY_NAME" == "" ]; then
-    exit
-fi
+set -u
 
 echo "-------------------------------------------------------------------"
 echo -e "$YELLOW Enter PASSWORD for your KEY $NORMAL"
 echo "-------------------------------------------------------------------"
 read -s PASS
+
 
 COIN=$(curl -s http://localhost:26657/genesis | jq -r .result.genesis.app_state.crisis.constant_fee.denom)
 FEE=5000${COIN}
