@@ -38,4 +38,22 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cos
 && chmod +x cosmovisor.sh \
 && ./cosmovisor.sh v0.42.4 desmos-labs desmos desmos desmos v0.16.0
 ```
+# AUTO WITHDRAW AND DELEGATE SCRIPT.
+Install script for auto-withdraw-delegate rewards to your Validator every 60 minutes.  
+Specify environments in this line `./start.sh COIN BINARY KEY_NAME`
+Example `./start.sh uatolo rizond keyname`
+
+Start new `TMUX` session:
+```
+tmux new -s delegate
+```
+And start this script:
+```
+wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/auto-withdraw-delegate/start.sh \
+&& chmod +x start.sh \
+&& ./start.sh uatolo rizond keyname
+```
+## SCREENSHOT EXAMPLE: 
+![alt_tag](scr\delegate.png)
+
 ### DONE
