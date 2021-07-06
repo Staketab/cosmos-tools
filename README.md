@@ -54,6 +54,6 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/auto-withdraw-
 && ./start.sh uatolo rizond keyname
 ```
 ## SCREENSHOT EXAMPLE: 
-![alt_tag](scr\delegate.png)
+![alt_tag](scr/delegate.png)
 
 ### DONE
