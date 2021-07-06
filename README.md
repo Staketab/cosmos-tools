@@ -40,8 +40,10 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cos
 ```
 # AUTO WITHDRAW AND DELEGATE SCRIPT.
 Install script for auto-withdraw-delegate rewards to your Validator every 60 minutes.  
-Specify environments in this line `./start.sh BINARY KEY_NAME`
-Example `./start.sh rizond keyname`
+Specify environments in this line `./start.sh BINARY KEY_NAME`  
+Example `./start.sh rizond keyname`  
+
+## If you have custom `RPC PORT` specify his at the end of line`./start.sh BINARY KEY_NAME RPC_PORT`  
 
 Start new `TMUX` session:
 ```
@@ -51,7 +53,7 @@ And start this script:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/auto-withdraw-delegate/start.sh \
 && chmod +x start.sh \
-&& ./start.sh rizond keyname
+&& ./start.sh rizond keyname rpc_port
 ```
 ## SCREENSHOT EXAMPLE: 
 ![alt_tag](scr/delegate.png)
