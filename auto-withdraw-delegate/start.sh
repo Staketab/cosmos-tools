@@ -54,7 +54,7 @@ if [ "$ANSWER" == "yes" ]; then
     while true
     do
     echo "-------------------------------------------------------------------"
-    echo -e "$RED$(date)$NORMAL $YELLOW Withdraw commission and rewards $NORMAL"
+    echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW Withdraw commission and rewards $NORMAL"
     echo "-------------------------------------------------------------------"
     echo $PASS | ${BINARY} tx distribution withdraw-rewards ${VALOPER} --commission --from ${KEY_NAME} --gas auto --chain-id=${CHAIN} --fees ${FEE} --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
 
@@ -65,7 +65,7 @@ if [ "$ANSWER" == "yes" ]; then
 
     if [[ $DELEGATE > 0 && $DELEGATE != "null" ]]; then
         echo "-------------------------------------------------------------------"
-        echo -e "$RED$(date)$NORMAL $YELLOW Stake ${DELEGATE} ${COIN} $NORMAL"
+        echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW Stake ${DELEGATE} ${COIN} $NORMAL"
         echo "-------------------------------------------------------------------"
         echo $PASS | ${BINARY} tx staking delegate ${VALOPER} ${DELEGATE}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --fees ${FEE} --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
     else
