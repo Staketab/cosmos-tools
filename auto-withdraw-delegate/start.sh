@@ -19,13 +19,7 @@ NORMAL="\033[0m"
 BINARY=$1
 KEY_NAME=$2
 
-if [ "$BINARY" == "" ]; then
-    exit
-fi
-
-if [ "$KEY_NAME" == "" ]; then
-    exit
-fi
+set -u
 
 echo "-------------------------------------------------------------------"
 echo -e "$YELLOW Enter PASSWORD for your KEY $NORMAL"
