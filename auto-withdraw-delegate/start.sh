@@ -56,7 +56,7 @@ if [ "$ANSWER" == "yes" ]; then
     echo "-------------------------------------------------------------------"
     echo -e "$RED$(date)$NORMAL $YELLOW Withdraw commission and rewards $NORMAL"
     echo "-------------------------------------------------------------------"
-    echo $PASS | ${BINARY} tx distribution withdraw-rewards ${VALOPER} --commission --from ${KEY_NAME} --gas auto --chain-id=${CHAIN} --fees ${FEE} -y | grep "raw_log\|txhash"
+    echo $PASS | ${BINARY} tx distribution withdraw-rewards ${VALOPER} --commission --from ${KEY_NAME} --gas auto --chain-id=${CHAIN} --fees ${FEE} --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
 
     sleep 1m
 
@@ -67,7 +67,7 @@ if [ "$ANSWER" == "yes" ]; then
         echo "-------------------------------------------------------------------"
         echo -e "$RED$(date)$NORMAL $YELLOW Stake ${DELEGATE} ${COIN} $NORMAL"
         echo "-------------------------------------------------------------------"
-        echo $PASS | ${BINARY} tx staking delegate ${VALOPER} ${DELEGATE}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --fees ${FEE} -y | grep "raw_log\|txhash"
+        echo $PASS | ${BINARY} tx staking delegate ${VALOPER} ${DELEGATE}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --fees ${FEE} --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
     else
         echo "-------------------------------------------------------------------"
         echo -e "$RED Insufficient balance for delegation $NORMAL"
