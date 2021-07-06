@@ -19,6 +19,7 @@ NORMAL="\033[0m"
 BINARY=$1
 KEY_NAME=$2
 RPC_PORT=$3
+
 if [[ ${RPC_PORT} == "" ]]; then
   RPC_PORT=26657
 fi
@@ -31,7 +32,7 @@ echo "-------------------------------------------------------------------"
 read -s PASS
 
 
-COIN=$(curl -s http://localhost:26657/genesis | jq -r .result.genesis.app_state.crisis.constant_fee.denom)
+COIN=$(curl -s http://localhost:${RPC_PORT}/genesis | jq -r .result.genesis.app_state.crisis.constant_fee.denom)
 FEE=5000${COIN}
 ADDRESS=$(echo $PASS | ${BINARY} keys show ${KEY_NAME} --output json | jq -r '.address')
 VALOPER=$(echo $PASS | ${BINARY} keys show ${ADDRESS} -a --bech val)
