@@ -36,7 +36,7 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh v0.42.4 desmos-labs desmos desmos desmos v0.16.0
+&& ./cosmovisor.sh v0.42.6 desmos-labs desmos desmos desmos v0.16.0
 ```
 # AUTO WITHDRAW AND DELEGATE SCRIPT.
 Install script for auto-withdraw-delegate rewards to your Validator every 60 minutes.  
