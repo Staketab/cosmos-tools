@@ -23,24 +23,7 @@ BIN_NAME=$4
 CONFIG_FOLDER=$5
 BIN_VER=$6
 
-if [ "$COSMOVISOR" == "" ]; then
-    exit
-fi
-if [ "$GIT_NAME" == "" ]; then
-    exit
-fi
-if [ "$GIT_FOLDER" == "" ]; then
-    exit
-fi
-if [ "$BIN_NAME" == "" ]; then
-    exit
-fi
-if [ "$CONFIG_FOLDER" == "" ]; then
-    exit
-fi
-if [ "$BIN_VER" == "" ]; then
-    exit
-fi
+set -u
 
 function service {
 sudo /bin/bash -c  'echo "[Unit]
