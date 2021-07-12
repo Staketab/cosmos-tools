@@ -45,9 +45,9 @@ WantedBy=multi-user.target
 
 sudo systemctl daemon-reload && sudo systemctl enable ${BIN_NAME}.service
 
-echo "---------------"
+echo "-------------------------------------------------------------------"
 echo -e "$YELLOW Cosmovisor service installed.$NORMAL"
-echo "---------------"
+echo "-------------------------------------------------------------------"
 }
 
 function genesis {
@@ -84,7 +84,7 @@ function sentry {
 echo -e "$YELLOW SENRTY CONFIGURING.$NORMAL"
 echo -e "$YELLOW Next you need to provide CHAIN data.$NORMAL"
 echo -e "$YELLOW If some data is not needed, just press ENTER to go next.$NORMAL"
-echo "---------------"
+echo "-------------------------------------------------------------------"
 
 sleep 3
 
@@ -99,11 +99,11 @@ else
     ${BIN_NAME} init $MONIKER --chain-id $CHAIN
 fi
 
-echo "---------------"
+echo "-------------------------------------------------------------------"
 echo -e "$YELLOW Your SENTRY Moniker: ${MONIKER}, initialised.$NORMAL"
 echo -e "$YELLOW Your SENTRY NODE-ID: $NORMAL"
 ${BIN_NAME} tendermint show-node-id
-echo "---------------"
+echo "-------------------------------------------------------------------"
 
 sleep 5
 
@@ -116,13 +116,13 @@ fastsync
 sed -i.bak -E 's#^(pex[[:space:]]+=[[:space:]]+).*$#\1'true'#' ~/.${CONFIG_FOLDER}/config/config.toml
 sed -i.bak -E 's#^(addr_book_strict[[:space:]]+=[[:space:]]+).*$#\1'false'#' ~/.${CONFIG_FOLDER}/config/config.toml
 
-echo "---------------"
+echo "-------------------------------------------------------------------"
 echo -e "$YELLOW ${BIN_NAME} Configured and waiting to start.$NORMAL"
-echo "---------------"
+echo "-------------------------------------------------------------------"
 echo -e "$YELLOW Installation of ${BIN_NAME}, and cosmovisor complete.$NORMAL"
-echo "---------------"
+echo "-------------------------------------------------------------------"
 echo -e "$YELLOW Waiting for start the chain!$NORMAL"
-echo "---------------"
+echo "-------------------------------------------------------------------"
 }
 
 function validator {
@@ -130,7 +130,7 @@ function validator {
 echo -e "$YELLOW VALIDATOR CONFIGURING.$NORMAL"
 echo -e "$YELLOW Next you need to provide CHAIN data.$NORMAL"
 echo -e "$YELLOW If some data is not needed, just press ENTER to go next.$NORMAL"
-echo "---------------"
+echo "-------------------------------------------------------------------"
 
 sleep 3
 
@@ -145,11 +145,11 @@ else
     ${BIN_NAME} init $MONIKER --chain-id $CHAIN
 fi
 
-echo "---------------"
+echo "-------------------------------------------------------------------"
 echo -e "$YELLOW Your Validator Moniker: ${MONIKER}, initialised.$NORMAL"
 echo -e "$YELLOW Your Validator NODE-ID: $NORMAL"
 ${BIN_NAME} tendermint show-node-id
-echo "---------------"
+echo "-------------------------------------------------------------------"
 
 sleep 5
 
@@ -161,13 +161,13 @@ fastsync
 
 sed -i.bak -E 's#^(pex[[:space:]]+=[[:space:]]+).*$#\1'false'#' ~/.${CONFIG_FOLDER}/config/config.toml
 
-echo "---------------"
+echo "-------------------------------------------------------------------"
 echo -e "$YELLOW ${BIN_NAME} Configured and waiting to start.$NORMAL"
-echo "---------------"
+echo "-------------------------------------------------------------------"
 echo -e "$YELLOW Installation of ${BIN_NAME}, and cosmovisor complete.$NORMAL"
-echo "---------------"
+echo "-------------------------------------------------------------------"
 echo -e "$YELLOW Waiting for start the chain!$NORMAL"
-echo "---------------"
+echo "-------------------------------------------------------------------"
 }
 
 function configuring {
@@ -178,15 +178,15 @@ mkdir -p $GOPATH/src/github.com/cosmos && cd $GOPATH/src/github.com/cosmos && gi
 
 mv cosmovisor $GOBIN
 
-echo "---------------"
+echo "-------------------------------------------------------------------"
 echo -e "$YELLOW Cosmovisor built and installed.$NORMAL"
-echo "---------------"
+echo "-------------------------------------------------------------------"
 
 mkdir $GOPATH/src/github.com/${GIT_FOLDER} && cd $GOPATH/src/github.com/${GIT_FOLDER} && git clone https://github.com/${GIT_NAME}/${GIT_FOLDER} && cd ${GIT_FOLDER} && git fetch && git checkout tags/${BIN_VER} && make install && make build
 
-echo "---------------"
+echo "-------------------------------------------------------------------"
 echo -e "$YELLOW ${BIN_NAME} built and installed.$NORMAL"
-echo "---------------"
+echo "-------------------------------------------------------------------"
 
 if [ -e $GOPATH/src/github.com/${GIT_FOLDER}/${GIT_FOLDER}/build/${BIN_NAME} ]; then
   cp build/${BIN_NAME} ${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin
