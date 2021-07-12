@@ -32,7 +32,7 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cos
 
 ## 3. Data for start the chain. 
 Chain-id - `cygnusx-1`  
-Genesis file - [Link]()  
+Genesis file - [Link](https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/stargaze/genesis.json)  
 Peers - ``  
 Seed - `b5c81e417113e283288c48a34f1d57c73a0c6682@seed.cygnusx-1.publicawesome.dev:36656`  
 minimum-gas-prices - `0.025ustarx`  
