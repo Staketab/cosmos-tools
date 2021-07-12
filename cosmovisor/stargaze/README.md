@@ -27,7 +27,7 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh v0.42.6 public-awesome stargaze starsd starsd v0.8.1
+&& ./cosmovisor.sh v0.42.7 public-awesome stargaze starsd starsd v0.9.2
 ```
 
 ## 3. Data for start the chain. 
