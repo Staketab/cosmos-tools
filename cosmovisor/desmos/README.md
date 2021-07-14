@@ -16,31 +16,31 @@ Reboot your terminal after installing.
 
 ## 2. Run COSMOVISOR setup and build.
 Enter Enviroments on the example of the Desmos project:  
-`COSMOVISOR_VER = v0.42.4`  
+`COSMOVISOR_VER = v0.42.7`  
 `GIT_NAME = desmos-labs`  
 `GIT_FOLDER = desmos`  
 `BIN_NAME = desmos`  
 `CONFIG_FOLDER = desmos`  
-`BIN_VER = v0.16.0`
+`BIN_VER = v0.17.2`
 
 The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh v0.42.4 desmos-labs desmos desmos desmos v0.16.0
+&& ./cosmovisor.sh v0.42.7 desmos-labs desmos desmos desmos v0.17.2
 ```
 
 ## 3. Data for start the chain. 
-Chain-id - `morpheus-apollo-1`  
-Genesis file - [Link](https://raw.githubusercontent.com/desmos-labs/morpheus/master/morpheus-apollo-1/genesis.json)  
+Chain-id - `morpheus-apollo-2`  
+Genesis file - [Link](https://raw.githubusercontent.com/desmos-labs/morpheus/master/morpheus-apollo-2/genesis.json)  
 Peers - `None`  
 Seed - `be3db0fe5ee7f764902dbcc75126a2e082cbf00c@seed-1.morpheus.desmos.network:26656,4659ab47eef540e99c3ee4009ecbe3fbf4e3eaff@seed-2.morpheus.desmos.network:26656,1d9cc23eedb2d812d30d99ed12d5c5f21ff40c23@seed-3.morpheus.desmos.network:26656`  
 minimum-gas-prices - `0.025udaric`  
 
 ## 4. Service commands.
 Reload configuration change - `systemctl daemon-reload`  
-Restart Cosmovisor service - `systemctl restart cosmovisor.service`  
-Cosmovisor service logs - `journalctl -u cosmovisor.service -f`  
-Stop Cosmovisor service - `systemctl stop cosmovisor.service`  
+Restart Cosmovisor service - `systemctl restart desmos.service`  
+Cosmovisor service logs - `journalctl -u desmos.service -f`  
+Stop Cosmovisor service - `systemctl stop desmos.service`  
 
 ## DONE
