@@ -21,13 +21,13 @@ Enter Enviroments on the example of the Osmosis project:
 `GIT_FOLDER = stargaze`  
 `BIN_NAME = starsd`  
 `CONFIG_FOLDER = starsd`  
-`BIN_VER = v0.9.2`
+`BIN_VER = v0.9.3`
 
 The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh v0.42.7 public-awesome stargaze starsd starsd v0.9.2
+&& ./cosmovisor.sh v0.42.7 public-awesome stargaze starsd starsd v0.9.3
 ```
 
 ## 3. Data for start the chain. 
