@@ -16,7 +16,7 @@ Reboot your terminal after installing.
 
 ## 2. Run COSMOVISOR setup and build.
 Enter Enviroments on the example of the Osmosis project:  
-`COSMOVISOR_VER = v0.42.5`  
+`COSMOVISOR_VER = v0.42.7`  
 `GIT_NAME = osmosis-labs`  
 `GIT_FOLDER = osmosis`  
 `BIN_NAME = osmosisd`  
@@ -27,7 +27,7 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh v0.42.5 osmosis-labs osmosis osmosisd osmosisd v1.0.1
+&& ./cosmovisor.sh v0.42.7 osmosis-labs osmosis osmosisd osmosisd v1.0.1
 ```
 
 ## 3. Data for start the chain. 
@@ -39,8 +39,8 @@ minimum-gas-prices - `0.025uosmo`
 
 ## 4. Service commands.
 Reload configuration change - `systemctl daemon-reload`  
-Restart Cosmovisor service - `systemctl restart cosmovisor.service`  
-Cosmovisor service logs - `journalctl -u cosmovisor.service -f`  
-Stop Cosmovisor service - `systemctl stop cosmovisor.service`  
+Restart Cosmovisor service - `systemctl restart osmosisd.service`  
+Cosmovisor service logs - `journalctl -u osmosisd.service -f`  
+Stop Cosmovisor service - `systemctl stop osmosisd.service`  
 
 ## DONE
