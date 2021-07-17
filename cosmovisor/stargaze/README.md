@@ -21,20 +21,20 @@ Enter Enviroments on the example of the Osmosis project:
 `GIT_FOLDER = stargaze`  
 `BIN_NAME = starsd`  
 `CONFIG_FOLDER = starsd`  
-`BIN_VER = v0.9.3`
+`BIN_VER = v0.10.0`
 
 The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh v0.42.7 public-awesome stargaze starsd starsd v0.9.3
+&& ./cosmovisor.sh v0.42.7 public-awesome stargaze starsd starsd v0.10.0
 ```
 
 ## 3. Data for start the chain. 
 Chain-id - `cygnusx-1`  
-Genesis file - [Link](https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/stargaze/genesis.json)  
+Genesis file - [Link](https://github.com/public-awesome/networks/releases/download/cygnusx-1-final/genesis.json)  
 Peers - ``  
-Seed - `b5c81e417113e283288c48a34f1d57c73a0c6682@seed.cygnusx-1.publicawesome.dev:36656`  
+Seed - `b5c81e417113e283288c48a34f1d57c73a0c6682@seed.cygnusx-1.publicawesome.dev:36657`  
 minimum-gas-prices - `0.025ustarx`  
 
 ## 4. Service commands.
