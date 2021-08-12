@@ -24,7 +24,7 @@ read -s PASS
 
 
 COIN=$(curl -s http://localhost:${RPC_PORT}/genesis | jq -r .result.genesis.app_state.crisis.constant_fee.denom)
-echo -e "$GREEN Enter Fees in umed (1 MED = 1000000umed)$NORMAL"
+echo -e "$GREEN Enter Fees in ${COIN}.$NORMAL"
 read -p "Fees: " FEES
 FEE=${FEES}${COIN}
 ADDRESS=$(echo $PASS | ${BINARY} keys show ${KEY_NAME} --output json | jq -r '.address')
