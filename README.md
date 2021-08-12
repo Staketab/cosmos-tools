@@ -7,13 +7,13 @@ Setup COSMOVISOR for all Cosmos projects.
 ### 1. GOLANG #GO
 Install custom version of Golang #GO.  
 Specify version in this line `./install.sh -v VERSION`  
-Example `./install.sh -v 1.15.7`    
+Example `./install.sh -v 1.16.5`    
 
 Or you can install GO from [official website](https://golang.org/doc/install).
 ```
 wget https://raw.githubusercontent.com/Staketab/node-tools/main/components/golang/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -v 1.15.7
+&& ./install.sh -v 1.16.5
 ```
 Reboot your terminal after installing.
 

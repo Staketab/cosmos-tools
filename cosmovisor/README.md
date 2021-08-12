@@ -4,20 +4,20 @@ Setup COSMOVISOR for all Cosmos projects.
 ### 1. Install GOLANG.
 Install custom version of Golang #GO.  
 Specify version in this line `./install.sh -v VERSION`  
-Example `./install.sh -v 1.15.7`    
+Example `./install.sh -v 1.16.5`    
 
 Or you can install GO from [official website](https://golang.org/doc/install).
 ```
-wget https://raw.githubusercontent.com/Staketab/tools/main/golang/install.sh \
+wget https://raw.githubusercontent.com/Staketab/node-tools/main/golang/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -v 1.15.7
+&& ./install.sh -v 1.16.5
 ```
 Reboot your terminal after installing.
 
 ### 2. Run COSMOVISOR setup and build.
 Enter Enviroments `COSMOVISOR_VER GIT_NAME GIT_FOLDER BIN_NAME CONFIG_FOLDER BIN_VER` and run this script to setup and build.  
 ```
-wget https://raw.githubusercontent.com/Staketab/tools/main/cosmovisor/cosmovisor.sh \
+wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
 && ./cosmovisor.sh COSMOVISOR_VER GIT_NAME GIT_FOLDER BIN_NAME BIN_VER
 ```
@@ -31,7 +31,7 @@ wget https://raw.githubusercontent.com/Staketab/tools/main/cosmovisor/cosmovisor
 
 The run command should look like this:  
 ```
-wget https://raw.githubusercontent.com/Staketab/tools/main/cosmovisor/cosmovisor.sh \
+wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
 && ./cosmovisor.sh v0.42.4 desmos-labs desmos desmos desmos v0.16.0
 ```
