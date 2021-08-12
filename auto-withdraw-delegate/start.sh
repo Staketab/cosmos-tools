@@ -24,7 +24,9 @@ read -s PASS
 
 
 COIN=$(curl -s http://localhost:${RPC_PORT}/genesis | jq -r .result.genesis.app_state.crisis.constant_fee.denom)
-FEE=5000${COIN}
+echo -e "$GREEN Enter Fees in umed (1 MED = 1000000umed)$NORMAL"
+read -p "Fees: " FEES
+FEE=${FEES}${COIN}
 ADDRESS=$(echo $PASS | ${BINARY} keys show ${KEY_NAME} --output json | jq -r '.address')
 VALOPER=$(echo $PASS | ${BINARY} keys show ${ADDRESS} -a --bech val)
 CHAIN=$(${BINARY} status 2>&1 | jq -r .NodeInfo.network)
@@ -52,7 +54,7 @@ if [ "$ANSWER" == "yes" ]; then
     sleep 1m
 
     AMOUNT=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --output json | jq -r '.balances[0].amount')
-    DELEGATE=$((AMOUNT - 1000000))
+    DELEGATE=$((AMOUNT - 3000000))
 
     if [[ $DELEGATE > 0 && $DELEGATE != "null" ]]; then
         echo "-------------------------------------------------------------------"
