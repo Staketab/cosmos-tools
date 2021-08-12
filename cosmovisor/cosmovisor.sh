@@ -87,6 +87,9 @@ if [ -f $BINARY*.zip ]; then
 elif [ -f $BINARY*.tar.gz ]; then
     echo -e "$YELLOW :: Unpacking archive with BINARY...$NORMAL"
     tar -xzvf $HOME/tmp/*.tar.gz
+elif [ -f $BINARY*.gz ]; then
+    echo -e "$YELLOW :: Unpacking archive with BINARY...$NORMAL"
+    gunzip -c $HOME/tmp/*.gz
 elif [ -f $BINARY*.bzip2 ]; then
     echo -e "$YELLOW :: Unpacking archive with BINARY...$NORMAL"
     tar -xvjf $HOME/tmp/*.bzip2
@@ -140,9 +143,38 @@ done
 #fi
 }
 function genesis {
-echo -e "$GREEN Enter RAW link to Genesis file (Example: https://raw.githubusercontent.com/desmos-labs/morpheus/master/morpheus-apollo-1/genesis.json)$NORMAL"
-read -p "Genesis link: " GENESIS
-curl $GENESIS > $HOME/.${CONFIG_FOLDER}/config/genesis.json
+echo -e "$GREEN Enter link to Genesis file (Example: https://raw.githubusercontent.com/desmos-labs/morpheus/master/morpheus-apollo-1/genesis.json)$NORMAL"
+read -p "Genesis link: " LINK2
+mkdir -p $HOME/tmp && cd $HOME/tmp
+GENESIS_PATH="$HOME/.${CONFIG_FOLDER}/config/"
+FILE="genesis.json"
+
+echo -e "$YELLOW :: Downloading archive with Genesis...$NORMAL"
+GENESIS=$HOME/tmp/
+wget -P $GENESIS $LINK2 --quiet --show-progress
+if [ -f $GENESIS*.zip ]; then
+    echo -e "$YELLOW :: Unpacking archive with BINARY...$NORMAL"
+    unzip -q $HOME/tmp/*.zip
+elif [ -f $GENESIS*.tar.gz ]; then
+    echo -e "$YELLOW :: Unpacking archive with BINARY...$NORMAL"
+    tar -xzvf $HOME/tmp/*.tar.gz -C $GENESIS
+elif [ -f $GENESIS*.gz ]; then
+    echo -e "$YELLOW :: Unpacking archive with BINARY...$NORMAL"
+    gunzip -c $HOME/tmp/*.gz > $FILE
+elif [ -f $GENESIS*.bzip2 ]; then
+    echo -e "$YELLOW :: Unpacking archive with BINARY...$NORMAL"
+    tar -xvjf $HOME/tmp/*.bzip2 -C $GENESIS
+elif [ -f $GENESIS*.gzip ]; then
+    echo -e "$YELLOW :: Unpacking archive with BINARY...$NORMAL"
+    tar -xvzf $HOME/tmp/*.gzip -C $GENESIS
+elif [ -f $GENESIS*.tar ]; then
+    echo -e "$YELLOW :: Unpacking archive with BINARY...$NORMAL"
+    tar -xvjf $HOME/tmp/*.tar -C $GENESIS
+elif [ -f $GENESIS*.json ]; then
+    echo -e "$YELLOW It's not archive. Continue...$NORMAL"
+fi
+cp $HOME/tmp/$FILE $GENESIS_PATH
+rm -rf $HOME/tmp
 }
 function seeds {
 line
