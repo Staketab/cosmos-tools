@@ -23,7 +23,7 @@ Enter Enviroments on the example of the Desmos project:
 `CONFIG_FOLDER = bcna`  
 `BIN_VER = v0.2-beta`
 
-The run command should look like this:
+## The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
@@ -31,11 +31,30 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cos
 ```
 
 ## 3. Data for start the chain. 
-Chain-id - `bitcanna-testnet-6`  
-Genesis file - [Link](https://raw.githubusercontent.com/BitCannaGlobal/testnet-bcna-cosmos/main/instructions/public-testnet/genesis.json)  
-Peers - `d6aa4c9f3ccecb0cc52109a95962b4618d69dd3f@seed1.bitcanna.io:26656,23671067d0fd40aec523290585c7d8e91034a771@seed2.bitcanna.io:26656`  
-Seed - `d6aa4c9f3ccecb0cc52109a95962b4618d69dd3f@seed1.bitcanna.io:26656,23671067d0fd40aec523290585c7d8e91034a771@seed2.bitcanna.io:26656`  
-minimum-gas-prices - `0.01ubcna`  
+Binary link:
+```
+https://github.com/BitCannaGlobal/bcna/releases/download/v0.2-beta/bcnad
+```
+Chain-id:
+```
+bitcanna-testnet-6
+```  
+Genesis file:
+```
+https://raw.githubusercontent.com/BitCannaGlobal/testnet-bcna-cosmos/main/instructions/public-testnet/genesis.json
+```
+Peers:
+```
+d6aa4c9f3ccecb0cc52109a95962b4618d69dd3f@seed1.bitcanna.io:26656,23671067d0fd40aec523290585c7d8e91034a771@seed2.bitcanna.io:26656
+```
+Seed:
+```
+d6aa4c9f3ccecb0cc52109a95962b4618d69dd3f@seed1.bitcanna.io:26656,23671067d0fd40aec523290585c7d8e91034a771@seed2.bitcanna.io:26656
+```
+minimum-gas-prices:
+```
+0.01ubcna
+```
 
 ## 4. Service commands.
 Reload configuration change - `systemctl daemon-reload`  
