@@ -25,7 +25,7 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cos
 && ./cosmovisor.sh COSMOVISOR_VER GIT_NAME GIT_FOLDER BIN_NAME CONFIG_FOLDER BIN_VER
 ```
 #### On the example of the Desmos project:  
-`COSMOVISOR_VER = v0.42.6`  
+`COSMOVISOR_VER = v0.42.9`  
 `GIT_NAME = desmos-labs`  
 `GIT_FOLDER = desmos`  
 `BIN_NAME = desmos`  
@@ -36,26 +36,6 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh v0.42.6 desmos-labs desmos desmos desmos v0.16.0
+&& ./cosmovisor.sh v0.42.9 desmos-labs desmos desmos desmos v0.16.0
 ```
-# AUTO WITHDRAW AND DELEGATE SCRIPT.
-Install script for auto-withdraw-delegate rewards to your Validator every 60 minutes.  
-Specify environments in this line `./start.sh BINARY KEY_NAME`  
-Example `./start.sh desmos ducca`  
-
-## If you have custom `RPC PORT` specify his at the end of line`./start.sh BINARY KEY_NAME RPC_PORT`  
-
-Start new `TMUX` session:
-```
-tmux new -s delegate
-```
-And start this script:
-```
-wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/auto-withdraw-delegate/start.sh \
-&& chmod +x start.sh \
-&& ./start.sh binary keyname rpc_port
-```
-## SCREENSHOT EXAMPLE: 
-![alt_tag](scr/delegate.png)
-
 ### DONE
