@@ -7,21 +7,46 @@ YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
 
-BINARY=$1
-KEY_NAME=$2
-RPC_PORT=$3
+function setup {
+  binary "${1}"
+  keyname "${2}"
+  rpcport "${3}"
+  tgtoken "${4}"
+  tgchatid "${5}"
+}
 
-if [[ ${RPC_PORT} == "" ]]; then
-  RPC_PORT=26657
-fi
+function binary {
+  BINARY=${1}
+}
 
-set -u
+function keyname {
+  KEY_NAME=${1}
+}
 
+function rpcport {
+  RPC_PORT=${1:-"26657"}
+}
+
+function tgtoken {
+  TG_TOKEN=${1}
+}
+function tgchatid {
+  TG_CHAT_ID=${1}
+}
+
+function sendTg {
+  if [[ ${TG_TOKEN} != "" ]]; then
+    local tg_msg="$@"
+    curl -s -H 'Content-Type: application/json' --request 'POST' -d "{\"chat_id\":\"${TG_CHAT_ID}\",\"text\":\"${tg_msg}\"}" "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" -so /dev/null
+  fi
+}
+
+function launch {
+setup "${1}" "${2}" "${3}" "${4}" "${5}"
 echo "-------------------------------------------------------------------"
 echo -e "$YELLOW Enter PASSWORD for your KEY $NORMAL"
 echo "-------------------------------------------------------------------"
 read -s PASS
-
 
 COIN=$(curl -s http://localhost:${RPC_PORT}/genesis | jq -r .result.genesis.app_state.crisis.constant_fee.denom)
 echo -e "$GREEN Enter Fees in ${COIN}.$NORMAL"
@@ -61,7 +86,16 @@ if [ "$ANSWER" == "yes" ]; then
         echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW Stake ${DELEGATE} ${COIN} $NORMAL"
         echo "-------------------------------------------------------------------"
         echo $PASS | ${BINARY} tx staking delegate ${VALOPER} ${DELEGATE}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --fees ${FEE} --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
+        sleep 30s
+        echo "-------------------------------------------------------------------"
+        echo -e "$GREEN Balance after delegation:$NORMAL"
+        BAL=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --output json | jq -r '.balances[0].amount')
+        echo -e "$YELLOW ${BAL} ${COIN} $NORMAL"
+        MSG=$(echo -e "${BINARY} | $(date +%F-%H-%M-%S) | Delegated: ${DELEGATE} ${COIN} | Balance after delegation: ${BAL} ${COIN}")
+        sendTg ${MSG}
     else
+        MSG=$(echo -e "${BINARY} | $(date +%F-%H-%M-%S) | Insufficient balance for delegation")
+        sendTg ${MSG}
         echo "-------------------------------------------------------------------"
         echo -e "$RED Insufficient balance for delegation $NORMAL"
         echo "-------------------------------------------------------------------"
@@ -78,4 +112,27 @@ else
     echo -e "$RED Answer wrong. Exited...$NORMAL"
     exit 0
 fi
+}
+
+while getopts ":b:k:p:t:c:" o; do
+  case "${o}" in
+    b)
+      b=${OPTARG}
+      ;;
+    k)
+      k=${OPTARG}
+      ;;
+    p)
+      p=${OPTARG}
+      ;;
+    t)
+      t=${OPTARG}
+      ;;
+    c)
+      c=${OPTARG}
+      ;;
+  esac
 done
+shift $((OPTIND-1))
+
+launch "${b}" "${k}" "${p}" "${t}" "${c}"
