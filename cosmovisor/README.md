@@ -33,7 +33,7 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh v0.42.4 desmos-labs desmos desmos desmos v0.16.0
+&& ./cosmovisor.sh v0.42.9 desmos-labs desmos desmos desmos v0.16.0
 ```
 
 ## 3. Service commands.
