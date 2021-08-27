@@ -46,7 +46,7 @@ https://raw.githubusercontent.com/desmos-labs/mainnet/main/genesis.json
 ```
 Peers:
 ```
-none
+6af346f98a371c327afc078f45f401c7594bf4c7@95.216.42.177:26656
 ```
 Seed:
 ```
