@@ -8,7 +8,7 @@ Example `./install.sh -v 1.16.5`
 
 Or you can install GO from [official website](https://golang.org/doc/install).
 ```
-wget https://raw.githubusercontent.com/Staketab/node-tools/main/golang/install.sh \
+wget https://raw.githubusercontent.com/Staketab/node-tools/main/components/golang/install.sh \
 && chmod +x install.sh \
 && ./install.sh -v 1.16.5
 ```
