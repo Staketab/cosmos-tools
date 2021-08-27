@@ -153,27 +153,34 @@ echo -e "$YELLOW :: Downloading archive with Genesis...$NORMAL"
 GENESIS=$HOME/tmp/
 wget -P $GENESIS $LINK2 --quiet --show-progress
 if [ -f $GENESIS*.zip ]; then
-    echo -e "$YELLOW :: Unpacking archive with BINARY...$NORMAL"
+    echo -e "$YELLOW :: Unpacking archive with Genesis...$NORMAL"
     unzip -q $HOME/tmp/*.zip
 elif [ -f $GENESIS*.tar.gz ]; then
-    echo -e "$YELLOW :: Unpacking archive with BINARY...$NORMAL"
+    echo -e "$YELLOW :: Unpacking archive with Genesis...$NORMAL"
     tar -xzvf $HOME/tmp/*.tar.gz -C $GENESIS
 elif [ -f $GENESIS*.gz ]; then
-    echo -e "$YELLOW :: Unpacking archive with BINARY...$NORMAL"
+    echo -e "$YELLOW :: Unpacking archive with Genesis...$NORMAL"
     gunzip -c $HOME/tmp/*.gz > $FILE
 elif [ -f $GENESIS*.bzip2 ]; then
-    echo -e "$YELLOW :: Unpacking archive with BINARY...$NORMAL"
+    echo -e "$YELLOW :: Unpacking archive with Genesis...$NORMAL"
     tar -xvjf $HOME/tmp/*.bzip2 -C $GENESIS
 elif [ -f $GENESIS*.gzip ]; then
-    echo -e "$YELLOW :: Unpacking archive with BINARY...$NORMAL"
+    echo -e "$YELLOW :: Unpacking archive with Genesis...$NORMAL"
     tar -xvzf $HOME/tmp/*.gzip -C $GENESIS
 elif [ -f $GENESIS*.tar ]; then
-    echo -e "$YELLOW :: Unpacking archive with BINARY...$NORMAL"
+    echo -e "$YELLOW :: Unpacking archive with Genesis...$NORMAL"
     tar -xvjf $HOME/tmp/*.tar -C $GENESIS
 elif [ -f $GENESIS*.json ]; then
     echo -e "$YELLOW It's not archive. Continue...$NORMAL"
 fi
-cp $HOME/tmp/$FILE $GENESIS_PATH
+
+if [ -f $GENESIS$FILE ]; then
+    echo -e "$YELLOW :: Genesis file correct...$NORMAL"
+elif [ $GENESIS*.json != $FILE ]; then
+    echo -e "$YELLOW :: Renaming Genesis...$NORMAL"
+    mv $HOME/tmp/*.json $GENESIS_PATH$FILE
+fi
+cp $HOME/tmp/$FILE $GENESIS_PATH$FILE
 rm -rf $HOME/tmp
 }
 function seeds {
