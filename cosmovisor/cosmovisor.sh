@@ -149,7 +149,7 @@ mkdir -p $HOME/tmp && cd $HOME/tmp
 GENESIS_PATH="$HOME/.${CONFIG_FOLDER}/config/"
 FILE="genesis.json"
 
-echo -e "$YELLOW :: Downloading archive with Genesis...$NORMAL"
+echo -e "$YELLOW :: Downloading file with Genesis...$NORMAL"
 GENESIS=$HOME/tmp/
 wget -P $GENESIS $LINK2 --quiet --show-progress
 if [ -f $GENESIS*.zip ]; then
