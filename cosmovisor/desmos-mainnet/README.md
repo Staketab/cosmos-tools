@@ -38,7 +38,7 @@ none
 ```
 Chain-id:
 ```
-desmos-mainnet-1
+desmos-mainnet
 ```  
 Genesis file:
 ```
