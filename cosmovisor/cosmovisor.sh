@@ -444,7 +444,7 @@ sleep 2
 
 sudo systemctl start ${BIN_NAME}.service
 
-journalctl -u ${BIN_NAME}.service -f
+sudo journalctl -u ${BIN_NAME}.service -f
 }
 
 configuring
