@@ -43,7 +43,7 @@ sudo /bin/bash -c  'echo "[Unit]
 Description='${BIN_NAME}' Node Service
 After=network-online.target
 [Service]
-User=${USER}
+User='${USER}'
 Environment=DAEMON_NAME='${BIN_NAME}'
 Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=true
 Environment=DAEMON_RESTART_AFTER_UPGRADE=true
