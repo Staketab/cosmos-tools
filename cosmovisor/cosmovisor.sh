@@ -102,7 +102,15 @@ elif [ -f $BINARY*.tar ]; then
 elif [ -f $BINARY* ]; then
     echo -e "$YELLOW It's not archive. Continue...$NORMAL"
 fi
-cp $HOME/tmp/$BIN_NAME $GOBIN
+
+if [ -f $BINARY${BIN_NAME} ]; then
+    echo -e "$YELLOW :: BINARY file correct...$NORMAL"
+elif [ $BINARY* != ${BIN_NAME} ]; then
+    echo -e "$YELLOW :: Renaming BINARY...$NORMAL"
+    mv $BINARY* $BINARY
+fi
+
+cp $BINARY$BIN_NAME $GOBIN
 rm -rf $HOME/tmp
 }
 function bin_config {
@@ -182,6 +190,12 @@ elif [ $GENESIS*.json != $FILE ]; then
 fi
 cp $HOME/tmp/$FILE $GENESIS_PATH$FILE
 rm -rf $HOME/tmp
+
+line
+echo -e "$GREEN Checking genesis SHASUM -a 256:$NORMAL"
+jq -S -c -M '' $HOME/.${CONFIG_FOLDER}/config/genesis.json | shasum -a 256
+line
+sleep 3
 }
 function seeds {
 line
