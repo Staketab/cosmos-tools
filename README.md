@@ -2,7 +2,7 @@
 List of tools for COSMOS projects.
 
 # COSMOVISOR
-Setup COSMOVISOR for all Cosmos projects.  
+Cosmos multi-network automation script for Cosmovisor setup.  
 
 ### 1. GOLANG #GO
 Install custom version of Golang #GO.  

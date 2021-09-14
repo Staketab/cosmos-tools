@@ -1,5 +1,5 @@
 # COSMOVISOR
-Setup COSMOVISOR for SIFCHAIN BETANET.
+Cosmos multi-network automation script for Cosmovisor - SIFCHAIN BETANET.
 
 ## 1. Install GOLANG.
 Install custom version of Golang #GO. 

@@ -1,5 +1,5 @@
 # COSMOVISOR
-Setup COSMOVISOR for all Cosmos projects.  
+Cosmos multi-network automation script for Cosmovisor setup.  
 
 ### 1. Install GOLANG.
 Install custom version of Golang #GO.  

@@ -1,5 +1,5 @@
 # COSMOVISOR
-Setup COSMOVISOR for DESMOS MAINNET.
+Cosmos multi-network automation script for Cosmovisor - DESMOS MAINNET.
 
 ## 1. Install GOLANG.
 Install custom version of Golang #GO. 

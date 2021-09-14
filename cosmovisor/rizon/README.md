@@ -1,5 +1,5 @@
 # COSMOVISOR
-Setup COSMOVISOR for RIZON TESTNET.
+Cosmos multi-network automation script for Cosmovisor - RIZON TESTNET.
 
 ## 1. Install GOLANG.
 Install custom version of Golang #GO. 

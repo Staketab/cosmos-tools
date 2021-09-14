@@ -1,5 +1,5 @@
 # COSMOVISOR
-Setup COSMOVISOR for BITCANNA TESTNET.
+Cosmos multi-network automation script for Cosmovisor - BITCANNA TESTNET.
 
 ## 1. Install GOLANG.
 Install custom version of Golang #GO. 

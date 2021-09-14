@@ -1,5 +1,5 @@
 # COSMOVISOR
-Setup COSMOVISOR for MEDIBLOC MAINNET.
+Cosmos multi-network automation script for Cosmovisor - MEDIBLOC MAINNET.
 
 ## 1. Install GOLANG.
 Install custom version of Golang #GO. 

@@ -1,5 +1,5 @@
 # COSMOVISOR
-Setup COSMOVISOR for OSMOSIS MAINNET.
+Cosmos multi-network automation script for Cosmovisor - OSMOSIS MAINNET.
 
 ## 1. Install GOLANG.
 Install custom version of Golang #GO. 

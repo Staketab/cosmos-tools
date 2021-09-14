@@ -1,5 +1,5 @@
 # COSMOVISOR
-Setup COSMOVISOR for STARGAZE TESTNET.
+Cosmos multi-network automation script for Cosmovisor - STARGAZE TESTNET.
 
 ## 1. Install GOLANG.
 Install custom version of Golang #GO. 

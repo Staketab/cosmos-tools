@@ -1,5 +1,5 @@
 # COSMOVISOR
-Setup COSMOVISOR for OMNIFLIX TESTNET.
+Cosmos multi-network automation script for Cosmovisor - OMNIFLIX TESTNET.
 
 ## 1. Install GOLANG.
 Install custom version of Golang #GO. 
