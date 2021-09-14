@@ -1,7 +1,7 @@
 # COSMOS Tools
 List of tools for COSMOS projects.
 
-# COSMOVISOR
+# AUTOVISOR
 Cosmos multi-network automation script for Cosmovisor setup.  
 
 ### 1. GOLANG #GO
@@ -17,7 +17,7 @@ wget https://raw.githubusercontent.com/Staketab/node-tools/main/components/golan
 ```
 Reboot your terminal after installing.
 
-### 2. Run COSMOVISOR setup and build.
+### 2. Run AUTOVISOR setup and build.
 Enter Enviroments `COSMOVISOR_VER GIT_NAME GIT_FOLDER BIN_NAME CONFIG_FOLDER BIN_VER` and run this script to setup and build.  
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cosmovisor.sh \

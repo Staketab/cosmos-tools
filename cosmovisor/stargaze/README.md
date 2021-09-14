@@ -1,4 +1,4 @@
-# COSMOVISOR
+# AUTOVISOR
 Cosmos multi-network automation script for Cosmovisor - STARGAZE TESTNET.
 
 ## 1. Install GOLANG.

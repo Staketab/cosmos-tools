@@ -1,4 +1,4 @@
-# COSMOVISOR
+# AUTOVISOR
 Cosmos multi-network automation script for Cosmovisor - DESMOS APOLLO TESTNET.
 
 ## 1. Install GOLANG.
