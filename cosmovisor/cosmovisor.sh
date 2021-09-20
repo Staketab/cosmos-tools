@@ -433,6 +433,7 @@ echo "export DAEMON_NAME=${BIN_NAME}" >> $HOME/.profile
 echo "export DAEMON_HOME=${HOME}/.${CONFIG_FOLDER}" >> $HOME/.profile
 echo "export DAEMON_ALLOW_DOWNLOAD_BINARIES=true" >> $HOME/.profile
 echo "export DAEMON_RESTART_AFTER_UPGRADE=true" >> $HOME/.profile
+echo "export DAEMON_LOG_BUFFER_SIZE=512" >> $HOME/.profile
 . $HOME/.profile
 
 service
