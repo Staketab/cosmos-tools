@@ -33,7 +33,7 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cos
 ## 3. Data for start the chain. 
 Binary link:
 ```
-https://github.com/osmosis-labs/osmosis/releases/download/v4.0.0/osmosisd-4.0.0-linux-amd64
+https://github.com/osmosis-labs/osmosis/releases/download/v3.1.0/osmosisd-3.1.0-linux-amd64
 ```
 Chain-id:
 ```
