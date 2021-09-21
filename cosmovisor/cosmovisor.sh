@@ -235,7 +235,7 @@ else
 fi
 }
 function snapshot {
-SNAP="$(cat https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/snapshot.sh | grep SNAP_BINARIES)"
+SNAP="$(curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/snapshot.sh | grep SNAP_BINARIES)"
 if [[ $SNAP == *"${BIN_NAME}"* ]]; then
     line
     echo -e "$GREEN FOUND A SNAPSHOT FOR THE ${BIN_NAME} NETWORK: $NORMAL"
