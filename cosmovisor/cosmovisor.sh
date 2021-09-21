@@ -387,13 +387,15 @@ line
 }
 
 function configuring {
-
+LS_CUR="${HOME}/.${CONFIG_FOLDER}/cosmovisor/current"
+GENBIN="${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin"
+UPGBIN="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin"
 SDK="$GOPATH/src/github.com/cosmos-sdk"
 if [ -e $SDK ]; then
-    mkdir -p ${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin
+    mkdir -p ${GENBIN} ${UPGBIN}
     echo -e "$YELLOW Cosmos SDK folder exists...$NORMAL"
 else
-    mkdir -p ${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin
+    mkdir -p ${GENBIN} ${UPGBIN}
     mkdir -p $GOPATH/src/github.com && cd $GOPATH/src/github.com && git clone https://github.com/cosmos/cosmos-sdk && cd cosmos-sdk/cosmovisor && git checkout ${COSMOVISOR} && make cosmovisor
     cp cosmovisor $GOBIN
     line
@@ -403,27 +405,27 @@ fi
 
 bin_config
 
-if [ -e ${HOME}/.${CONFIG_FOLDER}/cosmovisor/current ]; then
-    rm -rf ${HOME}/.${CONFIG_FOLDER}/cosmovisor/current
-    ln -s -T ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir ${HOME}/.${CONFIG_FOLDER}/cosmovisor/current
+if [ -e ${LS_CUR} ]; then
+    rm -rf ${LS_CUR}
+    ln -s -T ${UPGBIN} ${LS_CUR}
 else
-    ln -s -T ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir ${HOME}/.${CONFIG_FOLDER}/cosmovisor/current
+    ln -s -T ${UPGBIN} ${LS_CUR}
 fi
 
 BUILD="$GOPATH/src/github.com/${GIT_FOLDER}/build"
 if [ -e $BUILD/${BIN_NAME} ]; then
-    cp $BUILD/${BIN_NAME} ${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin
-    cp $BUILD/${BIN_NAME} ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin
+    cp $BUILD/${BIN_NAME} ${GENBIN}
+    cp $BUILD/${BIN_NAME} ${UPGBIN}
 elif [ -e $GOBIN/${BIN_NAME} ]; then
     cd
-    cp $GOBIN/${BIN_NAME} ${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin
-    cp $GOBIN/${BIN_NAME} ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin
+    cp $GOBIN/${BIN_NAME} ${GENBIN}
+    cp $GOBIN/${BIN_NAME} ${UPGBIN}
 else
-    cp $(which ${BIN_NAME}) ${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin
-    cp $(which ${BIN_NAME}) ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin
+    cp $(which ${BIN_NAME}) ${GENBIN}
+    cp $(which ${BIN_NAME}) ${UPGBIN}
 fi
-chmod +x ${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin/*
-chmod +x ${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin/*
+chmod +x ${GENBIN}/*
+chmod +x ${UPGBIN}/*
 
 cd
 echo "export PATH=$HOME/.${CONFIG_FOLDER}/cosmovisor/current/bin:\$PATH" >> $HOME/.profile
