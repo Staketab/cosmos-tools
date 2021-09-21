@@ -234,6 +234,25 @@ else
     sed -i.bak -E 's#^(version[[:space:]]+=[[:space:]]+).*$#\1"'v0'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
 fi
 }
+function snapshot {
+SNAP="$(cat https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/snapshot.sh | grep SNAP_BINARIES)"
+if [[ $SNAP == *"${BIN_NAME}"* ]]; then
+    line
+    echo -e "$GREEN FOUND A SNAPSHOT FOR THE ${BIN_NAME} NETWORK: $NORMAL"
+    line
+    echo -e "$GREEN Choose option: $NORMAL"
+    echo -e "$RED 1$NORMAL -$YELLOW Use Snapshot$NORMAL"
+    echo -e "$RED 2$NORMAL -$YELLOW Don't use Snapshot$NORMAL"
+    read -p "Answer: " SNAP_ANSWER
+    if [ "$SNAP_ANSWER" == "1" ]; then
+        curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/snapshot.sh | bash
+    else
+        statesync
+    fi
+else
+    statesync
+fi
+}
 function statesync {
 line
 echo -e "$GREEN STATE SYNC CONFIGURATION OPTIONS.$NORMAL"
@@ -318,7 +337,7 @@ peers
 gas
 echo -e "$YELLOW Waiting...$NORMAL"
 sleep 3
-statesync
+snapshot
 fastsync
 
 sed -i.bak -E 's#^(pex[[:space:]]+=[[:space:]]+).*$#\1'true'#' $HOME/.${CONFIG_FOLDER}/config/config.toml
@@ -372,7 +391,7 @@ peers
 gas
 echo -e "$YELLOW Waiting...$NORMAL"
 sleep 3
-statesync
+snapshot
 fastsync
 
 sed -i.bak -E 's#^(pex[[:space:]]+=[[:space:]]+).*$#\1'false'#' $HOME/.${CONFIG_FOLDER}/config/config.toml
@@ -390,6 +409,7 @@ function configuring {
 LS_CUR="${HOME}/.${CONFIG_FOLDER}/cosmovisor/current"
 GENBIN="${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin"
 UPGBIN="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin"
+UPGLS="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir"
 SDK="$GOPATH/src/github.com/cosmos-sdk"
 if [ -e $SDK ]; then
     mkdir -p ${GENBIN} ${UPGBIN}
@@ -407,9 +427,9 @@ bin_config
 
 if [ -e ${LS_CUR} ]; then
     rm -rf ${LS_CUR}
-    ln -s -T ${UPGBIN} ${LS_CUR}
+    ln -s -T ${UPGLS} ${LS_CUR}
 else
-    ln -s -T ${UPGBIN} ${LS_CUR}
+    ln -s -T ${UPGLS} ${LS_CUR}
 fi
 
 BUILD="$GOPATH/src/github.com/${GIT_FOLDER}/build"
