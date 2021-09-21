@@ -112,6 +112,7 @@ elif [ $BINARY* != ${BIN_NAME} ]; then
 fi
 
 cp $BINARY$BIN_NAME $GOBIN
+cd
 rm -rf $HOME/tmp
 }
 function bin_config {
@@ -190,6 +191,7 @@ elif [ $GENESIS*.json != $FILE ]; then
     mv $HOME/tmp/*.json $GENESIS_PATH$FILE
 fi
 cp $HOME/tmp/$FILE $GENESIS_PATH$FILE
+cd
 rm -rf $HOME/tmp
 
 line
