@@ -68,7 +68,13 @@ PROJECT="$GOPATH/src/github.com/${GIT_FOLDER}"
 if [ -e $PROJECT ]; then
     echo -e "$YELLOW ${GIT_FOLDER} folder exists...$NORMAL"
 else
-    cd $GOPATH/src/github.com && git clone https://github.com/${GIT_NAME}/${GIT_FOLDER} && cd ${GIT_FOLDER} && git fetch && git checkout tags/${BIN_VER} && make install && make build
+    cd $GOPATH/src/github.com \
+    && git clone https://github.com/${GIT_NAME}/${GIT_FOLDER} \
+    && cd ${GIT_FOLDER} \
+    && git fetch \
+    && git checkout tags/${BIN_VER} \
+    && make install \
+    && make build
     line
     echo -e "$GREEN ${BIN_NAME} built and installed.$NORMAL"
     line
@@ -418,8 +424,13 @@ if [ -e $SDK ]; then
     echo -e "$YELLOW Cosmos SDK folder exists...$NORMAL"
 else
     mkdir -p ${GENBIN} ${UPGBIN}
-    mkdir -p $GOPATH/src/github.com && cd $GOPATH/src/github.com && git clone https://github.com/cosmos/cosmos-sdk && cd cosmos-sdk/cosmovisor && git checkout ${COSMOVISOR} && make cosmovisor
-    cp cosmovisor $GOBIN
+    mkdir -p $GOPATH/src/github.com \
+    && cd $GOPATH/src/github.com \
+    && git clone https://github.com/cosmos/cosmos-sdk \
+    && cd cosmos-sdk/cosmovisor \
+    && git checkout ${COSMOVISOR} \
+    && make cosmovisor
+    cp cosmovisor $GOBIN && cd
     line
     echo -e "$GREEN Cosmovisor built and installed.$NORMAL"
     line
@@ -449,7 +460,6 @@ fi
 chmod +x ${GENBIN}/*
 chmod +x ${UPGBIN}/*
 
-cd
 echo "export PATH=$HOME/.${CONFIG_FOLDER}/cosmovisor/current/bin:\$PATH" >> $HOME/.profile
 echo "export BIN_NAME=${BIN_NAME}" >> $HOME/.profile
 echo "export CONFIG_FOLDER=${CONFIG_FOLDER}" >> $HOME/.profile
