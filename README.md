@@ -4,6 +4,8 @@ List of tools for COSMOS projects.
 # AUTOVISOR
 Cosmos multi-network automation script for Cosmovisor setup.  
 
+![alt_tag](src/AutoVisor_Banner.png)
+
 ### 1. GOLANG #GO
 Install custom version of Golang #GO.  
 Specify version in this line `./install.sh -v VERSION`  
