@@ -1,6 +1,8 @@
 # AUTOVISOR
 Cosmos multi-network automation script for Cosmovisor setup.  
 
+![alt_tag](https://raw.githubusercontent.com/Staketab/cosmos-tools/main/src/AutoVisor_Banner.png)
+
 ### 1. Install GOLANG.
 Install custom version of Golang #GO.  
 Specify version in this line `./install.sh -v VERSION`  
