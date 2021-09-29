@@ -361,7 +361,6 @@ line
 }
 
 function validator {
-
 echo -e "$YELLOW VALIDATOR CONFIGURING.$NORMAL"
 echo -e "$YELLOW Next you need to provide CHAIN data.$NORMAL"
 echo -e "$YELLOW If some data is not needed, just press ENTER to go next.$NORMAL"
@@ -441,8 +440,18 @@ bin_config
 if [ -e ${LS_CUR} ]; then
     rm -rf ${LS_CUR}
     ln -s -T ${UPGLS} ${LS_CUR}
+    line
+    echo -e "$GREEN Checking cosmovisor update dir...$NORMAL"
+    ls -la ${LS_CUR}
+    line
+    sleep 2
 else
     ln -s -T ${UPGLS} ${LS_CUR}
+    line
+    echo -e "$GREEN Checking cosmovisor update dir...$NORMAL"
+    ls -la ${LS_CUR}
+    line
+    sleep 2
 fi
 
 BUILD="$GOPATH/src/github.com/${GIT_FOLDER}/build"
@@ -474,7 +483,6 @@ service
 }
 
 function initialising {
-
 echo -e "$GREEN Next, you need to choose which type of node to configure.$NORMAL"
 echo -e "$RED 1$NORMAL -$YELLOW VALIDATOR node.$NORMAL"
 echo -e "$RED 2$NORMAL -$YELLOW SENTRY node.$NORMAL"
