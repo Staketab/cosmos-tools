@@ -45,7 +45,7 @@ https://raw.githubusercontent.com/BitCannaGlobal/bcna/main/genesis.json
 ```
 Peers:
 ```
-none
+7d359339e0aa23d316ee3bff0dc03de88d26adcd@135.181.177.155:26656
 ```
 Seed:
 ```
