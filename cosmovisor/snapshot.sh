@@ -4,7 +4,7 @@ RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
-SNAP_BINARIES="akash,sifnoded,sentinelhub,desmos,osmosisd"
+SNAP_BINARIES="akash,sifnoded,sentinelhub,desmos,osmosisd,bcnad"
 
 function line {
 echo "-------------------------------------------------------------------"
@@ -40,6 +40,10 @@ elif [[ "${BIN_NAME}" == "osmosisd" ]]; then
     cd $HOME/.${CONFIG_FOLDER}/data
     SNAP_NAME=$(curl -s http://135.181.60.250:8085/osmosis/ | egrep -o ">osmosis.*tar" | tr -d ">")
     wget -O - http://135.181.60.250:8085/osmosis/${SNAP_NAME} | tar xf -
+elif [[ "${BIN_NAME}" == "bcnad" ]]; then
+    cd $HOME/.${CONFIG_FOLDER}/data
+    SNAP_NAME=$(curl -s http://135.181.60.250:8086/bitcanna/ | egrep -o ">bitcanna.*tar" | tr -d ">")
+    wget -O - http://135.181.60.250:8086/bitcanna/${SNAP_NAME} | tar xf -
 else
     line
     echo -e "$RED Something went wrong ... Snapshot not found ...$NORMAL"
