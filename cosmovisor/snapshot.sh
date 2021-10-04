@@ -26,7 +26,7 @@ if [[ "${BIN_NAME}" == "akash" ]]; then
     wget -O - http://135.181.60.250/akash/${SNAP_NAME} | tar xf -
 elif [[ "${BIN_NAME}" == "sifnoded" ]]; then
     cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s http://135.181.60.250:8081/sifchain/ | egrep -o ">sifchain.*tar" | tr -d ">")
+    SNAP_NAME=$(curl -s http://135.181.60.250:8081/sifchain/ | egrep -o ">sifchain.*tar" | tail -n 1 | tr -d '>')
     wget -O - http://135.181.60.250:8081/sifchain/${SNAP_NAME} | tar xf -
 elif [[ "${BIN_NAME}" == "sentinelhub" ]]; then
     cd $HOME/.${CONFIG_FOLDER}/data
