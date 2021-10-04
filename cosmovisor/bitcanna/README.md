@@ -16,7 +16,7 @@ Reboot your terminal after installing.
 
 ## 2. Run COSMOVISOR setup and build.
 Enter Enviroments on the example of the Desmos project:  
-`COSMOVISOR_VER = v0.42.9`  
+`COSMOVISOR_VER = cosmovisor/v1.0.0`  
 `GIT_NAME = BitCannaGlobal`  
 `GIT_FOLDER = bcna`  
 `BIN_NAME = bcnad`  
@@ -27,7 +27,7 @@ Enter Enviroments on the example of the Desmos project:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cosmovisor.sh \
 && chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh v0.42.9 BitCannaGlobal bcna bcnad bcna v1.1
+&& ./cosmovisor.sh cosmovisor/v1.0.0 BitCannaGlobal bcna bcnad bcna v1.1
 ```
 
 ## 3. Data for start the chain. 
