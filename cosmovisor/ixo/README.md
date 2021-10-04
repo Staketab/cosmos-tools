@@ -31,7 +31,7 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cos
 ```
 
 ## 3. Data for start the chain. 
-https://github.com/ixofoundation/ixo-blockchain/releases/tag/v1.6.0 
+https://github.com/ixofoundation/ixo-blockchain/releases/tag/v1.6.0  
 Binary link:
 ```
 none
