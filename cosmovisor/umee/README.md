@@ -31,7 +31,7 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cos
 ```
 
 ## 3. Data for start the chain. 
-https://github.com/umee-network/umee/releases 
+https://github.com/umee-network/umee/releases  
 Binary link:
 ```
 https://github.com/umee-network/umee/releases/download/v0.2.1/umeed-v0.2.1-linux-amd64.tar.gz
