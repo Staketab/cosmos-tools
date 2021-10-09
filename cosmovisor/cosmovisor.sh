@@ -202,7 +202,7 @@ rm -rf $HOME/tmp
 
 line
 echo -e "$GREEN Checking genesis SHASUM -a 256:$NORMAL"
-jq -S -c -M '' $HOME/.${CONFIG_FOLDER}/config/genesis.json | shasum -a 256
+shasum -a 256 $HOME/.${CONFIG_FOLDER}/config/genesis.json
 line
 sleep 3
 }
