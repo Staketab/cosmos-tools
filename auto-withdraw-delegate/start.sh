@@ -106,7 +106,7 @@ if [ "$ANSWER" == "yes" ]; then
         echo "-------------------------------------------------------------------"
     fi
         echo "-------------------------------------------------------------------"
-        echo -e "$GREEN Sleep for 60 minutes $NORMAL"
+        echo -e "$GREEN Sleep for ${STIME} minutes $NORMAL"
         echo "-------------------------------------------------------------------"
         sleep ${STIME}m
     done
