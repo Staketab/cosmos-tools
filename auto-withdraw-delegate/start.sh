@@ -10,9 +10,10 @@ NORMAL="\033[0m"
 function setup {
   binary "${1}"
   keyname "${2}"
-  rpcport "${3}"
-  tgtoken "${4}"
-  tgchatid "${5}"
+  sleepTime "${3}"
+  rpcport "${4}"
+  tgtoken "${5}"
+  tgchatid "${6}"
 }
 
 function binary {
@@ -21,6 +22,10 @@ function binary {
 
 function keyname {
   KEY_NAME=${1}
+}
+
+function sleepTime {
+  STIME=${1:-"60"}
 }
 
 function rpcport {
@@ -42,7 +47,7 @@ function sendTg {
 }
 
 function launch {
-setup "${1}" "${2}" "${3}" "${4}" "${5}"
+setup "${1}" "${2}" "${3}" "${4}" "${5}" "${6}"
 echo "-------------------------------------------------------------------"
 echo -e "$YELLOW Enter PASSWORD for your KEY $NORMAL"
 echo "-------------------------------------------------------------------"
@@ -103,7 +108,7 @@ if [ "$ANSWER" == "yes" ]; then
         echo "-------------------------------------------------------------------"
         echo -e "$GREEN Sleep for 60 minutes $NORMAL"
         echo "-------------------------------------------------------------------"
-        sleep 60m
+        sleep ${STIME}m
     done
 elif [ "$ANSWER" == "no" ]; then
     echo -e "$RED Exited...$NORMAL"
@@ -114,13 +119,16 @@ else
 fi
 }
 
-while getopts ":b:k:p:t:c:" o; do
+while getopts ":b:k:s:p:t:c:" o; do
   case "${o}" in
     b)
       b=${OPTARG}
       ;;
     k)
       k=${OPTARG}
+      ;;
+    s)
+      s=${OPTARG}
       ;;
     p)
       p=${OPTARG}
@@ -135,4 +143,4 @@ while getopts ":b:k:p:t:c:" o; do
 done
 shift $((OPTIND-1))
 
-launch "${b}" "${k}" "${p}" "${t}" "${c}"
+launch "${b}" "${k}" "${s}" "${p}" "${t}" "${c}"
