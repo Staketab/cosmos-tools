@@ -401,7 +401,7 @@ sleep 3
 snapshot
 fastsync
 
-sed -i.bak -E 's#^(pex[[:space:]]+=[[:space:]]+).*$#\1'false'#' $HOME/.${CONFIG_FOLDER}/config/config.toml
+sed -i.bak -E 's#^(pex[[:space:]]+=[[:space:]]+).*$#\1'true'#' $HOME/.${CONFIG_FOLDER}/config/config.toml
 
 line
 echo -e "$GREEN ${BIN_NAME} Configured and waiting to start.$NORMAL"
