@@ -57,8 +57,8 @@ COIN=$(curl -s http://localhost:${RPC_PORT}/genesis | jq -r .result.genesis.app_
 echo -e "$GREEN Enter Fees in ${COIN}.$NORMAL"
 read -p "Fees: " FEES
 FEE=${FEES}${COIN}
-ADDRESS=$(echo $PASS | ${BINARY} keys show ${KEY_NAME} --node http://localhost:${RPC_PORT} --output json | jq -r '.address')
-VALOPER=$(echo $PASS | ${BINARY} keys show ${ADDRESS} --node http://localhost:${RPC_PORT} -a --bech val)
+ADDRESS=$(echo $PASS | ${BINARY} keys show ${KEY_NAME} --output json | jq -r '.address')
+VALOPER=$(echo $PASS | ${BINARY} keys show ${ADDRESS} -a --bech val)
 CHAIN=$(${BINARY} status --node http://localhost:${RPC_PORT} 2>&1 | jq -r .NodeInfo.network)
 
 echo "-------------------------------------------------------------------"
