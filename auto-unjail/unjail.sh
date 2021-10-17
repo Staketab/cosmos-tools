@@ -25,7 +25,7 @@ function keyname {
 }
 
 function sleepTime {
-  STIME=${1:-"10"}
+  STIME=${1:-"10m"}
 }
 
 function rpcport {
@@ -70,7 +70,7 @@ echo -e "$GREEN Voting power: $VPOWER$COIN $NORMAL"
 echo -e "$GREEN Chain: $CHAIN $NORMAL"
 echo -e "$GREEN Coin: $COIN $NORMAL"
 echo -e "$GREEN Key Name: $KEY_NAME $NORMAL"
-echo -e "$GREEN Sleep Time: $STIME minutes $NORMAL"
+echo -e "$GREEN Sleep Time: $STIME $NORMAL"
 echo "-------------------------------------------------------------------"
 echo -e "$YELLOW If your Data is right type$RED yes$NORMAL.$NORMAL"
 echo -e "$YELLOW If your Data is wrong type$RED no$NORMAL$YELLOW and check it.$NORMAL $NORMAL"
@@ -101,7 +101,7 @@ if [ "$ANSWER" == "yes" ]; then
         echo "-------------------------------------------------------------------"
         echo -e "$GREEN Sleep for ${STIME} minutes $NORMAL"
         echo "-------------------------------------------------------------------"
-        sleep ${STIME}m
+        sleep ${STIME}
     done
 elif [ "$ANSWER" == "no" ]; then
     echo -e "$RED Exited...$NORMAL"
