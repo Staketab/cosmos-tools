@@ -82,6 +82,7 @@ if [ "$ANSWER" == "yes" ]; then
     echo "-------------------------------------------------------------------"
     echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW Start checking the validator state. $NORMAL"
     echo "-------------------------------------------------------------------"
+    VPOWER=$(${BINARY} status --node http://localhost:${RPC_PORT} 2>&1 | jq -r .ValidatorInfo.VotingPower)
     if [[ $VPOWER == 0 ]]; then
         echo "-------------------------------------------------------------------"
         echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW Validator JAILED. $NORMAL"
@@ -89,7 +90,7 @@ if [ "$ANSWER" == "yes" ]; then
         echo $PASS | ${BINARY} tx slashing unjail --gas auto --fees ${FEE} --chain-id=${CHAIN} --from ${KEY_NAME} --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
         sleep 15s
         VPOWER_NEW=$(${BINARY} status --node http://localhost:${RPC_PORT} 2>&1 | jq -r .ValidatorInfo.VotingPower)
-        MSG=$(echo -e "${BINARY} | $(date +%F-%H-%M-%S)\n VALIDATOR UNJAILED\n VOTING POWER ${VPOWER_NEW}${COIN}")
+        MSG=$(echo -e "${BINARY} | $(date +%F-%H-%M-%S) | VALIDATOR UNJAILED | VOTING POWER ${VPOWER_NEW}${COIN}")
         sendTg ${MSG}
     else
         echo "-------------------------------------------------------------------"
