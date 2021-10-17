@@ -26,3 +26,6 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/auto-unjail/un
 ## SCREENSHOT EXAMPLE: 
 ## `Tmux screen:`  
 ![alt_tag](src/unjail.png)
+
+## `Telegram screen:`  
+![alt_tag](src/tg.png)
