@@ -1,6 +1,3 @@
-# COSMOS Tools
-List of tools for COSMOS projects.
-
 # Auto-node-installer
 Cosmos SDK multi-network automation script for node setup.  
 ### Features:  
@@ -37,17 +34,46 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer
 && chmod +x install.sh \
 && ./install.sh -g GIT_NAME -f GIT_FOLDER -b BIN_NAME -c CONFIG_FOLDER -v BIN_VER
 ```
-#### On the example of the Desmos project:  
+Enter Enviroments on the example of the Desmos project:  
 `GIT_NAME = desmos-labs`  
 `GIT_FOLDER = desmos`  
 `BIN_NAME = desmos`  
-`CONFIG_FOLDER = desmos`   
-`BIN_VER = v0.16.0`
+`CONFIG_FOLDER = desmos`  
+`BIN_VER = v0.17.2`
 
-The run command should look like this:  
+The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g desmos-labs -f desmos -b desmos -c desmos -v v0.16.0
+&& ./install.sh -g desmos-labs -f desmos -b desmos -c desmos -v v0.17.2
 ```
-### DONE
+
+## 3. Data for start the chain. 
+Chain-id:
+```
+morpheus-apollo-2
+```
+Genesis file:
+```
+https://raw.githubusercontent.com/desmos-labs/morpheus/master/morpheus-apollo-2/genesis.json
+```
+Peers:
+```
+None
+```
+Seed:
+```
+be3db0fe5ee7f764902dbcc75126a2e082cbf00c@seed-1.morpheus.desmos.network:26656,4659ab47eef540e99c3ee4009ecbe3fbf4e3eaff@seed-2.morpheus.desmos.network:26656,1d9cc23eedb2d812d30d99ed12d5c5f21ff40c23@seed-3.morpheus.desmos.network:26656
+```
+minimum-gas-prices:
+```
+0.025udaric
+```
+
+## 4. Service commands.
+Reload configuration change - `systemctl daemon-reload`  
+Restart Cosmovisor service - `systemctl restart desmos.service`  
+Cosmovisor service logs - `journalctl -u desmos.service -f`  
+Stop Cosmovisor service - `systemctl stop desmos.service`  
+
+## DONE

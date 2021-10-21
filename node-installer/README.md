@@ -1,6 +1,3 @@
-# COSMOS Tools
-List of tools for COSMOS projects.
-
 # Auto-node-installer
 Cosmos SDK multi-network automation script for node setup.  
 ### Features:  
@@ -50,4 +47,11 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer
 && chmod +x install.sh \
 && ./install.sh -g desmos-labs -f desmos -b desmos -c desmos -v v0.16.0
 ```
+
+## 3. Service commands:
+Reload configuration change - `systemctl daemon-reload`  
+Restart Cosmovisor service - `systemctl restart desmos.service`  
+Cosmovisor service logs - `journalctl -u desmos.service -f`  
+Stop Cosmovisor service - `systemctl stop desmos.service`  
+
 ### DONE
