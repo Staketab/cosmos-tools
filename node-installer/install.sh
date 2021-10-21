@@ -92,6 +92,7 @@ function cosmService {
     line
 }
 function source {
+    mkdir -p ${GO_PATH}/src{,/github.com}
     cd $GOPATH/src/github.com \
     && git clone https://github.com/${GIT_NAME}/${GIT_FOLDER} \
     && cd ${GIT_FOLDER} \
@@ -254,7 +255,7 @@ function snapshot {
         line
         echo -e "$GREEN FOUND A SNAPSHOT FOR THE ${BIN_NAME} NETWORK WITH CHAIN-ID: ${CHAIN}: $NORMAL"
         line
-        echo -e "$GREEN Choose option: $NORMAL"
+        echo -e "$GREEN CHOOSE OPTION: $NORMAL"
         echo -e "$RED 1$NORMAL -$YELLOW Use Snapshot$NORMAL"
         echo -e "$RED 2$NORMAL -$YELLOW Don't use Snapshot$NORMAL"
         read -p "Answer: " SNAP_ANSWER
@@ -312,14 +313,14 @@ function statesync-c {
     sed -i.bak -E 's#^(enable[[:space:]]+=[[:space:]]+).*$#\1'true'#' $HOME/.${CONFIG_FOLDER}/config/config.toml
 }
 function cosmVars {
-    sudo /bin/bash -c  'echo "export PATH=$HOME/.'${CONFIG_FOLDER}'/cosmovisor/current/bin:\$PATH" >$HOME/.profile'
-    sudo /bin/bash -c  'echo "export BIN_NAME='${BIN_NAME}'" > $HOME/.profile'
-    sudo /bin/bash -c  'echo "export CONFIG_FOLDER='${CONFIG_FOLDER}'" > $HOME/.profile'
-    sudo /bin/bash -c  'echo "export DAEMON_NAME='${BIN_NAME}'" > $HOME/.profile'
-    sudo /bin/bash -c  'echo "export DAEMON_HOME=${HOME}/.'${CONFIG_FOLDER}'" > $HOME/.profile'
-    sudo /bin/bash -c  'echo "export DAEMON_ALLOW_DOWNLOAD_BINARIES=true" > $HOME/.profile'
-    sudo /bin/bash -c  'echo "export DAEMON_RESTART_AFTER_UPGRADE=true" > $HOME/.profile'
-    sudo /bin/bash -c  'echo "export DAEMON_LOG_BUFFER_SIZE=512" > $HOME/.profile'
+    sudo /bin/bash -c  'echo "export PATH=$HOME/.'${CONFIG_FOLDER}'/cosmovisor/current/bin:\$PATH" >> $HOME/.profile'
+    sudo /bin/bash -c  'echo "export BIN_NAME='${BIN_NAME}'" >> $HOME/.profile'
+    sudo /bin/bash -c  'echo "export CONFIG_FOLDER='${CONFIG_FOLDER}'" >> $HOME/.profile'
+    sudo /bin/bash -c  'echo "export DAEMON_NAME='${BIN_NAME}'" >> $HOME/.profile'
+    sudo /bin/bash -c  'echo "export DAEMON_HOME=${HOME}/.'${CONFIG_FOLDER}'" >> $HOME/.profile'
+    sudo /bin/bash -c  'echo "export DAEMON_ALLOW_DOWNLOAD_BINARIES=true" >> $HOME/.profile'
+    sudo /bin/bash -c  'echo "export DAEMON_RESTART_AFTER_UPGRADE=true" >> $HOME/.profile'
+    sudo /bin/bash -c  'echo "export DAEMON_LOG_BUFFER_SIZE=512" >> $HOME/.profile'
     . $HOME/.profile
 }
 function compCosmovisor {
