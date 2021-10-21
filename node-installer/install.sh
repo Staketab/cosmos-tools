@@ -36,7 +36,7 @@ function binary_version {
     BIN_VER=${1}
 }
 function cosmovisor_version {
-    COSMOVISOR_VER=${1-:"v1.0.0"}
+    COSMOVISOR_VER=${1:-"v1.0.0"}
 }
 
 
@@ -92,7 +92,7 @@ function cosmService {
     line
 }
 function source {
-    mkdir -p ${GO_PATH}/src{,/github.com}
+    mkdir -p ${GOPATH}/src{,/github.com}
     cd $GOPATH/src/github.com \
     && git clone https://github.com/${GIT_NAME}/${GIT_FOLDER} \
     && cd ${GIT_FOLDER} \
@@ -250,10 +250,11 @@ function gas {
     sed -i.bak -E 's#^(minimum-gas-prices[[:space:]]+=[[:space:]]+).*$#\1"'$GAS_PRICE'"#' $HOME/.${CONFIG_FOLDER}/config/app.toml
 }
 function snapshot {
+    sleep 2
     SNAP="$(curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/snapshot.sh | grep SNAP_BINARIES)"
     if [[ $SNAP == *"${CHAIN}"* ]]; then
         line
-        echo -e "$GREEN FOUND A SNAPSHOT FOR THE ${BIN_NAME} NETWORK WITH CHAIN-ID: ${CHAIN}: $NORMAL"
+        echo -e "$GREEN FOUND A SNAPSHOT FOR THE ${BIN_NAME} NETWORK WITH CHAIN-ID: ${CHAIN} $NORMAL"
         line
         echo -e "$GREEN CHOOSE OPTION: $NORMAL"
         echo -e "$RED 1$NORMAL -$YELLOW Use Snapshot$NORMAL"
@@ -332,7 +333,7 @@ function compCosmovisor {
     echo -e "$YELLOW proposal that gets approved, Cosmosvisor can automatically download the new$NORMAL"
     echo -e "$YELLOW binary, stop the current binary, switch from the old binary to the new one, and$NORMAL"
     echo -e "$YELLOW finally restart the node with the new binary.$NORMAL"
-    echo -e "$YELLOW Source: $NORMAL$REDhttps://docs.cosmos.network/master/run-node/cosmovisor.html#cosmosvisor$NORMAL"
+    echo -e "$YELLOW Source: $NORMAL$RED https://docs.cosmos.network/master/run-node/cosmovisor.html#cosmosvisor$NORMAL"
     line
     echo -e "$GREEN CHOOSE OPTION. $NORMAL"
     echo -e "$RED 1$NORMAL -$YELLOW Install Cosmosvisor$NORMAL"
@@ -353,13 +354,14 @@ function compCosmovisor {
             echo -e "$RED 2$NORMAL -$YELLOW Leave the current$NORMAL"
             read -p "Answer: " COSM_ANSWER
                 if [ "$COSM_ANSWER" == "1" ]; then
-                    go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@${COSMOVISOR_VER}
+                    go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@'${COSMOVISOR_VER}'
                     line
                     echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
                     line
                 fi
         else
-            go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@${COSMOVISOR_VER}
+            mkdir -p ${GENBIN} ${UPGBIN}
+            go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@'${COSMOVISOR_VER}'
             line
             echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
             line
