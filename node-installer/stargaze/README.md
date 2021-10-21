@@ -1,22 +1,39 @@
-# AUTOVISOR
-Cosmos multi-network automation script for Cosmovisor - STARGAZE TESTNET.
+# Auto-node-installer
+Cosmos SDK multi-network automation script for node setup.  
+### Features:  
+- Node installer
+- Cosmovisor installer
+- Snapshots
+- State-sync
+- No need to edit config
 
-## 1. Install GOLANG.
-Install custom version of Golang #GO. 
-Specify version in this line `./install.sh -v VERSION`
-Example `./install.sh -v 1.15.7`
+### 1. Install GOLANG:
+Install custom version of Golang #GO.  
+Or you can install GO from [official website](https://golang.org/doc/install).  
 
-Or you can install GO from [official website](https://golang.org/doc/install).
+Specify version and GO path in this line `./go.sh -v GO_VERSION -p GO_PATH`  
+Example `./go.sh -v 1.17.2 -p /root/go`  
+
+### You can use all the variables or not use them at all and then the GO_VERSION and GO_PATH will be used by default as (-v 1.17.1 -p /usr/local/go)  
+
 ```
-wget https://raw.githubusercontent.com/Staketab/node-tools/main/components/golang/install.sh \
+wget https://raw.githubusercontent.com/Staketab/node-tools/main/components/golang/go.sh \
+&& chmod +x go.sh \
+&& ./go.sh -v 1.17.2 -p /root/go \
+&& rm -rf go.sh
+```
+Now apply the changes with the command below or reboot your terminal.  
+```
+. /etc/profile && . $HOME/.profile
+```
+
+### 2. Run Node setup:
+Enter Enviroments `-g GIT_NAME -f GIT_FOLDER -b BIN_NAME -c CONFIG_FOLDER -v BIN_VER` and run this script to setup and build.  
+```
+wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -v 1.15.7
+&& ./install.sh -g GIT_NAME -f GIT_FOLDER -b BIN_NAME -c CONFIG_FOLDER -v BIN_VER
 ```
-Reboot your terminal after installing.
-
-## 2. Run COSMOVISOR setup and build.
-Enter Enviroments on the example of the Osmosis project:  
-`COSMOVISOR_VER = v0.42.7`  
 `GIT_NAME = public-awesome`  
 `GIT_FOLDER = stargaze`  
 `BIN_NAME = starsd`  
@@ -25,9 +42,9 @@ Enter Enviroments on the example of the Osmosis project:
 
 The run command should look like this:
 ```
-wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/cosmovisor.sh \
-&& chmod +x cosmovisor.sh \
-&& ./cosmovisor.sh v0.42.7 public-awesome stargaze starsd starsd v0.10.1
+wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
+&& chmod +x install.sh \
+&& ./install.sh -g public-awesome -f stargaze -b starsd -c starsd -v v0.10.1
 ```
 
 ## 3. Data for start the chain. 
