@@ -15,15 +15,14 @@ echo "-------------------------------------------------------------------"
 function greeting {
 line
 echo -e "$YELLOW Using the Snapshot Services from:$NORMAL"
-echo -e "$RED c29r3: https://github.com/c29r3/cosmos-snapshots$NORMAL"
+echo -e "$GREEN c29r3:$NORMAL$RED https://github.com/c29r3/cosmos-snapshots$NORMAL"
 line
-echo -e "$RED Bambarello: http://95.216.45.250:8081/$NORMAL"
+echo -e "$GREEN Bambarello:$NORMAL$RED http://95.216.45.250:8081/$NORMAL"
 line
-echo -e "$RED Staketab: https://github.com/Staketab/nginx-cosmos-snap$NORMAL"
+echo -e "$GREEN Staketab:$NORMAL$RED https://github.com/Staketab/nginx-cosmos-snap$NORMAL"
 line
-echo -e "$RED Alex Novy: https://snapshots.stakecraft.com/$NORMAL"
+echo -e "$GREEN Alex Novy:$NORMAL$RED https://snapshots.stakecraft.com/$NORMAL"
 line
-sleep 5
 }
 
 function snapStart {
