@@ -252,7 +252,7 @@ function snapshot {
     SNAP="$(curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/snapshot.sh | grep SNAP_BINARIES)"
     if [[ $SNAP == *"${CHAIN}"* ]]; then
         line
-        echo -e "$GREEN FOUND A SNAPSHOT FOR THE ${BIN_NAME} NETWORK WITH ${CHAIN}: $NORMAL"
+        echo -e "$GREEN FOUND A SNAPSHOT FOR THE ${BIN_NAME} NETWORK WITH CHAIN-ID: ${CHAIN}: $NORMAL"
         line
         echo -e "$GREEN Choose option: $NORMAL"
         echo -e "$RED 1$NORMAL -$YELLOW Use Snapshot$NORMAL"
@@ -354,27 +354,27 @@ function compCosmovisor {
                 if [ "$COSM_ANSWER" == "1" ]; then
                     go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@${COSMOVISOR_VER}
                     line
-                    echo -e "$GREEN Cosmovisor built and installed.$NORMAL"
+                    echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
                     line
                 fi
         else
             go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@${COSMOVISOR_VER}
             line
-            echo -e "$GREEN Cosmovisor built and installed.$NORMAL"
+            echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
             line
         fi
         if [ -e ${LS_CUR} ]; then
             rm -rf ${LS_CUR}
             ln -s -T ${UPGLS} ${LS_CUR}
             line
-            echo -e "$GREEN Checking cosmovisor update dir...$NORMAL"
+            echo -e "$GREEN Checking Cosmosvisor update dir...$NORMAL"
             ls -la ${LS_CUR}
             line
             sleep 2
         else
             ln -s -T ${UPGLS} ${LS_CUR}
             line
-            echo -e "$GREEN Checking cosmovisor update dir...$NORMAL"
+            echo -e "$GREEN Checking Cosmosvisor update dir...$NORMAL"
             ls -la ${LS_CUR}
             line
             sleep 2
