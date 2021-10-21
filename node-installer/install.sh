@@ -255,7 +255,7 @@ function snapshot {
     SNAP="$(curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/dev/node-installer/snapshot.sh | grep SNAP_BINARIES)"
     if [[ $SNAP == *"${CHAIN}"* ]]; then
         line
-        echo -e "$GREEN FOUND A SNAPSHOT FOR THE ${BIN_NAME} NETWORK WITH CHAIN-ID: ${CHAIN} $NORMAL"
+        echo -e "$GREEN FOUND A SNAPSHOT FOR THE$NORMAL$RED ${BIN_NAME}$NORMAL NETWORK WITH CHAIN-ID:$NORMAL$RED ${CHAIN}$NORMAL"
         line
         echo -e "$GREEN CHOOSE OPTION: $NORMAL"
         echo -e "$RED 1$NORMAL -$YELLOW Use Snapshot$NORMAL"
