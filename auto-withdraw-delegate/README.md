@@ -9,8 +9,8 @@ Install script for auto-withdraw-delegate rewards to your Validator every 60 min
 - No need to edit config
 
 Specify environments in this line `./start.sh -b BINARY -k KEY_NAME -s SLEEP_TIME -p RPC_PORT -t TG_TOKEN -c TG_CHANNEL`  
-Example `./start.sh -b desmos -k ducca -s 60 -p 36657 -t 1948967210:ATrsFGHJEpdYPO81S13nzn56FgcE_YA-t_S -c -1542578945875`  
-`-s 60` - value in minutes  
+Example `./start.sh -b desmos -k ducca -s 60m -p 36657 -t 1948967210:ATrsFGHJEpdYPO81S13nzn56FgcE_YA-t_S -c -1542578945875`  
+`-s 60m` - value in seconds(s), minutes(m), hours(h)  
 ### You can use like all variables, some or set only `-b BINARY` and `-k KEY_NAME`.
 
 Start new `TMUX` session:
