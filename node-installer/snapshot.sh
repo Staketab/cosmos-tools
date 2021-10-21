@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
@@ -13,17 +15,13 @@ echo "-------------------------------------------------------------------"
 function greeting {
 line
 echo -e "$YELLOW Using the Snapshot Services from:$NORMAL"
-echo -e "$RED c29r3: $NORMAL"
-echo -e "$GREEN link:$NORMAL$RED https://github.com/c29r3/cosmos-snapshots$NORMAL"
+echo -e "$RED c29r3: https://github.com/c29r3/cosmos-snapshots$NORMAL"
 line
-echo -e "$RED Bambarello: $NORMAL"
-echo -e "$GREEN link:$NORMAL$RED http://95.216.45.250:8081/$NORMAL"
+echo -e "$RED Bambarello: http://95.216.45.250:8081/$NORMAL"
 line
-echo -e "$RED Staketab: $NORMAL"
-echo -e "$GREEN link:$NORMAL$RED https://github.com/Staketab/nginx-cosmos-snap$NORMAL"
+echo -e "$RED Staketab: https://github.com/Staketab/nginx-cosmos-snap$NORMAL"
 line
-echo -e "$RED Alex Novy: $NORMAL"
-echo -e "$GREEN link:$NORMAL$RED https://snapshots.stakecraft.com/$NORMAL"
+echo -e "$RED Alex Novy: https://snapshots.stakecraft.com/$NORMAL"
 line
 sleep 5
 }
