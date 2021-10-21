@@ -4,7 +4,7 @@ RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
-SNAP_BINARIES="akash,sifnoded,sentinelhub,desmos,osmosisd,bcnad"
+SNAP_BINARIES="akash,sifnoded,sentinelhub,desmos,osmosisd,bcnad,oasis-node,ixod,panacead,junod"
 
 function line {
 echo "-------------------------------------------------------------------"
@@ -12,11 +12,20 @@ echo "-------------------------------------------------------------------"
 
 function greeting {
 line
-echo -e "$YELLOW Using the Snapshot Service from$NORMAL$RED c29r3: $NORMAL"
-echo -e "$GREEN Snapshot Github link:$NORMAL$RED https://github.com/c29r3/cosmos-snapshots $NORMAL"
-echo -e "$GREEN Contact discord nickname:$NORMAL$RED @whataday2day#1271 $NORMAL"
+echo -e "$YELLOW Using the Snapshot Services from:$NORMAL"
+echo -e "$RED c29r3: $NORMAL"
+echo -e "$GREENlink:$NORMAL$RED https://github.com/c29r3/cosmos-snapshots$NORMAL"
 line
-sleep 3
+echo -e "$RED Bambarello: $NORMAL"
+echo -e "$GREENlink:$NORMAL$RED http://95.216.45.250:8081/$NORMAL"
+line
+echo -e "$RED Staketab: $NORMAL"
+echo -e "$GREENlink:$NORMAL$RED https://github.com/Staketab/nginx-cosmos-snap$NORMAL"
+line
+echo -e "$RED Alex Novy: $NORMAL"
+echo -e "$GREENlink:$NORMAL$RED https://snapshots.stakecraft.com/$NORMAL"
+line
+sleep 5
 }
 
 function snapStart {
@@ -44,6 +53,22 @@ elif [[ "${BIN_NAME}" == "bcnad" ]]; then
     cd $HOME/.${CONFIG_FOLDER}/data
     SNAP_NAME=$(curl -s http://135.181.60.250:8086/bitcanna/ | egrep -o ">bitcanna.*tar" | tr -d ">")
     wget -O - http://135.181.60.250:8086/bitcanna/${SNAP_NAME} | tar xf -
+elif [[ "${BIN_NAME}" == "oasis-node" ]]; then
+    cd $HOME/.${CONFIG_FOLDER}/data
+    SNAP_NAME=$(curl -s http://95.216.45.250:8081/ | egrep -o ">oasis.*tar" | tr -d ">")
+    wget -O - http://95.216.45.250:8081/${SNAP_NAME} | tar xzf -
+elif [[ "${BIN_NAME}" == "ixod" ]]; then
+    cd $HOME/.${CONFIG_FOLDER}/data
+    SNAP_NAME=$(curl -s http://cosmos-snap.staketab.com/ixo/ | egrep -o ">impacthub-3.*tar" | tr -d ">")
+    wget -O - http://cosmos-snap.staketab.com/ixo/${SNAP_NAME} | tar xf -
+elif [[ "${BIN_NAME}" == "panacead" ]]; then
+    cd $HOME/.${CONFIG_FOLDER}/data
+    SNAP_NAME=$(curl -s http://cosmos-snap.staketab.com/medibloc/ | egrep -o ">panacea-3.*tar" | tr -d ">")
+    wget -O - http://cosmos-snap.staketab.com/medibloc/${SNAP_NAME} | tar xf -
+elif [[ "${BIN_NAME}" == "junod" ]]; then
+    cd $HOME/.${CONFIG_FOLDER}/data
+    SNAP_NAME=$(curl -s https://snapshots.stakecraft.com/ | egrep -o ">juno-1.*tar" | tr -d ">")
+    wget -O - https://snapshots.stakecraft.com/${SNAP_NAME} | tar xf -
 else
     line
     echo -e "$RED Something went wrong ... Snapshot not found ...$NORMAL"
