@@ -25,7 +25,7 @@ function keyname {
 }
 
 function sleepTime {
-  STIME=${1:-"60"}
+  STIME=${1:-"60m"}
 }
 
 function rpcport {
@@ -68,7 +68,7 @@ echo -e "$GREEN Valoper: $VALOPER $NORMAL"
 echo -e "$GREEN Chain: $CHAIN $NORMAL"
 echo -e "$GREEN Coin: $COIN $NORMAL"
 echo -e "$GREEN Key Name: $KEY_NAME $NORMAL"
-echo -e "$GREEN Sleep Time: $STIME minutes $NORMAL"
+echo -e "$GREEN Sleep Time: $STIME $NORMAL"
 echo "-------------------------------------------------------------------"
 echo -e "$YELLOW If your Data is right type$RED yes$NORMAL.$NORMAL"
 echo -e "$YELLOW If your Data is wrong type$RED no$NORMAL$YELLOW and check it.$NORMAL $NORMAL"
@@ -85,7 +85,7 @@ if [ "$ANSWER" == "yes" ]; then
     sleep 1m
 
     AMOUNT=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node http://localhost:${RPC_PORT} --output json | jq -r '.balances[0].amount')
-    DELEGATE=$((AMOUNT - 3000000))
+    DELEGATE=$((AMOUNT - 1000000))
 
     if [[ $DELEGATE > 0 && $DELEGATE != "null" ]]; then
         echo "-------------------------------------------------------------------"
@@ -107,9 +107,9 @@ if [ "$ANSWER" == "yes" ]; then
         echo "-------------------------------------------------------------------"
     fi
         echo "-------------------------------------------------------------------"
-        echo -e "$GREEN Sleep for ${STIME} minutes $NORMAL"
+        echo -e "$GREEN Sleep for ${STIME} $NORMAL"
         echo "-------------------------------------------------------------------"
-        sleep ${STIME}m
+        sleep ${STIME}
     done
 elif [ "$ANSWER" == "no" ]; then
     echo -e "$RED Exited...$NORMAL"
