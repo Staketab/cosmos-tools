@@ -252,7 +252,7 @@ function gas {
 }
 function snapshot {
     sleep 2
-    SNAP="$(curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/dev/node-installer/snapshot.sh | grep SNAP_BINARIES)"
+    SNAP="$(curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/snapshot.sh | grep SNAP_BINARIES)"
     if [[ $SNAP == *"${CHAIN}"* ]]; then
         line
         echo -e "$GREEN FOUND A SNAPSHOT FOR THE$NORMAL$RED ${BIN_NAME}$NORMAL NETWORK WITH CHAIN-ID:$NORMAL$RED ${CHAIN}$NORMAL"
@@ -262,7 +262,7 @@ function snapshot {
         echo -e "$RED 2$NORMAL -$YELLOW Don't use Snapshot$NORMAL"
         read -p "Answer: " SNAP_ANSWER
         if [ "$SNAP_ANSWER" == "1" ]; then
-            curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/dev/node-installer/snapshot.sh | bash
+            curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/snapshot.sh | bash
         else
             statesync
         fi
