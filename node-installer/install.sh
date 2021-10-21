@@ -37,6 +37,7 @@ function binary_version {
 }
 function cosmovisor_version {
     COSMOVISOR_VER=${1:-"v1.0.0"}
+    export COSMOVISOR_VER=${COSMOVISOR_VER}
 }
 
 
@@ -44,19 +45,19 @@ function line {
     echo "-------------------------------------------------------------------"
 }
 function binService {
-    sudo /bin/bash -c  'echo "[Unit]
-    Description='${BIN_NAME}' Node Service
-    After=network-online.target
-    [Service]
-    Type=simple
-    User=$(whoami)
-    ExecStart='$(which ${BIN_NAME})' start
-    Restart=always
-    RestartSec=3
-    LimitNOFILE=50000
-    [Install]
-    WantedBy=multi-user.target
-    " >/etc/systemd/system/'${BIN_NAME}'.service'
+sudo /bin/bash -c  'echo "[Unit]
+Description='${BIN_NAME}' Node Service
+After=network-online.target
+[Service]
+Type=simple
+User=$(whoami)
+ExecStart='$(which ${BIN_NAME})' start
+Restart=always
+RestartSec=3
+LimitNOFILE=50000
+[Install]
+WantedBy=multi-user.target
+" >/etc/systemd/system/'${BIN_NAME}'.service'
 
     sudo systemctl daemon-reload && sudo systemctl enable ${BIN_NAME}.service
 
@@ -66,24 +67,24 @@ function binService {
 }
 
 function cosmService {
-    sudo /bin/bash -c  'echo "[Unit]
-    Description='${BIN_NAME}' Node Service
-    After=network-online.target
-    [Service]
-    User=$(whoami)
-    Environment=DAEMON_NAME='${BIN_NAME}'
-    Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=true
-    Environment=DAEMON_RESTART_AFTER_UPGRADE=true
-    Environment=DAEMON_LOG_BUFFER_SIZE=512
-    Environment=UNSAFE_SKIP_BACKUP=false
-    Environment=DAEMON_HOME='${HOME}'/.'${CONFIG_FOLDER}'
-    ExecStart='$(which cosmovisor)' start
-    Restart=always
-    RestartSec=3
-    LimitNOFILE=50000
-    [Install]
-    WantedBy=multi-user.target
-    " >/etc/systemd/system/'${BIN_NAME}'.service'
+sudo /bin/bash -c  'echo "[Unit]
+Description='${BIN_NAME}' Node Service
+After=network-online.target
+[Service]
+User=$(whoami)
+Environment=DAEMON_NAME='${BIN_NAME}'
+Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=true
+Environment=DAEMON_RESTART_AFTER_UPGRADE=true
+Environment=DAEMON_LOG_BUFFER_SIZE=512
+Environment=UNSAFE_SKIP_BACKUP=false
+Environment=DAEMON_HOME='${HOME}'/.'${CONFIG_FOLDER}'
+ExecStart='$(which cosmovisor)' start
+Restart=always
+RestartSec=3
+LimitNOFILE=50000
+[Install]
+WantedBy=multi-user.target
+" >/etc/systemd/system/'${BIN_NAME}'.service'
 
     sudo systemctl daemon-reload && sudo systemctl enable ${BIN_NAME}.service
 
@@ -189,7 +190,7 @@ function genesis {
     mkdir -p $HOME/tmp && cd $HOME/tmp
     GENESIS_PATH="$HOME/.${CONFIG_FOLDER}/config/"
     FILE="genesis.json"
-
+    
     echo -e "$YELLOW :: Downloading file with Genesis...$NORMAL"
     GENESIS=$HOME/tmp/
     wget -P $GENESIS $LINK2 --quiet --show-progress
@@ -251,7 +252,7 @@ function gas {
 }
 function snapshot {
     sleep 2
-    SNAP="$(curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/snapshot.sh | grep SNAP_BINARIES)"
+    SNAP="$(curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/dev/node-installer/snapshot.sh | grep SNAP_BINARIES)"
     if [[ $SNAP == *"${CHAIN}"* ]]; then
         line
         echo -e "$GREEN FOUND A SNAPSHOT FOR THE ${BIN_NAME} NETWORK WITH CHAIN-ID: ${CHAIN} $NORMAL"
@@ -261,7 +262,7 @@ function snapshot {
         echo -e "$RED 2$NORMAL -$YELLOW Don't use Snapshot$NORMAL"
         read -p "Answer: " SNAP_ANSWER
         if [ "$SNAP_ANSWER" == "1" ]; then
-            curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/snapshot.sh | bash
+            curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/dev/node-installer/snapshot.sh | bash
         else
             statesync
         fi
@@ -333,7 +334,7 @@ function compCosmovisor {
     echo -e "$YELLOW proposal that gets approved, Cosmosvisor can automatically download the new$NORMAL"
     echo -e "$YELLOW binary, stop the current binary, switch from the old binary to the new one, and$NORMAL"
     echo -e "$YELLOW finally restart the node with the new binary.$NORMAL"
-    echo -e "$YELLOW Source: $NORMAL$RED https://docs.cosmos.network/master/run-node/cosmovisor.html#cosmosvisor$NORMAL"
+    echo -e "$YELLOW Source:$NORMAL$RED https://docs.cosmos.network/master/run-node/cosmovisor.html#cosmosvisor$NORMAL"
     line
     echo -e "$GREEN CHOOSE OPTION. $NORMAL"
     echo -e "$RED 1$NORMAL -$YELLOW Install Cosmosvisor$NORMAL"
@@ -354,14 +355,14 @@ function compCosmovisor {
             echo -e "$RED 2$NORMAL -$YELLOW Leave the current$NORMAL"
             read -p "Answer: " COSM_ANSWER
                 if [ "$COSM_ANSWER" == "1" ]; then
-                    go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@'${COSMOVISOR_VER}'
+                    go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@${COSMOVISOR_VER}
                     line
                     echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
                     line
                 fi
         else
             mkdir -p ${GENBIN} ${UPGBIN}
-            go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@'${COSMOVISOR_VER}'
+            go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@${COSMOVISOR_VER}
             line
             echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
             line
@@ -420,13 +421,16 @@ function launch {
     sleep 3
     echo -e "$GREEN Enter CHAIN-ID$NORMAL"
     read -p "Chain-id: " CHAIN
-
+    export CHAIN=${CHAIN}
     line
     echo -e "$GREEN Enter your Moniker$NORMAL"
     read -p "Moniker: " MONIKER
+    GENESIS_FILE="$HOME/.${CONFIG_FOLDER}/config/genesis.json"
         if [ "$CHAIN" == "" ]; then
+            rm -rf ${GENESIS_FILE}
             ${BIN_NAME} init $MONIKER
         else
+            rm -rf ${GENESIS_FILE}
             ${BIN_NAME} init $MONIKER --chain-id $CHAIN
         fi
 
@@ -453,7 +457,7 @@ function launch {
     line
     echo -e "$GREEN Now you can start the chain!$NORMAL"
     line
-    echo -e "$YELLOW Use $NORMAL$RED sudo systemctl start ${BIN_NAME}.service && sudo journalctl -u ${BIN_NAME}.service -f$NORMAL"
+    echo -e "$YELLOW Use$NORMAL$RED sudo systemctl start ${BIN_NAME}.service && sudo journalctl -u ${BIN_NAME}.service -f$NORMAL"
     line
     echo -e "$GREEN DONE$NORMAL"
     line
