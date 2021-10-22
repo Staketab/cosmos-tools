@@ -255,7 +255,7 @@ function snapshot {
     SNAP="$(curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/snapshot.sh | grep SNAP_BINARIES)"
     if [[ $SNAP == *"${CHAIN}"* ]]; then
         line
-        echo -e "$GREEN FOUND A SNAPSHOT FOR THE$NORMAL$RED ${BIN_NAME}$NORMAL NETWORK WITH CHAIN-ID:$NORMAL$RED ${CHAIN}$NORMAL"
+        echo -e "$GREEN FOUND A SNAPSHOT FOR THE$NORMAL$RED ${BIN_NAME}$NORMAL$GREEN NETWORK WITH CHAIN-ID:$NORMAL$RED ${CHAIN}$NORMAL"
         line
         echo -e "$GREEN CHOOSE OPTION: $NORMAL"
         echo -e "$RED 1$NORMAL -$YELLOW Use Snapshot$NORMAL"
@@ -292,24 +292,27 @@ function statesync {
     fi
 }
 function statesync-c {
+    #SERVERIP="$(curl ifconfig.me)"
     line
-    echo -e "$GREEN Enter RPC Servers (Example: rpc1.com:26657,rpc1.com:26657)$NORMAL"
-    read -p "RPC Servers: " RPC_STATE
+    echo -e "$GREEN Enter RPC Servers 1 (Example: rpc1.com:26657)$NORMAL"
+    read -p "RPC Server 1: " RPC_STATE_1
+    echo -e "$GREEN Enter RPC Server 2 (Example: rpc1.com:26657)$NORMAL"
+    read -p "RPC Server 2: " RPC_STATE_2
     line
-    echo -e "$GREEN Enter Trust Height (Example: 1580047)$NORMAL"
-    read -p "Trust Height: " TRUST_HEIGHT
+    LATEST_HEIGHT=$(curl -s $RPC_STATE_1/block | jq -r .result.block.header.height)
+    TRUST_HEIGHT=$((LATEST_HEIGHT - 2000))
+    TRUST_HASH=$(curl -s "$RPC_STATE_1/block?height=$TRUST_HEIGHT" | jq -r .result.block_id.hash)
+    echo -e "$YELLOW RPC SERVERS:$NORMAL$RED ${RPC_STATE_1},${RPC_STATE_2}$NORMAL"
+    echo -e "$YELLOW TRUST_HEIGHT:$NORMAL$RED ${TRUST_HEIGHT}$NORMAL"
+    echo -e "$YELLOW TRUST_HASH:$NORMAL$RED ${TRUST_HASH}$NORMAL"
     line
-    echo -e "$GREEN Enter Trust Hash (Example: 6FD28DAAAC79B77F589AE692B6CD403412CE27D0D2629E81951607B297696E5B)$NORMAL"
-    read -p "Trust Hash: " TRUST_HASH
-    line
-    echo -e "$GREEN Enter Trust Period - 2/3 of unbonding time (Example: 168h0m0s)$NORMAL"
-    read -p "Trust Period: " TRUST_PERIOD
-    line
+    sleep 3
 
-    sed -i.bak -E 's#^(rpc_servers[[:space:]]+=[[:space:]]+).*$#\1"'$RPC_STATE'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
+    #sed -i.bak -E 's#^(external_address[[:space:]]+=[[:space:]]+).*$#\1"'$SERVERIP':26656"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
+    sed -i.bak -E 's#^(rpc_servers[[:space:]]+=[[:space:]]+).*$#\1"'$RPC_STATE_1','$RPC_STATE_2'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
     sed -i.bak -E 's#^(trust_height[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_HEIGHT'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
     sed -i.bak -E 's#^(trust_hash[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_HASH'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
-    sed -i.bak -E 's#^(trust_period[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_PERIOD'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
+    #sed -i.bak -E 's#^(trust_period[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_PERIOD'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
 
     # STATESYNC enabled
     sed -i.bak -E 's#^(enable[[:space:]]+=[[:space:]]+).*$#\1'true'#' $HOME/.${CONFIG_FOLDER}/config/config.toml
@@ -355,14 +358,14 @@ function compCosmovisor {
             echo -e "$RED 2$NORMAL -$YELLOW Leave the current$NORMAL"
             read -p "Answer: " COSM_ANSWER
                 if [ "$COSM_ANSWER" == "1" ]; then
-                    go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@${COSMOVISOR_VER}
+                    go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/'cosmovisor@'${COSMOVISOR_VER}''
                     line
                     echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
                     line
                 fi
         else
             mkdir -p ${GENBIN} ${UPGBIN}
-            go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@${COSMOVISOR_VER}
+            go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/'cosmovisor@$'{COSMOVISOR_VER}''
             line
             echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
             line
@@ -422,6 +425,7 @@ function launch {
     echo -e "$GREEN Enter CHAIN-ID$NORMAL"
     read -p "Chain-id: " CHAIN
     export CHAIN=${CHAIN}
+    export CONFIG_FOLDER=${CONFIG_FOLDER}
     line
     echo -e "$GREEN Enter your Moniker$NORMAL"
     read -p "Moniker: " MONIKER
@@ -446,8 +450,8 @@ function launch {
     sleep 5
 
     genesis
-    seeds
     peers
+    seeds
     gas
     snapshot
     compCosmovisor
