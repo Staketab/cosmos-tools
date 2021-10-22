@@ -255,7 +255,7 @@ function snapshot {
     SNAP="$(curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/dev/node-installer/snapshot.sh | grep SNAP_BINARIES)"
     if [[ $SNAP == *"${CHAIN}"* ]]; then
         line
-        echo -e "$GREEN FOUND A SNAPSHOT FOR THE$NORMAL$RED ${BIN_NAME}$NORMAL NETWORK WITH CHAIN-ID:$NORMAL$RED ${CHAIN}$NORMAL"
+        echo -e "$GREEN FOUND A SNAPSHOT FOR THE$NORMAL$RED ${BIN_NAME}$NORMAL$GREEN NETWORK WITH CHAIN-ID:$NORMAL$RED ${CHAIN}$NORMAL"
         line
         echo -e "$GREEN CHOOSE OPTION: $NORMAL"
         echo -e "$RED 1$NORMAL -$YELLOW Use Snapshot$NORMAL"
@@ -425,6 +425,7 @@ function launch {
     echo -e "$GREEN Enter CHAIN-ID$NORMAL"
     read -p "Chain-id: " CHAIN
     export CHAIN=${CHAIN}
+    export CONFIG_FOLDER=${CONFIG_FOLDER}
     line
     echo -e "$GREEN Enter your Moniker$NORMAL"
     read -p "Moniker: " MONIKER
