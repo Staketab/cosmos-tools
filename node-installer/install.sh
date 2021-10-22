@@ -292,18 +292,24 @@ function statesync {
     fi
 }
 function statesync-c {
+    #SERVERIP="$(curl ifconfig.me)"
     line
-    echo -e "$GREEN Enter RPC Servers (Example: http://rpc1.com:26657)$NORMAL"
-    read -p "RPC Server: " RPC_STATE
+    echo -e "$GREEN Enter RPC Servers 1 (Example: rpc1.com:26657)$NORMAL"
+    read -p "RPC Server 1: " RPC_STATE_1
+    echo -e "$GREEN Enter RPC Server 2 (Example: rpc1.com:26657)$NORMAL"
+    read -p "RPC Server 2: " RPC_STATE_2
     line
-    LATEST_HEIGHT=$(curl -s $RPC_STATE/block | jq -r .result.block.header.height)
+    LATEST_HEIGHT=$(curl -s $RPC_STATE_1/block | jq -r .result.block.header.height)
     TRUST_HEIGHT=$((LATEST_HEIGHT - 2000))
-    TRUST_HASH=$(curl -s "$RPC_STATE/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
+    TRUST_HASH=$(curl -s "$RPC_STATE_1/block?height=$TRUST_HEIGHT" | jq -r .result.block_id.hash)
+    echo -e "$YELLOW RPC SERVERS:$NORMAL$RED ${RPC_STATE_1},${RPC_STATE_2}$NORMAL"
     echo -e "$YELLOW TRUST_HEIGHT:$NORMAL$RED ${TRUST_HEIGHT}$NORMAL"
     echo -e "$YELLOW TRUST_HASH:$NORMAL$RED ${TRUST_HASH}$NORMAL"
     line
+    sleep 3
 
-    sed -i.bak -E 's#^(rpc_servers[[:space:]]+=[[:space:]]+).*$#\1"'$RPC_STATE'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
+    #sed -i.bak -E 's#^(external_address[[:space:]]+=[[:space:]]+).*$#\1"'$SERVERIP':26656"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
+    sed -i.bak -E 's#^(rpc_servers[[:space:]]+=[[:space:]]+).*$#\1"'$RPC_STATE_1','$RPC_STATE_2'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
     sed -i.bak -E 's#^(trust_height[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_HEIGHT'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
     sed -i.bak -E 's#^(trust_hash[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_HASH'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
     #sed -i.bak -E 's#^(trust_period[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_PERIOD'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
