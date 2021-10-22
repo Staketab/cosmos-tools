@@ -252,7 +252,7 @@ function gas {
 }
 function snapshot {
     sleep 2
-    SNAP="$(curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/snapshot.sh | grep SNAP_BINARIES)"
+    SNAP="$(curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/dev/node-installer/snapshot.sh | grep SNAP_BINARIES)"
     if [[ $SNAP == *"${CHAIN}"* ]]; then
         line
         echo -e "$GREEN FOUND A SNAPSHOT FOR THE$NORMAL$RED ${BIN_NAME}$NORMAL NETWORK WITH CHAIN-ID:$NORMAL$RED ${CHAIN}$NORMAL"
@@ -262,7 +262,7 @@ function snapshot {
         echo -e "$RED 2$NORMAL -$YELLOW Don't use Snapshot$NORMAL"
         read -p "Answer: " SNAP_ANSWER
         if [ "$SNAP_ANSWER" == "1" ]; then
-            curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/snapshot.sh | bash
+            curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/dev/node-installer/snapshot.sh | bash
         else
             statesync
         fi
@@ -293,23 +293,20 @@ function statesync {
 }
 function statesync-c {
     line
-    echo -e "$GREEN Enter RPC Servers (Example: rpc1.com:26657,rpc1.com:26657)$NORMAL"
-    read -p "RPC Servers: " RPC_STATE
+    echo -e "$GREEN Enter RPC Servers (Example: http://rpc1.com:26657)$NORMAL"
+    read -p "RPC Server: " RPC_STATE
     line
-    echo -e "$GREEN Enter Trust Height (Example: 1580047)$NORMAL"
-    read -p "Trust Height: " TRUST_HEIGHT
-    line
-    echo -e "$GREEN Enter Trust Hash (Example: 6FD28DAAAC79B77F589AE692B6CD403412CE27D0D2629E81951607B297696E5B)$NORMAL"
-    read -p "Trust Hash: " TRUST_HASH
-    line
-    echo -e "$GREEN Enter Trust Period - 2/3 of unbonding time (Example: 168h0m0s)$NORMAL"
-    read -p "Trust Period: " TRUST_PERIOD
+    LATEST_HEIGHT=$(curl -s $RPC_STATE/block | jq -r .result.block.header.height)
+    TRUST_HEIGHT=$((LATEST_HEIGHT - 2000))
+    TRUST_HASH=$(curl -s "$RPC_STATE/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
+    echo -e "$YELLOW TRUST_HEIGHT:$NORMAL$RED ${TRUST_HEIGHT}$NORMAL"
+    echo -e "$YELLOW TRUST_HASH:$NORMAL$RED ${TRUST_HASH}$NORMAL"
     line
 
     sed -i.bak -E 's#^(rpc_servers[[:space:]]+=[[:space:]]+).*$#\1"'$RPC_STATE'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
     sed -i.bak -E 's#^(trust_height[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_HEIGHT'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
     sed -i.bak -E 's#^(trust_hash[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_HASH'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
-    sed -i.bak -E 's#^(trust_period[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_PERIOD'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
+    #sed -i.bak -E 's#^(trust_period[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_PERIOD'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
 
     # STATESYNC enabled
     sed -i.bak -E 's#^(enable[[:space:]]+=[[:space:]]+).*$#\1'true'#' $HOME/.${CONFIG_FOLDER}/config/config.toml
@@ -446,8 +443,8 @@ function launch {
     sleep 5
 
     genesis
-    seeds
     peers
+    seeds
     gas
     snapshot
     compCosmovisor
