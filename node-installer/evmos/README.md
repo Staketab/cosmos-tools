@@ -34,50 +34,50 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer
 && chmod +x install.sh \
 && ./install.sh -g GIT_NAME -f GIT_FOLDER -b BIN_NAME -c CONFIG_FOLDER -v BIN_VER
 ```
-`GIT_NAME = ixofoundation`  
-`GIT_FOLDER = ixo-blockchain`  
-`BIN_NAME = ixod`  
-`CONFIG_FOLDER = ixod`  
-`BIN_VER = v1.6.0`
+`GIT_NAME = tharsis`  
+`GIT_FOLDER = evmos`  
+`BIN_NAME = evmosd`  
+`CONFIG_FOLDER = evmosd`  
+`BIN_VER = v0.1.2`
 
 The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g ixofoundation -f ixo-blockchain -b ixod -c ixod -v v1.6.0
+&& ./install.sh -g tharsis -f evmos -b evmosd -c evmosd -v v0.1.2
 ```
 
 ## 3. Data for start the chain. 
-https://github.com/ixofoundation/ixo-blockchain/releases/tag/v1.6.0  
+https://github.com/tharsis/evmos/releases  
 Binary link:
 ```
 none
 ```
 Chain-id:
 ```
-impacthub-3
+evmos_9000-1
 ```  
 Genesis file:
 ```
-https://raw.githubusercontent.com/ixofoundation/genesis/master/impacthub-3/genesis.json
+https://raw.githubusercontent.com/tharsis/testnets/main/arsia_mons/genesis.json
 ```
 Peers:
 ```
-34a26a4cb5d2f1a5051a7057af9cc5b313258130@206.81.5.133:26656,c48aa4ac28d33f874f1884e04e2e60ce7f724709@176.9.80.46:36656,cbe8c6a5a77f861db8edb1426b734f2cf1fa4020@18.166.133.210:26656,36e4738c7efcf353d3048e5e6073406d045bae9d@80.64.208.42:26656,f0d4546fa5e0c2d84a4244def186b9da3c12ba1a@46.166.138.214:26656,c95af93f0386f8e19e65997262c9f874d1901dc5@18.163.242.188:26656
+be7593d1d2cae15a574537f9107f525200824767@194.163.187.94:26656,78605eed3018a74d9c8c3a912cd8e6d5c9a9ca4b@65.21.232.149:26726,3bd90caf48ddd2d6b290550ecccd63348fc51da0@95.217.107.96:26658,f8da50943569f160854ac21c9ffb46fb4ff7bc0d@144.217.252.197:26626,1c4c38243893889a17fd3e677999f896b2b18586@95.217.35.111:26666,0e4dec8dd2cb74277bae3a9e7f1816603e97ce60@161.97.178.48:26656,3e7b138c766dc6da32decca8665da1afb2b6bb88@207.244.249.17:26656,5502b008356087cb689211bb3c4285b7ce7f6571@95.217.154.12:26656,8227d17c3cf123108c69bf671295e5fb22d9beb3@161.97.115.68:26656,56de4d8fe7421f5a4fb6ba75b20d749be3eecf22@95.217.84.54:26656,06e3dfce2d729250e810bd5605ad7f05f3b1fc2c@75.119.155.119:26656,7cb1576a6ed3dbdc62bc30908ff7d7e910c5b08f@78.46.52.20:46656,5502b008356087cb689211bb3c4285b7ce7f6571@95.217.154.12:26656,5576b0160761fe81ccdf88e06031a01bc8643d51@195.201.108.97:24656,13e850d14610f966de38fc2f925f6dc35c7f4bf4@176.9.60.27:26656
 ```
 Seed:
 ```
-none
+c36cec90ded95d162b85f8ecd00ecd7c8849ca75@arsiamons.seed.evmos.org:26656,3787335176bbb91bf14a67724ebe0f0940ca5afb@evmos-seed.artifact-staking.io:26656,faa31510d9280e74e7f2e767a62023bd5c896c27@evmos-testnet.mercury-nodes.net:29447
 ```
 minimum-gas-prices:
 ```
-none
+0aphoton
 ```
 
 ## 4. Service commands.
 Reload configuration change - `systemctl daemon-reload`  
-Restart Cosmovisor service - `systemctl restart ixod.service`  
-Cosmovisor service logs - `journalctl -u ixod.service -f`  
-Stop Cosmovisor service - `systemctl stop ixod.service`  
+Restart Cosmovisor service - `systemctl restart evmosd.service`  
+Cosmovisor service logs - `journalctl -u evmosd.service -f`  
+Stop Cosmovisor service - `systemctl stop evmosd.service`  
 
 ## DONE
