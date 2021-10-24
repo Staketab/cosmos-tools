@@ -27,7 +27,7 @@ wget https://raw.githubusercontent.com/Staketab/node-tools/main/components/golan
 ```
 Now apply the changes with the command below or reboot your terminal.  
 ```
-. /etc/profile && . $HOME/.profile
+. /etc/profile && . $HOME/.bashrc
 ```
 
 ### 2. Run Node setup:
