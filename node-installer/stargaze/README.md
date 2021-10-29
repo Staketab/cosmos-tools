@@ -38,21 +38,41 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer
 `GIT_FOLDER = stargaze`  
 `BIN_NAME = starsd`  
 `CONFIG_FOLDER = starsd`  
-`BIN_VER = v0.10.1`
+`BIN_VER = v1.0.0`
 
 The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g public-awesome -f stargaze -b starsd -c starsd -v v0.10.1
+&& ./install.sh -g public-awesome -f stargaze -b starsd -c starsd -v v1.0.0
 ```
 
 ## 3. Data for start the chain. 
-Chain-id - `cygnusx-1`  
-Genesis file - [Link](https://github.com/public-awesome/networks/releases/download/cygnusx-1-final/genesis.json)  
-Peers - `20c363b38c52edd09d16ee63b44ff79f752ab855@144.217.252.197:26669,9f7f4c5a0ab8021e1b5c00b44605054680ba893c@14.52.147.51:30626,9ec309c3151c3eb09fbf76de32e49d9210a3eeaf@162.55.60.249:26656,4475c871a43faa9775dae81f9e5f0855fa8a05c9@172.31.15.156:26656,d81edf338d1f2b30ef126c22f0191b3e3bd1cb59@3.96.128.109:26656,1919ee8480b62856deb5ae89661460849feaf2a8@51.210.217.96:26656,1ff88514bfc749cfc5607e62e41d2b5c2541c59c@157.230.249.138:26656,e6b371a1461156e2665ae4c7fda2f841a0ff2e25@46.4.54.229:26656,0e4f9c7e1602cf32a0699155c0c05cca2cd39b59@46.105.92.97:26656,e7c3d120dfc8b784d17097415c3c21cb74ba1e43@159.69.126.56:26656,bee3f15177e32abf9797fbfee5a53477d9721101@143.110.186.44:26656,84694f369f3a8af9806ba7e3c5537611f519b65d@79.143.179.196:26656`  
-Seed - `b5c81e417113e283288c48a34f1d57c73a0c6682@seed.cygnusx-1.publicawesome.dev:36657`  
-minimum-gas-prices - ``  
+https://github.com/public-awesome/stargaze/releases/tag/v1.0.0  
+Binary link:
+```
+none
+```
+Chain-id:
+```
+stargaze-1
+```  
+Genesis file:
+```
+https://raw.githubusercontent.com/public-awesome/mainnet/main/stargaze-1/genesis.tar.gz
+```
+Peers:
+```
+1d73521c565b37a53038fc730bcd207a3db361b6@144.91.91.30:26656,524dd60331c56d198deabbb70238c2cc69119cca@161.97.122.216:36656,0c9ebd7b36f96d0279dbf6dc38572f5797c096c1@65.108.42.168:26656
+```
+Seed:
+```
+70ed826888f102c7c1ceb4d07287956628a53508@174.138.124.7:36656,722079345d941cd2da3daedea548c909d9b83ec5@104.248.101.113:36656,d5fc4f479c4e212c96dff5704bb2468ea03b8ae3@sg-seed.blockpane.com:26656
+```
+minimum-gas-prices:
+```
+0.001udsm
+```
 
 ## 4. Service commands.
 Reload configuration change - `systemctl daemon-reload`  
