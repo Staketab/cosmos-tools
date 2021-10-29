@@ -162,7 +162,7 @@ function installBinary {
         mv $BINARY* $BINARY
     fi
 
-    cp $BINARY$BIN_NAME $GOBIN
+    cp $BINARY$BIN_NAME $GOPATH/bin
     cd
     rm -rf $HOME/tmp
 }
@@ -347,7 +347,7 @@ function compCosmovisor {
         GENBIN="${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin"
         UPGBIN="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin"
         UPGLS="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir"
-        COSMBIN="$GOBIN/cosmovisor"
+        COSMBIN="$GOPATH/bin/cosmovisor"
         if [ -e $COSMBIN ]; then
             mkdir -p ${GENBIN} ${UPGBIN}
             line
@@ -389,10 +389,10 @@ function compCosmovisor {
         if [ -e $BUILD/${BIN_NAME} ]; then
             cp $BUILD/${BIN_NAME} ${GENBIN}
             cp $BUILD/${BIN_NAME} ${UPGBIN}
-        elif [ -e $GOBIN/${BIN_NAME} ]; then
+        elif [ -e $GOPATH/bin/${BIN_NAME} ]; then
             cd
-            cp $GOBIN/${BIN_NAME} ${GENBIN}
-            cp $GOBIN/${BIN_NAME} ${UPGBIN}
+            cp $GOPATH/bin/${BIN_NAME} ${GENBIN}
+            cp $GOPATH/bin/${BIN_NAME} ${UPGBIN}
         else
             cp $(which ${BIN_NAME}) ${GENBIN}
             cp $(which ${BIN_NAME}) ${UPGBIN}
