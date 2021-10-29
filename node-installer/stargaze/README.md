@@ -63,7 +63,7 @@ https://raw.githubusercontent.com/public-awesome/mainnet/main/stargaze-1/genesis
 ```
 Peers:
 ```
-1d73521c565b37a53038fc730bcd207a3db361b6@144.91.91.30:26656,524dd60331c56d198deabbb70238c2cc69119cca@161.97.122.216:36656,0c9ebd7b36f96d0279dbf6dc38572f5797c096c1@65.108.42.168:26656
+1d73521c565b37a53038fc730bcd207a3db361b6@144.91.91.30:26656,524dd60331c56d198deabbb70238c2cc69119cca@161.97.122.216:36656,0c9ebd7b36f96d0279dbf6dc38572f5797c096c1@65.108.42.168:26656,320e4b81ab327dd2593a39de0d3ae718fdb9347c@176.9.168.220:26656
 ```
 Seed:
 ```
@@ -71,7 +71,7 @@ Seed:
 ```
 minimum-gas-prices:
 ```
-0.001udsm
+0ustars
 ```
 
 ## 4. Service commands.
