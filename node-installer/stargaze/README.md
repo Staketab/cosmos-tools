@@ -75,9 +75,9 @@ minimum-gas-prices:
 ```
 
 ## 4. Service commands.
-Reload configuration change - `systemctl daemon-reload`  
-Restart Cosmovisor service - `systemctl restart starsd.service`  
-Cosmovisor service logs - `journalctl -u starsd.service -f`  
-Stop Cosmovisor service - `systemctl stop starsd.service`  
+Reload configuration change - `sudo systemctl daemon-reload`  
+Restart Cosmovisor service - `sudo systemctl restart starsd.service`  
+Cosmovisor service logs - `sudo journalctl -u starsd.service -f`  
+Stop Cosmovisor service - `sudo systemctl stop starsd.service`  
 
 ## DONE
