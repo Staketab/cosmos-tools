@@ -430,12 +430,13 @@ function launch {
     echo -e "$GREEN Enter your Moniker$NORMAL"
     read -p "Moniker: " MONIKER
     GENESIS_FILE="$HOME/.${CONFIG_FOLDER}/config/genesis.json"
+    CONFIG_HOME="$HOME/.${CONFIG_FOLDER}"
         if [ "$CHAIN" == "" ]; then
             rm -rf ${GENESIS_FILE}
-            ${BIN_NAME} init $MONIKER
+            ${BIN_NAME} init $MONIKER --home $CONFIG_HOME
         else
             rm -rf ${GENESIS_FILE}
-            ${BIN_NAME} init $MONIKER --chain-id $CHAIN
+            ${BIN_NAME} init $MONIKER --chain-id $CHAIN --home $CONFIG_HOME
         fi
 
     line
