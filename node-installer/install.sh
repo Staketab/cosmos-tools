@@ -51,7 +51,7 @@ After=network-online.target
 [Service]
 Type=simple
 User=$(whoami)
-ExecStart='$(which ${BIN_NAME})' start
+ExecStart='$(which ${BIN_NAME})' start --home '${HOME}'/.'${CONFIG_FOLDER}'
 Restart=always
 RestartSec=3
 LimitNOFILE=50000
@@ -65,7 +65,6 @@ WantedBy=multi-user.target
     echo -e "$GREEN ${BIN_NAME} service installed.$NORMAL"
     line
 }
-
 function cosmService {
 sudo /bin/bash -c  'echo "[Unit]
 Description='${BIN_NAME}' Node Service
@@ -78,7 +77,7 @@ Environment=DAEMON_RESTART_AFTER_UPGRADE=true
 Environment=DAEMON_LOG_BUFFER_SIZE=512
 Environment=UNSAFE_SKIP_BACKUP=false
 Environment=DAEMON_HOME='${HOME}'/.'${CONFIG_FOLDER}'
-ExecStart='$(which cosmovisor)' start
+ExecStart='$(which cosmovisor)' start --home '${HOME}'/.'${CONFIG_FOLDER}'
 Restart=always
 RestartSec=3
 LimitNOFILE=50000
