@@ -8,7 +8,7 @@ Cosmos SDK multi-network automation script for node setup.
 - Cosmovisor installer
 - Snapshots
 - State-sync
-- No need to edit config
+- No need to edit config  
 
 ### 1. Install GOLANG:
 Install custom version of Golang #GO.  
