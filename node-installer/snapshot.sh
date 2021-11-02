@@ -17,7 +17,7 @@ line
 echo -e "$YELLOW Using the Snapshot Services from:$NORMAL"
 echo -e "$GREEN c29r3:$NORMAL$RED https://github.com/c29r3/cosmos-snapshots$NORMAL"
 line
-echo -e "$GREEN Bambarello:$NORMAL$RED http://95.216.45.250:8081/$NORMAL"
+echo -e "$GREEN Bambarello:$NORMAL$RED http://snapshots.alexvalidator.com:8081/$NORMAL"
 line
 echo -e "$GREEN Staketab:$NORMAL$RED https://github.com/Staketab/nginx-cosmos-snap$NORMAL"
 line
