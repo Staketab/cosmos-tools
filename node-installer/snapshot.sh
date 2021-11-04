@@ -6,7 +6,7 @@ RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
-SNAP_BINARIES="akashnet-2,sifchain,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-node,impacthub-3,panacea-3,juno-1"
+SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-node,impacthub-3,panacea-3,juno-1"
 
 function line {
 echo "-------------------------------------------------------------------"
@@ -30,7 +30,7 @@ if [[ "${CHAIN}" == "akashnet-2" ]]; then
     cd $HOME/.${CONFIG_FOLDER}/data
     SNAP_NAME=$(curl -s http://135.181.60.250/akash/ | egrep -o ">akashnet-2.*tar" | tr -d ">")
     wget -O - http://135.181.60.250/akash/${SNAP_NAME} | tar xf -
-elif [[ "${CHAIN}" == "sifchain" ]]; then
+elif [[ "${CHAIN}" == "sifchain-1" ]]; then
     cd $HOME/.${CONFIG_FOLDER}/data
     SNAP_NAME=$(curl -s http://135.181.60.250:8081/sifchain/ | egrep -o ">sifchain.*tar" | tail -n 1 | tr -d '>')
     wget -O - http://135.181.60.250:8081/sifchain/${SNAP_NAME} | tar xf -
