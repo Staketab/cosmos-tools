@@ -63,6 +63,8 @@ echo -e "$GREEN Coin: $COIN $NORMAL"
 echo -e "$GREEN Key Name: $KEY_NAME $NORMAL"
 echo -e "$GREEN Sleep Time: $STIME $NORMAL"
 echo "-------------------------------------------------------------------"
+echo -e "$GREEN Receiver Address: $ADDRESS $NORMAL"
+echo "-------------------------------------------------------------------"
 echo -e "$YELLOW If your Data is right type$RED yes$NORMAL.$NORMAL"
 echo -e "$YELLOW If your Data is wrong type$RED no$NORMAL$YELLOW and check it.$NORMAL $NORMAL"
 read -p "Your answer: " ANSWER
@@ -73,12 +75,14 @@ if [ "$ANSWER" == "yes" ]; then
         AMOUNT=$(( $RANDOM %100 ))
         AMOUNT=$(( AMOUNT+5 ))
         echo $SEQ
-        TX=$(echo $PASS | ${BINARY} tx bank send ${SENDER} ${RECEIVER} ${AMOUNT}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --fees ${FEE} --node http://localhost:${RPC_PORT} --sequence ${SEQ} --broadcast-mode async -y | grep "raw_log")
+        CUR_BLOCK=$(curl -s http://localhost:${RPC_PORT}/abci_info | jq -r .result.response.last_block_height)
+        TX=$(echo $PASS | ${BINARY} tx bank send ${SENDER} ${RECEIVER} ${AMOUNT}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --fees ${FEE} --node http://localhost:${RPC_PORT} --sequence ${SEQ} --timeout-height $(($CUR_BLOCK + 5)) -y | grep "raw_log")
           if [ "$TX" == *"incorrect"* ]; then
             SEQ=$(($SEQ+1))
-            echo $PASS | ${BINARY} tx bank send ${SENDER} ${RECEIVER} ${AMOUNT}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --fees ${FEE} --node http://localhost:${RPC_PORT} --sequence ${SEQ} --broadcast-mode async -y | grep "raw_log\|txhash"
+            echo $PASS | ${BINARY} tx bank send ${SENDER} ${RECEIVER} ${AMOUNT}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --fees ${FEE} --node http://localhost:${RPC_PORT} --sequence ${SEQ} --timeout-height $(($CUR_BLOCK + 5)) -y | grep "raw_log\|txhash"
+            sleep 10
           else
-            echo $PASS | ${BINARY} tx bank send ${SENDER} ${RECEIVER} ${AMOUNT}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --fees ${FEE} --node http://localhost:${RPC_PORT} --sequence ${SEQ} --broadcast-mode async -y | grep "raw_log\|txhash"
+            echo $PASS | ${BINARY} tx bank send ${SENDER} ${RECEIVER} ${AMOUNT}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --fees ${FEE} --node http://localhost:${RPC_PORT} --sequence ${SEQ} --timeout-height $(($CUR_BLOCK + 5)) -y | grep "raw_log\|txhash"
           fi
         SEQ=$(($SEQ+1))
         sleep ${STIME}
