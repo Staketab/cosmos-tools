@@ -103,7 +103,11 @@ function source {
         echo -e "$GREEN ${BIN_NAME} found. Continue...$NORMAL"
     else
         make build
+        BUILD="$GOPATH/src/github.com/${GIT_FOLDER}/build"
         if [ -f ${GOPATH}/bin/${BIN_NAME} ]; then
+            echo -e "$GREEN ${BIN_NAME} found. Continue...$NORMAL"
+        elif [ -f $BUILD/${BIN_NAME} ]; then
+            cp $BUILD/${BIN_NAME} ${GOPATH}/bin/
             echo -e "$GREEN ${BIN_NAME} found. Continue...$NORMAL"
         else
             make all
