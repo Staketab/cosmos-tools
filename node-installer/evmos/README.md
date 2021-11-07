@@ -44,7 +44,8 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g tharsis -f evmos -b evmosd -c evmosd -v v0.1.2
+&& ./install.sh -g tharsis -f evmos -b evmosd -c evmosd -v v0.1.2 \
+&& rm -rf install.sh && . $HOME/.profile
 ```
 
 ## 3. Data for start the chain. 

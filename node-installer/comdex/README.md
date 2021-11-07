@@ -44,7 +44,8 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g comdex-official -f comdex -b comdex -c comdex -v v0.0.2
+&& ./install.sh -g comdex-official -f comdex -b comdex -c comdex -v v0.0.2 \
+&& rm -rf install.sh && . $HOME/.profile
 ```
 
 ## 3. Data for start the chain. 

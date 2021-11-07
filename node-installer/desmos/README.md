@@ -45,7 +45,8 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g desmos-labs -f desmos -b desmos -c desmos -v v0.17.2
+&& ./install.sh -g desmos-labs -f desmos -b desmos -c desmos -v v0.17.2 \
+&& rm -rf install.sh && . $HOME/.profile
 ```
 
 ## 3. Data for start the chain. 
