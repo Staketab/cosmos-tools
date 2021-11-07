@@ -75,7 +75,7 @@ Environment=DAEMON_NAME='${BIN_NAME}'
 Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=true
 Environment=DAEMON_RESTART_AFTER_UPGRADE=true
 Environment=DAEMON_LOG_BUFFER_SIZE=512
-Environment=UNSAFE_SKIP_BACKUP=false
+Environment=UNSAFE_SKIP_BACKUP=true
 Environment=DAEMON_HOME='${HOME}'/.'${CONFIG_FOLDER}'
 ExecStart='$(which cosmovisor)' start --home '${HOME}'/.'${CONFIG_FOLDER}'
 Restart=always
