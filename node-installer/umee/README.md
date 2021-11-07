@@ -44,7 +44,8 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g umee-network -f umee -b umeed -c umee -v v0.2.1
+&& ./install.sh -g umee-network -f umee -b umeed -c umee -v v0.2.1 \
+&& rm -rf install.sh && . $HOME/.profile
 ```
 
 ## 3. Data for start the chain. 

@@ -44,7 +44,8 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g rizon-world -f rizon -b rizond -c rizon -v v0.2.0
+&& ./install.sh -g rizon-world -f rizon -b rizond -c rizon -v v0.2.0 \
+&& rm -rf install.sh && . $HOME/.profile
 ```
 
 ## 3. Data for start the chain. 

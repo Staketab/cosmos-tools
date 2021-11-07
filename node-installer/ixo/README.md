@@ -44,7 +44,8 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g ixofoundation -f ixo-blockchain -b ixod -c ixod -v v1.6.0
+&& ./install.sh -g ixofoundation -f ixo-blockchain -b ixod -c ixod -v v1.6.0 \
+&& rm -rf install.sh && . $HOME/.profile
 ```
 
 ## 3. Data for start the chain. 

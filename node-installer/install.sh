@@ -75,7 +75,7 @@ Environment=DAEMON_NAME='${BIN_NAME}'
 Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=true
 Environment=DAEMON_RESTART_AFTER_UPGRADE=true
 Environment=DAEMON_LOG_BUFFER_SIZE=512
-Environment=UNSAFE_SKIP_BACKUP=false
+Environment=UNSAFE_SKIP_BACKUP=true
 Environment=DAEMON_HOME='${HOME}'/.'${CONFIG_FOLDER}'
 ExecStart='$(which cosmovisor)' start --home '${HOME}'/.'${CONFIG_FOLDER}'
 Restart=always
@@ -98,8 +98,21 @@ function source {
     && cd ${GIT_FOLDER} \
     && git fetch \
     && git checkout tags/${BIN_VER} \
-    && make install \
-    && make build
+    && make install
+    if [ -f ${GOPATH}/bin/${BIN_NAME} ]; then
+        echo -e "$GREEN ${BIN_NAME} found. Continue...$NORMAL"
+    else
+        make build
+        BUILD="$GOPATH/src/github.com/${GIT_FOLDER}/build"
+        if [ -f ${GOPATH}/bin/${BIN_NAME} ]; then
+            echo -e "$GREEN ${BIN_NAME} found. Continue...$NORMAL"
+        elif [ -f $BUILD/${BIN_NAME} ]; then
+            cp $BUILD/${BIN_NAME} ${GOPATH}/bin/
+            echo -e "$GREEN ${BIN_NAME} found. Continue...$NORMAL"
+        else
+            make all
+        fi
+    fi
     line
     echo -e "$GREEN ${BIN_NAME} built and installed.$NORMAL"
     line
@@ -217,11 +230,11 @@ function genesis {
 
     if [ -f $GENESIS$FILE ]; then
         echo -e "$YELLOW :: Genesis file correct...$NORMAL"
+        mv $HOME/tmp/*.json $GENESIS_PATH$FILE
     elif [ $GENESIS*.json != $FILE ]; then
         echo -e "$YELLOW :: Renaming Genesis...$NORMAL"
         mv $HOME/tmp/*.json $GENESIS_PATH$FILE
     fi
-    cp $HOME/tmp/$FILE $GENESIS_PATH$FILE
     cd
     rm -rf $HOME/tmp
 
@@ -357,14 +370,14 @@ function compCosmovisor {
             echo -e "$RED 2$NORMAL -$YELLOW Leave the current$NORMAL"
             read -p "Answer: " COSM_ANSWER
                 if [ "$COSM_ANSWER" == "1" ]; then
-                    go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.0.0
+                    go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@latest
                     line
                     echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
                     line
                 fi
         else
             mkdir -p ${GENBIN} ${UPGBIN}
-            go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.0.0
+            go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@latest
             line
             echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
             line

@@ -44,7 +44,8 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g Sifchain -f sifnode -b sifnoded -c sifnoded -v mainnet-genesis
+&& ./install.sh -g Sifchain -f sifnode -b sifnoded -c sifnoded -v mainnet-genesis \
+&& rm -rf install.sh && . $HOME/.profile
 ```
 
 ## 3. Data for start the chain. 

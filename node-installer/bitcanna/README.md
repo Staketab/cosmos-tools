@@ -44,7 +44,8 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g BitCannaGlobal -f bcna -b bcnad -c bcna -v v1.1
+&& ./install.sh -g BitCannaGlobal -f bcna -b bcnad -c bcna -v v1.1 \
+&& rm -rf install.sh && . $HOME/.profile
 ```
 
 ## 3. Data for start the chain. 
