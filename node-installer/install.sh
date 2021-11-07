@@ -98,8 +98,17 @@ function source {
     && cd ${GIT_FOLDER} \
     && git fetch \
     && git checkout tags/${BIN_VER} \
-    && make install \
-    && make build
+    && make install
+    if [ -f ${GOPATH}/bin/${BIN_NAME} ]; then
+        echo -e "$GREEN ${BIN_NAME} found. Continue...$NORMAL"
+    else
+        make build
+        if [ -f ${GOPATH}/bin/${BIN_NAME} ]; then
+            echo -e "$GREEN ${BIN_NAME} found. Continue...$NORMAL"
+        else
+            make all
+        fi
+    fi
     line
     echo -e "$GREEN ${BIN_NAME} built and installed.$NORMAL"
     line
@@ -217,11 +226,11 @@ function genesis {
 
     if [ -f $GENESIS$FILE ]; then
         echo -e "$YELLOW :: Genesis file correct...$NORMAL"
+        mv $HOME/tmp/*.json $GENESIS_PATH$FILE
     elif [ $GENESIS*.json != $FILE ]; then
         echo -e "$YELLOW :: Renaming Genesis...$NORMAL"
         mv $HOME/tmp/*.json $GENESIS_PATH$FILE
     fi
-    cp $HOME/tmp/$FILE $GENESIS_PATH$FILE
     cd
     rm -rf $HOME/tmp
 
