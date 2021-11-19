@@ -6,7 +6,7 @@ RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
-SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-node,impacthub-3,panacea-3,juno-1,comets-test"
+SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-node,impacthub-3,panacea-3,juno-1,comdex-1,Test-Denali"
 
 function line {
 echo "-------------------------------------------------------------------"
@@ -66,10 +66,14 @@ elif [[ "${CHAIN}" == "juno-1" ]]; then
     cd $HOME/.${CONFIG_FOLDER}/data
     SNAP_NAME=$(curl -s https://snapshots.stakecraft.com/ | egrep -o ">juno-1.*tar" | tr -d ">")
     wget -O - https://snapshots.stakecraft.com/${SNAP_NAME} | tar xf -
-elif [[ "${CHAIN}" == "comets-test" ]]; then
+elif [[ "${CHAIN}" == "comdex-1" ]]; then
     cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s http://cosmos-snap.staketab.com/comdex/ | egrep -o ">comets-test.*tar" | tr -d ">")
+    SNAP_NAME=$(curl -s http://cosmos-snap.staketab.com/comdex/ | egrep -o ">comdex-1.*tar" | tr -d ">")
     wget -O - http://cosmos-snap.staketab.com/comdex/${SNAP_NAME} | tar xf -
+elif [[ "${CHAIN}" == "Test-Denali" ]]; then
+    cd $HOME/.${CONFIG_FOLDER}/data
+    SNAP_NAME=$(curl -s http://cosmos-snap.staketab.com/idep/ | egrep -o ">Test-Denali.*tar" | tr -d ">")
+    wget -O - http://cosmos-snap.staketab.com/idep/${SNAP_NAME} | tar xf -
 else
     line
     echo -e "$RED Something went wrong ... Snapshot not found ...$NORMAL"
