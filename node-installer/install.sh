@@ -370,14 +370,14 @@ function compCosmovisor {
             echo -e "$RED 2$NORMAL -$YELLOW Leave the current$NORMAL"
             read -p "Answer: " COSM_ANSWER
                 if [ "$COSM_ANSWER" == "1" ]; then
-                    go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@latest
+                    go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v0.1.0
                     line
                     echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
                     line
                 fi
         else
             mkdir -p ${GENBIN} ${UPGBIN}
-            go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@latest
+            go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v0.1.0
             line
             echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
             line
