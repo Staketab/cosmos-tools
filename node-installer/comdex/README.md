@@ -38,13 +38,13 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer
 `GIT_FOLDER = comdex`  
 `BIN_NAME = comdex`  
 `CONFIG_FOLDER = comdex`  
-`BIN_VER = v0.0.2`
+`BIN_VER = v0.0.4`
 
 The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g comdex-official -f comdex -b comdex -c comdex -v v0.0.2 \
+&& ./install.sh -g comdex-official -f comdex -b comdex -c comdex -v v0.0.4 \
 && rm -rf install.sh && . $HOME/.profile
 ```
 
@@ -56,23 +56,23 @@ none
 ```
 Chain-id:
 ```
-comets-test
+comdex-1
 ```  
 Genesis file:
 ```
-https://raw.githubusercontent.com/comdex-official/networks/main/testnet/comets-test/genesis_final.json
+https://raw.githubusercontent.com/comdex-official/networks/main/mainnet/comdex-1/genesis.json
 ```
 Peers:
 ```
-3659590cd1466671a49421089e55f1392e1cad0e@15.207.189.210:26656,8b1ccf5cf3a3ba65ee074f46ea8c6c164d867104@52.201.166.91:26656,5307ce50bd8a6f7bb5a922e3f7109b5f3241c425@13.51.118.56:26656,9c25a7ab94a315f683c3693e17aec6b2c91c851c@52.77.115.73:26656
+f74518ad134630da8d2405570f6a3639954c985f@65.0.173.217:26656,d478882a80674fa10a32da63cc20cae13e3a2a57@43.204.0.243:26656,61d743ea796ad1e1ff838c9e84adb38dfffd1d9d@15.235.9.222:26656,b8468f64788a17dbf34a891d9cd29d54b2b6485d@194.163.178.25:26656,d8b74791ee56f1b345d822f62bd9bc969668d8df@194.163.128.55:36656,81444353d70bab79742b8da447a9564583ed3d6a@164.68.105.248:26656,5b1ceb8110da4e90c38c794d574eb9418a7574d6@43.254.41.56:26656,98b4522a541a69007d87141184f146a8f04be5b9@40.112.90.170:26656,9a59b6dc59903d036dd476de26e8d2b9f1acf466@195.201.195.111:26656
 ```
 Seed:
 ```
-none
+aef35f45db2d9f5590baa088c27883ac3d5e0b33@3.108.102.92:26656,7ca14a1d156299999eba9c394ca060368022d52f@54.194.178.110:26656
 ```
 minimum-gas-prices:
 ```
-0.2ucmdx
+0.025ucmdx
 ```
 
 ## 4. Service commands.
