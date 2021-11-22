@@ -34,49 +34,52 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer
 && chmod +x install.sh \
 && ./install.sh -g GIT_NAME -f GIT_FOLDER -b BIN_NAME -c CONFIG_FOLDER -v BIN_VER
 ```
-`GIT_NAME = Sifchain`  
-`GIT_FOLDER = sifnode`  
-`BIN_NAME = sifnoded`  
-`CONFIG_FOLDER = sifnoded`  
-`BIN_VER = mainnet-genesis`
+`GIT_NAME = IDEP-network`  
+`GIT_FOLDER = incentivized-testnet`  
+`BIN_NAME = iond`  
+`CONFIG_FOLDER = ion`  
+`BIN_VER = none`
 
 The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g Sifchain -f sifnode -b sifnoded -c sifnoded -v mainnet-genesis \
+&& ./install.sh -g IDEP-network -f incentivized-testnet -b ionds -c ions -v none \
 && rm -rf install.sh && . $HOME/.profile
 ```
+
 ## 3. Data for start the chain. 
+## IMPORTANT  
+### Use Binary installation option  
 Binary link:
 ```
-none
+https://raw.githubusercontent.com/IDEP-network/incentivized-testnet/main/binary/iond
 ```
 Chain-id:
 ```
-sifchain-1
+SanfordNetwork
 ```  
 Genesis file:
 ```
-https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/sifchain/genesis.json
+https://raw.githubusercontent.com/IDEP-network/incentivized-testnet/main/binary/genesis.json
 ```
 Peers:
 ```
-8c240f71f9e060277ce18dc09d82d3bbb05d1972@13.211.43.177:26656,0120f0a48e7e81cc98829ef4f5b39480f11ecd5a@52.76.185.17:26656,bcc2d07a14a8a0b3aa202e9ac106dec0bef91fda@13.55.247.60:26656,8c240f71f9e060277ce18dc09d82d3bbb05d1972@13.211.43.177:26656
+4a22319cf53209fe8655f4aa7dd023a3822d4e3c@88.99.56.200:36656
 ```
 Seed:
 ```
-none
+fb870b06d828a82a368f7a8e539edf76c3e7b420@159.89.84.111:26656
 ```
 minimum-gas-prices:
 ```
-0.025rowan
+0idep
 ```
 
 ## 4. Service commands.
 Reload configuration change - `systemctl daemon-reload`  
-Restart Cosmovisor service - `systemctl restart sifnoded.service`  
-Cosmovisor service logs - `journalctl -u sifnoded.service -f`  
-Stop Cosmovisor service - `systemctl stop sifnoded.service`  
+Restart Cosmovisor service - `systemctl restart iond.service`  
+Cosmovisor service logs - `journalctl -u iond.service -f`  
+Stop Cosmovisor service - `systemctl stop iond.service`  
 
 ## DONE

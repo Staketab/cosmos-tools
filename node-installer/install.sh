@@ -54,7 +54,7 @@ User=$(whoami)
 ExecStart='$(which ${BIN_NAME})' start --home '${HOME}'/.'${CONFIG_FOLDER}'
 Restart=always
 RestartSec=3
-LimitNOFILE=50000
+LimitNOFILE=65535
 [Install]
 WantedBy=multi-user.target
 " >/etc/systemd/system/'${BIN_NAME}'.service'
@@ -75,12 +75,12 @@ Environment=DAEMON_NAME='${BIN_NAME}'
 Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=true
 Environment=DAEMON_RESTART_AFTER_UPGRADE=true
 Environment=DAEMON_LOG_BUFFER_SIZE=512
-Environment=UNSAFE_SKIP_BACKUP=true
+Environment=UNSAFE_SKIP_BACKUP=false
 Environment=DAEMON_HOME='${HOME}'/.'${CONFIG_FOLDER}'
 ExecStart='$(which cosmovisor)' start --home '${HOME}'/.'${CONFIG_FOLDER}'
 Restart=always
 RestartSec=3
-LimitNOFILE=50000
+LimitNOFILE=65535
 [Install]
 WantedBy=multi-user.target
 " >/etc/systemd/system/'${BIN_NAME}'.service'
