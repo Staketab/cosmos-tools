@@ -47,18 +47,36 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer
 && ./install.sh -g Sifchain -f sifnode -b sifnoded -c sifnoded -v mainnet-genesis \
 && rm -rf install.sh && . $HOME/.profile
 ```
-
 ## 3. Data for start the chain. 
-Chain-id - `sifchain`  
-Genesis file - [Link](https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/sifchain/genesis.json)  
-Peers - `8c240f71f9e060277ce18dc09d82d3bbb05d1972@13.211.43.177:26656,0120f0a48e7e81cc98829ef4f5b39480f11ecd5a@52.76.185.17:26656,bcc2d07a14a8a0b3aa202e9ac106dec0bef91fda@13.55.247.60:26656,8c240f71f9e060277ce18dc09d82d3bbb05d1972@13.211.43.177:26656`  
-Seed - `None`  
-minimum-gas-prices - `0.025rowan`  
+Binary link:
+```
+none
+```
+Chain-id:
+```
+sifchain
+```  
+Genesis file:
+```
+https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/sifchain/genesis.json
+```
+Peers:
+```
+8c240f71f9e060277ce18dc09d82d3bbb05d1972@13.211.43.177:26656,0120f0a48e7e81cc98829ef4f5b39480f11ecd5a@52.76.185.17:26656,bcc2d07a14a8a0b3aa202e9ac106dec0bef91fda@13.55.247.60:26656,8c240f71f9e060277ce18dc09d82d3bbb05d1972@13.211.43.177:26656
+```
+Seed:
+```
+none
+```
+minimum-gas-prices:
+```
+0.025rowan
+```
 
 ## 4. Service commands.
 Reload configuration change - `systemctl daemon-reload`  
-Restart Cosmovisor service - `systemctl restart cosmovisor.service`  
-Cosmovisor service logs - `journalctl -u cosmovisor.service -f`  
-Stop Cosmovisor service - `systemctl stop cosmovisor.service`  
+Restart Cosmovisor service - `systemctl restart sifnoded.service`  
+Cosmovisor service logs - `journalctl -u sifnoded.service -f`  
+Stop Cosmovisor service - `systemctl stop sifnoded.service`  
 
 ## DONE
