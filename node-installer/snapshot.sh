@@ -6,7 +6,7 @@ RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
-SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-node,impacthub-3,panacea-3,juno-1,comdex-1,Test-Denali"
+SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-node,impacthub-3,panacea-3,juno-1,comdex-1,Test-Denali,SanfordNetwork"
 
 function line {
 echo "-------------------------------------------------------------------"
@@ -73,6 +73,10 @@ elif [[ "${CHAIN}" == "comdex-1" ]]; then
 elif [[ "${CHAIN}" == "Test-Denali" ]]; then
     cd $HOME/.${CONFIG_FOLDER}/data
     SNAP_NAME=$(curl -s http://cosmos-snap.staketab.com/idep/ | egrep -o ">Test-Denali.*tar" | tr -d ">")
+    wget -O - http://cosmos-snap.staketab.com/idep/${SNAP_NAME} | tar xf -
+elif [[ "${CHAIN}" == "SanfordNetwork" ]]; then
+    cd $HOME/.${CONFIG_FOLDER}/data
+    SNAP_NAME=$(curl -s http://cosmos-snap.staketab.com/idep/ | egrep -o ">SanfordNetwork.*tar" | tr -d ">")
     wget -O - http://cosmos-snap.staketab.com/idep/${SNAP_NAME} | tar xf -
 else
     line
