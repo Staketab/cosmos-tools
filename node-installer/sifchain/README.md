@@ -54,7 +54,7 @@ none
 ```
 Chain-id:
 ```
-sifchain
+sifchain-1
 ```  
 Genesis file:
 ```
