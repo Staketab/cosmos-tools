@@ -44,7 +44,7 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g IDEP-network -f incentivized-testnet -b ionds -c ions -v none \
+&& ./install.sh -g IDEP-network -f incentivized-testnet -b iond -c ion -v none \
 && rm -rf install.sh && . $HOME/.profile
 ```
 
