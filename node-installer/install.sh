@@ -176,6 +176,7 @@ function installBinary {
     fi
 
     cp $BINARY$BIN_NAME $GOPATH/bin
+    sudo chmod +x $GOPATH/bin/$BIN_NAME
     cd
     rm -rf $HOME/tmp
 }
