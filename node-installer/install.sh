@@ -36,7 +36,7 @@ function binary_version {
     BIN_VER=${1}
 }
 function cosmovisor_version {
-    COSMOVISOR_VER=${1:-"v1.0.0"}
+    COSMOVISOR_VER=${1:-"v0.1.0"}
     export COSMOVISOR_VER=${COSMOVISOR_VER}
 }
 
@@ -371,14 +371,16 @@ function compCosmovisor {
             echo -e "$RED 2$NORMAL -$YELLOW Leave the current$NORMAL"
             read -p "Answer: " COSM_ANSWER
                 if [ "$COSM_ANSWER" == "1" ]; then
-                    go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v0.1.0
+                    #go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v0.1.0
+                    go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/'cosmovisor@'${COSMOVISOR_VER}''
                     line
                     echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
                     line
                 fi
         else
             mkdir -p ${GENBIN} ${UPGBIN}
-            go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v0.1.0
+            #go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v0.1.0
+            go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/'cosmovisor@'${COSMOVISOR_VER}''
             line
             echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
             line
