@@ -483,7 +483,7 @@ function launch {
     line
 }
 
-while getopts ":g:f:b:c:v:cv:" o; do
+while getopts ":g:f:b:c:v:s:" o; do
   case "${o}" in
     g)
       g=${OPTARG}
@@ -500,11 +500,11 @@ while getopts ":g:f:b:c:v:cv:" o; do
     v)
       v=${OPTARG}
       ;;
-    cv)
-      cv=${OPTARG}
+    s)
+      s=${OPTARG}
       ;;
   esac
 done
 shift $((OPTIND-1))
 
-launch "${g}" "${f}" "${b}" "${c}" "${v}" "${cv}"
+launch "${g}" "${f}" "${b}" "${c}" "${v}" "${s}"
