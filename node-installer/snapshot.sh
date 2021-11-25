@@ -13,9 +13,8 @@ echo "-------------------------------------------------------------------"
 }
 
 function unpack {
-export SNAP_LINK=${SNAP_LINK}
 cd $HOME/.${CONFIG_FOLDER}/data
-aria2c -x2 ${SNAP_LINK}
+aria2c -x2 ${SNAP_LINK}${SNAP_NAME}
 tar -xf ${SNAP_NAME}
 rm -rf ${SNAP_NAME}
 rm -rf $HOME/.${CONFIG_FOLDER}/data/upgrade-info.json
