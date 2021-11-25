@@ -13,6 +13,7 @@ echo "-------------------------------------------------------------------"
 }
 
 function unpack {
+export SNAP_LINK=${SNAP_LINK}
 cd $HOME/.${CONFIG_FOLDER}/data
 aria2c -x2 ${SNAP_LINK}
 tar -xf ${SNAP_NAME}
