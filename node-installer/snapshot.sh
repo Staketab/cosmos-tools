@@ -12,6 +12,14 @@ function line {
 echo "-------------------------------------------------------------------"
 }
 
+function unpack {
+cd $HOME/.${CONFIG_FOLDER}/data
+aria2c -x2 ${SNAP_LINK}
+tar -xf ${SNAP_NAME}
+rm -rf ${SNAP_NAME}
+rm -rf $HOME/.${CONFIG_FOLDER}/data/upgrade-info.json
+}
+
 function greeting {
 line
 echo -e "$YELLOW Using the Snapshot Services from:$NORMAL"
@@ -27,61 +35,61 @@ line
 
 function snapStart {
 if [[ "${CHAIN}" == "akashnet-2" ]]; then
-    cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s http://135.181.60.250/akash/ | egrep -o ">akashnet-2.*tar" | tr -d ">")
-    wget -O - http://135.181.60.250/akash/${SNAP_NAME} | tar xf -
+    SNAP_LINK="http://135.181.60.250/akash/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">akashnet-2.*tar" | tr -d ">")
+    unpack
 elif [[ "${CHAIN}" == "sifchain-1" ]]; then
-    cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s http://135.181.60.250:8081/sifchain/ | egrep -o ">sifchain.*tar" | tail -n 1 | tr -d '>')
-    wget -O - http://135.181.60.250:8081/sifchain/${SNAP_NAME} | tar xf -
+    SNAP_LINK="http://135.181.60.250:8081/sifchain/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">sifchain.*tar" | tail -n 1 | tr -d '>')
+    unpack
 elif [[ "${CHAIN}" == "sentinelhub-2" ]]; then
-    cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s http://135.181.60.250:8083/sentinel/ | egrep -o ">sentinelhub-2.*tar" | tr -d ">")
-    wget -O - http://135.181.60.250:8083/sentinel/${SNAP_NAME} | tar xf -
+    SNAP_LINK="http://135.181.60.250:8083/sentinel/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">sentinelhub-2.*tar" | tr -d ">")
+    unpack
 elif [[ "${CHAIN}" == "desmos-mainnet" ]]; then
-    cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s http://135.181.60.250:8084/desmos/ | egrep -o ">desmos.*tar" | tr -d ">")
-    wget -O - http://135.181.60.250:8084/desmos/${SNAP_NAME} | tar xf -
+    SNAP_LINK="http://135.181.60.250:8084/desmos/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">desmos.*tar" | tr -d ">")
+    unpack
 elif [[ "${CHAIN}" == "osmosis-1" ]]; then
-    cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s http://135.181.60.250:8085/osmosis/ | egrep -o ">osmosis.*tar" | tr -d ">")
-    wget -O - http://135.181.60.250:8085/osmosis/${SNAP_NAME} | tar xf -
+    SNAP_LINK="http://135.181.60.250:8085/osmosis/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">osmosis.*tar" | tr -d ">")
+    unpack
 elif [[ "${CHAIN}" == "bitcanna-1" ]]; then
-    cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s http://135.181.60.250:8086/bitcanna/ | egrep -o ">bitcanna.*tar" | tr -d ">")
-    wget -O - http://135.181.60.250:8086/bitcanna/${SNAP_NAME} | tar xf -
+    SNAP_LINK="http://135.181.60.250:8086/bitcanna/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">bitcanna.*tar" | tr -d ">")
+    unpack
 elif [[ "${CHAIN}" == "oasis-node" ]]; then
-    cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s http://95.216.45.250:8081/ | egrep -o ">oasis.*tar" | tr -d ">")
-    wget -O - http://95.216.45.250:8081/${SNAP_NAME} | tar xzf -
+    SNAP_LINK="http://95.216.45.250:8081/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">oasis.*tar" | tr -d ">")
+    unpack
 elif [[ "${CHAIN}" == "impacthub-3" ]]; then
-    cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s http://cosmos-snap.staketab.com/ixo/ | egrep -o ">impacthub-3.*tar" | tr -d ">")
-    wget -O - http://cosmos-snap.staketab.com/ixo/${SNAP_NAME} | tar xf -
+    SNAP_LINK="http://cosmos-snap.staketab.com/ixo/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">impacthub-3.*tar" | tr -d ">")
+    unpack
 elif [[ "${CHAIN}" == "panacea-3" ]]; then
-    cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s http://cosmos-snap.staketab.com/medibloc/ | egrep -o ">panacea-3.*tar" | tr -d ">")
-    wget -O - http://cosmos-snap.staketab.com/medibloc/${SNAP_NAME} | tar xf -
+    SNAP_LINK="http://cosmos-snap.staketab.com/medibloc/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">panacea-3.*tar" | tr -d ">")
+    unpack
 elif [[ "${CHAIN}" == "juno-1" ]]; then
-    cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s https://snapshots.stakecraft.com/ | egrep -o ">juno-1.*tar" | tr -d ">")
-    wget -O - https://snapshots.stakecraft.com/${SNAP_NAME} | tar xf -
+    SNAP_LINK="https://snapshots.stakecraft.com/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">juno-1.*tar" | tr -d ">")
+    unpack
 elif [[ "${CHAIN}" == "comdex-1" ]]; then
-    cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s http://cosmos-snap.staketab.com/comdex/ | egrep -o ">comdex-1.*tar" | tr -d ">")
-    wget -O - http://cosmos-snap.staketab.com/comdex/${SNAP_NAME} | tar xf -
+    SNAP_LINK="http://cosmos-snap.staketab.com/comdex/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">comdex-1.*tar" | tr -d ">")
+    unpack
 elif [[ "${CHAIN}" == "kichain-2" ]]; then
-    cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s https://mercury-nodes.net/kichain-snaps/ | egrep -o ">kichain-2.*tar" | tr -d ">")
-    wget -O - https://mercury-nodes.net/kichain-snaps/${SNAP_NAME} | tar xf -
+    SNAP_LINK="https://mercury-nodes.net/kichain-snaps/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">kichain-2.*tar" | tr -d ">")
+    unpack
 elif [[ "${CHAIN}" == "Test-Denali" ]]; then
-    cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s http://cosmos-snap.staketab.com/idep/ | egrep -o ">Test-Denali.*tar" | tr -d ">")
-    wget -O - http://cosmos-snap.staketab.com/idep/${SNAP_NAME} | tar xf -
+    SNAP_LINK="http://cosmos-snap.staketab.com/idep/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">Test-Denali.*tar" | tr -d ">")
+    unpack
 elif [[ "${CHAIN}" == "SanfordNetwork" ]]; then
-    cd $HOME/.${CONFIG_FOLDER}/data
-    SNAP_NAME=$(curl -s http://cosmos-snap.staketab.com/idep/ | egrep -o ">SanfordNetwork.*tar" | tr -d ">")
-    wget -O - http://cosmos-snap.staketab.com/idep/${SNAP_NAME} | tar xf -
+    SNAP_LINK="http://cosmos-snap.staketab.com/idep/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">SanfordNetwork.*tar" | tr -d ">")
+    unpack
 else
     line
     echo -e "$RED Something went wrong ... Snapshot not found ...$NORMAL"
