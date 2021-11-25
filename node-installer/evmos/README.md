@@ -38,13 +38,13 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer
 `GIT_FOLDER = evmos`  
 `BIN_NAME = evmosd`  
 `CONFIG_FOLDER = evmosd`  
-`BIN_VER = v0.2.0`
+`BIN_VER = v0.3.0`
 
 The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g tharsis -f evmos -b evmosd -c evmosd -v v0.2.0 \
+&& ./install.sh -g tharsis -f evmos -b evmosd -c evmosd -v v0.3.0 \
 && rm -rf install.sh && . $HOME/.profile
 ```
 
@@ -68,7 +68,7 @@ Peers:
 ```
 Seed:
 ```
-c36cec90ded95d162b85f8ecd00ecd7c8849ca75@arsiamons.seed.evmos.org:26656,3787335176bbb91bf14a67724ebe0f0940ca5afb@evmos-seed.artifact-staking.io:26656,faa31510d9280e74e7f2e767a62023bd5c896c27@evmos-testnet.mercury-nodes.net:29447
+c36cec90ded95d162b85f8ecd00ecd7c8849ca75@arsiamons.seed.evmos.org:26656,6f0bbcf559a3eab1c5594062d587ccec4b4bade2@evmos-seed.artifact-staking.io:26656,faa31510d9280e74e7f2e767a62023bd5c896c27@evmos-testnet.mercury-nodes.net:29447
 ```
 minimum-gas-prices:
 ```
