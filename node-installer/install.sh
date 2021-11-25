@@ -197,6 +197,25 @@ function bin_config {
         exit 0
     fi
 }
+function checkAria {
+    ARIA2C=$(which aria2c)
+        if [ -f "$ARIA2C" ]; then
+            line
+            echo -e "$YELLOW File ARIA2C exist. No need to install.$NORMAL"
+            line
+        else
+            line
+            echo -e "$YELLOW Installing ARIA2C tool to fast downloading.$NORMAL"
+            installAria
+            line
+            echo -e "$GREEN ARIA2C installed.$NORMAL"
+            line
+        fi
+}
+function installAria {
+    sudo apt-get update -y -qq > /dev/null
+    sudo apt-get install -y aria2 -qq > /dev/null
+}
 function genesis {
     echo -e "$GREEN Enter link to Genesis file (Example: https://raw.githubusercontent.com/desmos-labs/morpheus/master/morpheus-apollo-1/genesis.json)$NORMAL"
     read -p "Genesis link: " LINK2
