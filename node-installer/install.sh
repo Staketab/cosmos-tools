@@ -294,6 +294,7 @@ function snapshot {
         echo -e "$RED 2$NORMAL -$YELLOW Don't use Snapshot$NORMAL"
         read -p "Answer: " SNAP_ANSWER
         if [ "$SNAP_ANSWER" == "1" ]; then
+            checkAria
             curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/snapshot.sh | bash
         else
             statesync
