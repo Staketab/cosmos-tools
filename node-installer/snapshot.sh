@@ -15,6 +15,9 @@ echo "-------------------------------------------------------------------"
 function unpack {
 cd $HOME/.${CONFIG_FOLDER}/data
 aria2c -x2 ${SNAP_LINK}${SNAP_NAME}
+line
+echo -e "$GREEN Unpacking...$NORMAL"
+line
 tar -xf ${SNAP_NAME}
 rm -rf ${SNAP_NAME}
 rm -rf $HOME/.${CONFIG_FOLDER}/data/upgrade-info.json
