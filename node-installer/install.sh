@@ -178,7 +178,7 @@ function installBinary {
         echo -e "$YELLOW :: BINARY file correct...$NORMAL"
     elif [ $BINARY* != ${BIN_NAME} ]; then
         echo -e "$YELLOW :: Renaming BINARY...$NORMAL"
-        mv $BINARY* $BINARY
+        mv $BINARY* $BIN_NAME
     fi
 
     cp $BINARY$BIN_NAME $GOPATH/bin
