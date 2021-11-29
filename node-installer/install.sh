@@ -441,8 +441,7 @@ function compCosmovisor {
         fi
         chmod +x ${GENBIN}/*
         chmod +x ${UPGBIN}/*
-
-        param
+        
         cosmService
         cosmVars
         line
@@ -458,6 +457,7 @@ function launch {
     setup "${1}" "${2}" "${3}" "${4}" "${5}" "${6}"
 
     bin_config
+    param
     binService
     echo -e "$GREEN VALIDATOR NODE CONFIGURING.$NORMAL"
     echo -e "$YELLOW Next you need to provide CHAIN data.$NORMAL"
