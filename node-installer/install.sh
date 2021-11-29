@@ -44,6 +44,12 @@ function cosmovisor_version {
 function line {
     echo "-------------------------------------------------------------------"
 }
+function param {
+    echo -e "$GREEN Add flags to$NORMAL $RED${BIN_NAME} start$NORMAL$GREEN command, if needed (Example: --x-crisis-skip-assert-invariants)$NORMAL"
+    line
+    read -p "Flags: " FLAG
+    export FLAG=${FLAG}
+}
 function binService {
 sudo /bin/bash -c  'echo "[Unit]
 Description='${BIN_NAME}' Node Service
@@ -51,7 +57,7 @@ After=network-online.target
 [Service]
 Type=simple
 User=$(whoami)
-ExecStart='$(which ${BIN_NAME})' start --home '${HOME}'/.'${CONFIG_FOLDER}'
+ExecStart='${GOPATH}'/bin/'${BIN_NAME}' start '${FLAG}' --home '${HOME}'/.'${CONFIG_FOLDER}'
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
@@ -75,9 +81,9 @@ Environment=DAEMON_NAME='${BIN_NAME}'
 Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=true
 Environment=DAEMON_RESTART_AFTER_UPGRADE=true
 Environment=DAEMON_LOG_BUFFER_SIZE=512
-Environment=UNSAFE_SKIP_BACKUP=false
+Environment=UNSAFE_SKIP_BACKUP=true
 Environment=DAEMON_HOME='${HOME}'/.'${CONFIG_FOLDER}'
-ExecStart='$(which cosmovisor)' start --home '${HOME}'/.'${CONFIG_FOLDER}'
+ExecStart='$(which cosmovisor)' start '${FLAG}' --home '${HOME}'/.'${CONFIG_FOLDER}'
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
@@ -87,7 +93,6 @@ WantedBy=multi-user.target
 
     sudo systemctl daemon-reload && sudo systemctl enable ${BIN_NAME}.service
 
-    line
     echo -e "$GREEN Cosmovisor service installed.$NORMAL"
     line
 }
@@ -141,6 +146,7 @@ function installSource {
 function installBinary {
     line
     echo -e "$GREEN Insers link to the BINARY file or archive (Example: https://github.com/desmos-labs/desmos/releases/download/v0.17.5/desmos-amd64.zip)$NORMAL"
+    line
     read -p "Link: " LINK
     mkdir -p $HOME/tmp && cd $HOME/tmp
     echo -e "$YELLOW :: Downloading archive with BINARY...$NORMAL"
@@ -187,6 +193,7 @@ function bin_config {
     echo -e "$YELLOW Select installation method:$NORMAL"
     echo -e "$RED 1$NORMAL -$YELLOW Install from SOURCE.$NORMAL"
     echo -e "$RED 2$NORMAL -$YELLOW Install using BINARY.$NORMAL"
+    line
     read -p "Your answer: " ANSWERS
     if [ "$ANSWERS" == "1" ]; then
         installSource
@@ -197,8 +204,28 @@ function bin_config {
         exit 0
     fi
 }
+function checkAria {
+    ARIA2C=$(which aria2c)
+        if [ -f "$ARIA2C" ]; then
+            line
+            echo -e "$YELLOW File ARIA2C exist. No need to install.$NORMAL"
+            line
+        else
+            line
+            echo -e "$YELLOW Installing ARIA2C tool to fast downloading.$NORMAL"
+            installAria
+            line
+            echo -e "$GREEN ARIA2C installed.$NORMAL"
+            line
+        fi
+}
+function installAria {
+    sudo apt-get update -y -qq > /dev/null
+    sudo apt-get install -y aria2 -qq > /dev/null
+}
 function genesis {
     echo -e "$GREEN Enter link to Genesis file (Example: https://raw.githubusercontent.com/desmos-labs/morpheus/master/morpheus-apollo-1/genesis.json)$NORMAL"
+    line
     read -p "Genesis link: " LINK2
     mkdir -p $HOME/tmp && cd $HOME/tmp
     GENESIS_PATH="$HOME/.${CONFIG_FOLDER}/config/"
@@ -242,24 +269,26 @@ function genesis {
     line
     echo -e "$GREEN Checking genesis SHASUM -a 256:$NORMAL"
     shasum -a 256 $HOME/.${CONFIG_FOLDER}/config/genesis.json
-    line
     sleep 3
 }
 function seeds {
     line
     echo -e "$GREEN Enter Seeds (Example: be3db0fe5ee7f764902dbcc75126a2e082cbf00c@seed-1.morpheus.desmos.network:26656)$NORMAL"
+    line
     read -p "Seed: " SEED
     sed -i.bak -E 's#^(seeds[[:space:]]+=[[:space:]]+).*$#\1"'$SEED'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
 }
 function peers {
     line
     echo -e "$GREEN Enter Peers (Validator or Sentry PEER) (Example: 728d59298dce64c72f13001f67a5b3e7fc080f91@135.181.201.2:26656)$NORMAL"
+    line
     read -p "Persistent_peers: " PEERS
     sed -i.bak -E 's#^(persistent_peers[[:space:]]+=[[:space:]]+).*$#\1"'$PEERS'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
 }
 function gas {
     line
     echo -e "$GREEN Enter minimum-gas-prices (Example: 0.025udaric)$NORMAL"
+    line
     read -p "minimum-gas-prices: " GAS_PRICE
     sed -i.bak -E 's#^(minimum-gas-prices[[:space:]]+=[[:space:]]+).*$#\1"'$GAS_PRICE'"#' $HOME/.${CONFIG_FOLDER}/config/app.toml
 }
@@ -273,8 +302,10 @@ function snapshot {
         echo -e "$GREEN CHOOSE OPTION: $NORMAL"
         echo -e "$RED 1$NORMAL -$YELLOW Use Snapshot$NORMAL"
         echo -e "$RED 2$NORMAL -$YELLOW Don't use Snapshot$NORMAL"
+        line
         read -p "Answer: " SNAP_ANSWER
         if [ "$SNAP_ANSWER" == "1" ]; then
+            checkAria
             curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/snapshot.sh | bash
         else
             statesync
@@ -295,6 +326,7 @@ function statesync {
     line
     echo -e "$RED 1$NORMAL -$YELLOW If you want to configure STATESYNC.$NORMAL"
     echo -e "$RED 2$NORMAL -$YELLOW If you don't want to configure STATESYNC.$NORMAL"
+    line
     read -p "Your answer: " ANSWERS
     if [ "$ANSWERS" == "1" ]; then
         statesync-c
@@ -341,6 +373,25 @@ function cosmVars {
     sudo /bin/bash -c  'echo "export DAEMON_LOG_BUFFER_SIZE=512" >> $HOME/.profile'
     . $HOME/.profile
 }
+function versCosmovisor {
+    line
+    echo -e "$GREEN CHOOSE COSMOSVISOR VERSION: $NORMAL"
+    line
+    echo -e "$RED 1$NORMAL -$YELLOW Install Cosmosvisor$NORMAL$RED v0.1.0$NORMAL"
+    echo -e "$RED 2$NORMAL -$YELLOW Install Cosmosvisor$NORMAL$RED v1.0.0$NORMAL"
+    echo -e "$RED 3$NORMAL -$YELLOW Install Cosmosvisor$NORMAL$RED latest$NORMAL"
+    line
+    read -p "Answer: " COSM_VERSION
+    if [ "$COSM_VERSION" == "1" ]; then
+        go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v0.1.0
+    elif [ "$COSM_VERSION" == "2" ]; then
+        go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.0.0
+    elif [ "$COSM_VERSION" == "3" ]; then
+        go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@latest
+    else
+        go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/'cosmovisor@'${COSMOVISOR_VER}''
+    fi
+}
 function compCosmovisor {
     line
     echo -e "$GREEN COSMOSVISOR SETUP: $NORMAL"
@@ -355,12 +406,13 @@ function compCosmovisor {
     echo -e "$GREEN CHOOSE OPTION. $NORMAL"
     echo -e "$RED 1$NORMAL -$YELLOW Install Cosmosvisor$NORMAL"
     echo -e "$RED 2$NORMAL -$YELLOW Don't install Cosmosvisor$NORMAL"
+    line
     read -p "Answer: " COSM_INSTALL_ANSWER
     if [ "$COSM_INSTALL_ANSWER" == "1" ]; then
         LS_CUR="${HOME}/.${CONFIG_FOLDER}/cosmovisor/current"
         GENBIN="${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin"
-        UPGBIN="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin"
-        UPGLS="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir"
+        UPGBIN="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/bin"
+        UPGLS="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades"
         COSMBIN="$GOPATH/bin/cosmovisor"
         if [ -e $COSMBIN ]; then
             mkdir -p ${GENBIN} ${UPGBIN}
@@ -369,16 +421,17 @@ function compCosmovisor {
             echo -e "$GREEN Choose option: $NORMAL"
             echo -e "$RED 1$NORMAL -$YELLOW Update binary$NORMAL"
             echo -e "$RED 2$NORMAL -$YELLOW Leave the current$NORMAL"
+            line
             read -p "Answer: " COSM_ANSWER
                 if [ "$COSM_ANSWER" == "1" ]; then
-                    go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v0.1.0
+                    versCosmovisor
                     line
                     echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
                     line
                 fi
         else
             mkdir -p ${GENBIN} ${UPGBIN}
-            go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v0.1.0
+            versCosmovisor
             line
             echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
             line
@@ -413,12 +466,9 @@ function compCosmovisor {
         fi
         chmod +x ${GENBIN}/*
         chmod +x ${UPGBIN}/*
-
+        
         cosmService
         cosmVars
-        line
-        echo -e "$GREEN Setup of Cosmosvisor complete.$NORMAL"
-        line
     else
     line
     echo -e "$RED Skipped Cosmosvisor setup...$NORMAL"
@@ -429,6 +479,7 @@ function launch {
     setup "${1}" "${2}" "${3}" "${4}" "${5}" "${6}"
 
     bin_config
+    param
     binService
     echo -e "$GREEN VALIDATOR NODE CONFIGURING.$NORMAL"
     echo -e "$YELLOW Next you need to provide CHAIN data.$NORMAL"
@@ -436,11 +487,13 @@ function launch {
     line
     sleep 3
     echo -e "$GREEN Enter CHAIN-ID$NORMAL"
+    line
     read -p "Chain-id: " CHAIN
     export CHAIN=${CHAIN}
     export CONFIG_FOLDER=${CONFIG_FOLDER}
     line
     echo -e "$GREEN Enter your Moniker$NORMAL"
+    line
     read -p "Moniker: " MONIKER
     GENESIS_FILE="$HOME/.${CONFIG_FOLDER}/config/genesis.json"
     CONFIG_HOME="$HOME/.${CONFIG_FOLDER}"
@@ -475,13 +528,14 @@ function launch {
     line
     echo -e "$GREEN Now you can start the chain!$NORMAL"
     line
-    echo -e "$YELLOW Use$NORMAL$RED sudo systemctl start ${BIN_NAME}.service && sudo journalctl -u ${BIN_NAME}.service -f$NORMAL"
+    echo -e "$YELLOW Use$NORMAL$RED sudo systemctl start ${BIN_NAME}.service$NORMAL$YELLOW To start service$NORMAL"
+    echo -e "$YELLOW Use$NORMAL$RED sudo journalctl -u ${BIN_NAME}.service -f$NORMAL$YELLOW To view service logs$NORMAL"
     line
     echo -e "$GREEN DONE$NORMAL"
     line
 }
 
-while getopts ":g:f:b:c:v:cv:" o; do
+while getopts ":g:f:b:c:v:s:" o; do
   case "${o}" in
     g)
       g=${OPTARG}
@@ -498,11 +552,11 @@ while getopts ":g:f:b:c:v:cv:" o; do
     v)
       v=${OPTARG}
       ;;
-    cv)
-      cv=${OPTARG}
+    s)
+      s=${OPTARG}
       ;;
   esac
 done
 shift $((OPTIND-1))
 
-launch "${g}" "${f}" "${b}" "${c}" "${v}" "${cv}"
+launch "${g}" "${f}" "${b}" "${c}" "${v}" "${s}"

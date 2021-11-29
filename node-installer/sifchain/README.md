@@ -74,9 +74,9 @@ minimum-gas-prices:
 ```
 
 ## 4. Service commands.
-Reload configuration change - `systemctl daemon-reload`  
-Restart Cosmovisor service - `systemctl restart sifnoded.service`  
-Cosmovisor service logs - `journalctl -u sifnoded.service -f`  
-Stop Cosmovisor service - `systemctl stop sifnoded.service`  
+Reload configuration change - `sudo systemctl daemon-reload`  
+Restart Cosmovisor service - `sudo systemctl restart sifnoded.service`  
+Cosmovisor service logs - `sudo journalctl -u sifnoded.service -f`  
+Stop Cosmovisor service - `sudo systemctl stop sifnoded.service`  
 
 ## DONE
