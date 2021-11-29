@@ -44,6 +44,12 @@ function cosmovisor_version {
 function line {
     echo "-------------------------------------------------------------------"
 }
+function param {
+    line
+    echo -e "$GREEN Add flags to$NORMAL $RED${BIN_NAME} start$NORMAL$GREEN command, if needed (Example: --x-crisis-skip-assert-invariants)$NORMAL"
+    read -p "Flags: " FLAG
+    export FLAG=${FLAG}
+}
 function binService {
 sudo /bin/bash -c  'echo "[Unit]
 Description='${BIN_NAME}' Node Service
@@ -51,7 +57,7 @@ After=network-online.target
 [Service]
 Type=simple
 User=$(whoami)
-ExecStart='$(which ${BIN_NAME})' start '${FLAG}' --home '${HOME}'/.'${CONFIG_FOLDER}'
+ExecStart='${GOPATH}'/bin/'${BIN_NAME}' start '${FLAG}' --home '${HOME}'/.'${CONFIG_FOLDER}'
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
@@ -90,12 +96,6 @@ WantedBy=multi-user.target
     line
     echo -e "$GREEN Cosmovisor service installed.$NORMAL"
     line
-}
-function param {
-    line
-    echo -e "$GREEN Add flags to$NORMAL $RED${BIN_NAME} start$NORMAL$GREEN command, if needed (Example: --x-crisis-skip-assert-invariants)$NORMAL"
-    read -p "Flags: " FLAG
-    export FLAG={FLAG}
 }
 function source {
     mkdir -p ${GOPATH}/src{,/github.com}
