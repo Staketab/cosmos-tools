@@ -51,7 +51,7 @@ After=network-online.target
 [Service]
 Type=simple
 User=$(whoami)
-ExecStart='$(which ${BIN_NAME})' start --home '${HOME}'/.'${CONFIG_FOLDER}'
+ExecStart='$(which ${BIN_NAME})' start '${FLAG}' --home '${HOME}'/.'${CONFIG_FOLDER}'
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
@@ -77,7 +77,7 @@ Environment=DAEMON_RESTART_AFTER_UPGRADE=true
 Environment=DAEMON_LOG_BUFFER_SIZE=512
 Environment=UNSAFE_SKIP_BACKUP=true
 Environment=DAEMON_HOME='${HOME}'/.'${CONFIG_FOLDER}'
-ExecStart='$(which cosmovisor)' start --home '${HOME}'/.'${CONFIG_FOLDER}'
+ExecStart='$(which cosmovisor)' start '${FLAG}' --home '${HOME}'/.'${CONFIG_FOLDER}'
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
@@ -90,6 +90,12 @@ WantedBy=multi-user.target
     line
     echo -e "$GREEN Cosmovisor service installed.$NORMAL"
     line
+}
+function param {
+    line
+    echo -e "$GREEN Add flags to$NORMAL $RED${BIN_NAME} start$NORMAL$GREEN command, if needed (Example: --x-crisis-skip-assert-invariants)$NORMAL"
+    read -p "Flags: " FLAG
+    export FLAG={FLAG}
 }
 function source {
     mkdir -p ${GOPATH}/src{,/github.com}
@@ -379,8 +385,8 @@ function compCosmovisor {
     if [ "$COSM_INSTALL_ANSWER" == "1" ]; then
         LS_CUR="${HOME}/.${CONFIG_FOLDER}/cosmovisor/current"
         GENBIN="${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin"
-        UPGBIN="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir/bin"
-        UPGLS="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/Gir"
+        UPGBIN="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/bin"
+        UPGLS="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades"
         COSMBIN="$GOPATH/bin/cosmovisor"
         if [ -e $COSMBIN ]; then
             mkdir -p ${GENBIN} ${UPGBIN}
@@ -436,6 +442,7 @@ function compCosmovisor {
         chmod +x ${GENBIN}/*
         chmod +x ${UPGBIN}/*
 
+        param
         cosmService
         cosmVars
         line
