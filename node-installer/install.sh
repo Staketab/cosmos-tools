@@ -36,7 +36,7 @@ function binary_version {
     BIN_VER=${1}
 }
 function cosmovisor_version {
-    COSMOVISOR_VER=${1:-"v0.1.0"}
+    COSMOVISOR_VER=${1:-"v1.0.0"}
     export COSMOVISOR_VER=${COSMOVISOR_VER}
 }
 
@@ -367,6 +367,24 @@ function cosmVars {
     sudo /bin/bash -c  'echo "export DAEMON_LOG_BUFFER_SIZE=512" >> $HOME/.profile'
     . $HOME/.profile
 }
+function versCosmovisor {
+    line
+    echo -e "$GREEN CHOOSE COSMOSVISOR VERSION: $NORMAL"
+    line
+    echo -e "$RED 1$NORMAL -$YELLOW Install Cosmosvisor$NORMAL$RED v0.1.0$NORMAL"
+    echo -e "$RED 2$NORMAL -$YELLOW Install Cosmosvisor$NORMAL$RED v1.0.0$NORMAL"
+    echo -e "$RED 3$NORMAL -$YELLOW Install Cosmosvisor$NORMAL$RED latest$NORMAL"
+    read -p "Answer: " COSM_VERSION
+    if [ "$COSM_VERSION" == "1" ]; then
+        go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v0.1.0
+    elif [ "$COSM_VERSION" == "2" ]; then
+        go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.0.0
+    elif [ "$COSM_VERSION" == "3" ]; then
+        go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@latest
+    else
+        go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/'cosmovisor@'${COSMOVISOR_VER}''
+    fi
+}
 function compCosmovisor {
     line
     echo -e "$GREEN COSMOSVISOR SETUP: $NORMAL"
@@ -397,16 +415,14 @@ function compCosmovisor {
             echo -e "$RED 2$NORMAL -$YELLOW Leave the current$NORMAL"
             read -p "Answer: " COSM_ANSWER
                 if [ "$COSM_ANSWER" == "1" ]; then
-                    #go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v0.1.0
-                    go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/'cosmovisor@'${COSMOVISOR_VER}''
+                    versCosmovisor
                     line
                     echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
                     line
                 fi
         else
             mkdir -p ${GENBIN} ${UPGBIN}
-            #go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v0.1.0
-            go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/'cosmovisor@'${COSMOVISOR_VER}''
+            versCosmovisor
             line
             echo -e "$GREEN Cosmosvisor built and installed.$NORMAL"
             line
