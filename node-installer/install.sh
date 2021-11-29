@@ -528,7 +528,8 @@ function launch {
     line
     echo -e "$GREEN Now you can start the chain!$NORMAL"
     line
-    echo -e "$YELLOW Use$NORMAL$RED sudo systemctl start ${BIN_NAME}.service && sudo journalctl -u ${BIN_NAME}.service -f$NORMAL"
+    echo -e "$YELLOW Use$NORMAL$RED sudo systemctl start ${BIN_NAME}.service$NORMAL$YELLOW To start service$NORMAL"
+    echo -e "$YELLOW Use$NORMAL$RED sudo journalctl -u ${BIN_NAME}.service -f$NORMAL$YELLOW To view service logs$NORMAL"
     line
     echo -e "$GREEN DONE$NORMAL"
     line
