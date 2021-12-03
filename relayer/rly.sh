@@ -112,14 +112,6 @@ function varChains {
   line
   read -p "GAS_PRICE 2: " GAS_PRICE_2
   line
-  echo -e "$YELLOW Enter denom for CHAIN 1:(Example: uatom)$NORMAL"
-  line
-  read -p "DENOM 1: " DENOM_1
-  line
-  echo -e "$YELLOW Enter denom for CHAIN 2:(Example: uosmo)$NORMAL"
-  line
-  read -p "DENOM 2: " DENOM_2
-  line
   echo -e "$YELLOW Default: 2/3 of the unbonding period for Cosmos SDK chains.$NORMAL"
   echo -e "$YELLOW Example: unbonding period = 3 weeks, trusting period = 2 weeks$NORMAL"
   line
@@ -205,7 +197,6 @@ function chainsSetup {
       \"rpc-addr\": \"http://'${RPC_1}'\",
       \"account-prefix\": \"'${PREFIX_1}'\",
       \"gas-prices\": \"'${GAS_PRICE_1}'\",
-      \"default-denom\": \"'${DENOM_1}'\",
       \"gas-adjustment\": 1.5,
       \"trusting-period\": \"'${TRUST_PERIOD_1}'\"
   }
@@ -217,7 +208,6 @@ function chainsSetup {
       \"rpc-addr\": \"http://'${RPC_2}'\",
       \"account-prefix\": \"'${PREFIX_2}'\",
       \"gas-prices\": \"'${GAS_PRICE_2}'\",
-      \"default-denom\": \"'${DENOM_2}'\",
       \"gas-adjustment\": 1.5,
       \"trusting-period\": \"'${TRUST_PERIOD_2}'\"
   }
