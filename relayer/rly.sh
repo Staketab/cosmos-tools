@@ -298,6 +298,16 @@ else
     line
 fi
 }
+function rlyRestart {
+  sudo systemctl restart rly.service
+  sudo systemctl restart rly-packets.service
+}
+function log {
+  line
+  echo -e "$GREEN sudo journalctl -u rly -f$NORMAL"
+  echo -e "$GREEN sudo journalctl -u rly-packets -f$NORMAL"
+  line
+}
 function launch {
   setup "${1}"
 
@@ -312,7 +322,7 @@ function launch {
   rlyLightInit
   rlyLink
   rlyServices
-
+  rlyRestart
 }
 while getopts ":v:" o; do
   case "${o}" in
@@ -324,3 +334,4 @@ done
 shift $((OPTIND-1))
 
 launch "${v}"
+log
