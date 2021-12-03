@@ -54,7 +54,7 @@ User=$(whoami)
 ExecStart='$(which rly)' start '${PORT}'
 Restart=always
 RestartSec=3
-LimitNOFILE=57777
+LimitNOFILE=65535
 [Install]
 WantedBy=multi-user.target
 " >/etc/systemd/system/rly.service'
@@ -72,10 +72,10 @@ Description=Relayer packets Service
 After=network-online.target
 [Service]
 User=$(whoami)
-ExecStart=/bin/bash /root/rly-pack.bash
+ExecStart=/bin/bash $HOME/rly-pack.bash
 Restart=always
 RestartSec=3
-LimitNOFILE=57777
+LimitNOFILE=65535
 [Install]
 WantedBy=multi-user.target
 " >/etc/systemd/system/rly-packets.service'
@@ -83,7 +83,7 @@ WantedBy=multi-user.target
     sudo systemctl daemon-reload && sudo systemctl enable rly-packets.service
 
     line
-    echo -e "$GREEN Relayer- service installed.$NORMAL"
+    echo -e "$GREEN Relayer-package service installed.$NORMAL"
     line
 }
 function source {
