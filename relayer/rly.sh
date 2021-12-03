@@ -22,6 +22,7 @@ function goCheck {
   if ! [ -x "$(command -v go)" ]; then
     goSetup
   else
+    goVars
     line
     echo -e "$GREEN GO installed.$NORMAL"
     line
@@ -32,6 +33,14 @@ function goSetup {
   && bash +x ./go.sh -v 1.17.2 \
   && rm -rf go.sh \
   && . /etc/profile && . $HOME/.bashrc
+  goVars
+}
+function goVars {
+  export GOPATH=$HOME/go
+  export PATH=$HOME/go/bin:$PATH
+  export GOBIN=$HOME/go/bin
+  export GOROOT=/usr/local/go
+  export GO111MODULE=on
 }
 function rlyCheck {
   if ! [ -x "$(command -v rly)" ]; then
@@ -122,11 +131,11 @@ function varChains {
   line
   read -p "TRUST_PERIOD 2: " TRUST_PERIOD_2
   line
-  echo -e "$YELLOW Enter mnemonic phrase for KEY 1:(Example: peanut solar proof hidden perfect dust funny stand sphere stomach ignore gauge knock trigger tree art spell nuclear grape suggest discover inside seed)$NORMAL"
+  echo -e "$YELLOW Enter mnemonic phrase for KEY 1 CHAIN 1:(Example: peanut solar proof hidden perfect dust funny stand sphere stomach ignore gauge knock trigger tree art spell nuclear grape suggest discover inside seed)$NORMAL"
   line
   read -p "MNEMONIC_1: " MNEMONIC_1
   line
-  echo -e "$YELLOW Enter mnemonic phrase for KEY 2:(Example: peanut solar proof hidden perfect dust funny stand sphere stomach ignore gauge knock trigger tree art spell nuclear grape suggest discover inside seed)$NORMAL"
+  echo -e "$YELLOW Enter mnemonic phrase for KEY 2 CHAIN 2:(Example: peanut solar proof hidden perfect dust funny stand sphere stomach ignore gauge knock trigger tree art spell nuclear grape suggest discover inside seed)$NORMAL"
   line
   read -p "MNEMONIC_2: " MNEMONIC_2
 }
@@ -138,15 +147,12 @@ function rlyAddChainsPaths {
   rly config add-paths $RELAYER_DIR/paths --home $RELAYER_DIR
 }
 function rlyRestoreKeys {
-  rly keys restore ${CHAIN_1} ${KEY_1} "'${MNEMONIC_1}'" --home $RELAYER_DIR
-  rly keys restore ${CHAIN_2} ${KEY_2} "'${MNEMONIC_2}'" --home $RELAYER_DIR
-}
-function rlyLightInit {
-  rly light init ${CHAIN_1} -f --home $RELAYER_DIR
-  rly light init ${CHAIN_2} -f --home $RELAYER_DIR
+  rly keys restore ${CHAIN_1} ${KEY_1} "$MNEMONIC_1" --home $RELAYER_DIR
+  rly keys restore ${CHAIN_2} ${KEY_2} "$MNEMONIC_2" --home $RELAYER_DIR
 }
 function rlyLink {
   rly tx link transfer --home $RELAYER_DIR
+  echo -e "$YELLOW transfer completed$NORMAL"
 }
 function rlyService {
 sudo /bin/bash -c  'echo "[Unit]
@@ -170,7 +176,7 @@ WantedBy=multi-user.target
   line
 }
 function rlyPacketsService {
-  cp https://raw.githubusercontent.com/Staketab/cosmos-tools/rly/relayer/rly-pack.bash ${RELAYER_DIR}/rly-pack.bash
+  wget -O ${RELAYER_DIR}/rly-pack.bash https://raw.githubusercontent.com/Staketab/cosmos-tools/rly/relayer/rly-pack.bash
 
 sudo /bin/bash -c  'echo "[Unit]
 Description=Relayer packets Service
@@ -217,7 +223,7 @@ function chainsSetup {
   }
   " > $HOME/.relayer/chains/'${CHAIN_2}'.json'
   line
-  echo -e "$GREEN Ironfish config created.$NORMAL"
+  echo -e "$GREEN Chains ${CHAIN_1} ${CHAIN_2} created.$NORMAL"
   line
 }
 function pathsSetup {
@@ -230,7 +236,7 @@ function pathsSetup {
       \"channel-id\": \"\",
       \"port-id\": \"transfer\",
       \"order\": \"unordered\",
-      \"version\": \"ics27-1\"
+      \"version\": \"ics20-1\"
     },
     \"dst\": {
       \"chain-id\": \"'${CHAIN_2}'\",
@@ -239,7 +245,7 @@ function pathsSetup {
       \"channel-id\": \"\",
       \"port-id\": \"transfer\",
       \"order\": \"unordered\",
-      \"version\": \"ics27-1\"
+      \"version\": \"ics20-1\"
     },
     \"strategy\": {
       \"type\": \"naive\"
@@ -248,7 +254,7 @@ function pathsSetup {
   " > $HOME/.relayer/paths/transfer.json'
 
   line
-  echo -e "$GREEN Ironfish config created.$NORMAL"
+  echo -e "$GREEN Paths created.$NORMAL"
   line
 }
 function rlyServices {
@@ -319,7 +325,6 @@ function launch {
   pathsSetup
   rlyAddChainsPaths
   rlyRestoreKeys
-  rlyLightInit
   rlyLink
   rlyServices
   rlyRestart
