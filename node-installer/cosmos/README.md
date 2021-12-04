@@ -18,8 +18,7 @@ Example `./go.sh -v 1.17.2 -p /root/go`
 
 ```
 wget https://raw.githubusercontent.com/Staketab/node-tools/main/components/golang/go.sh \
-&& chmod +x go.sh \
-&& ./go.sh -v 1.17.2 -p /root/go \
+&& chmod +x go.sh && ./go.sh -v 1.17.2 \
 && rm -rf go.sh
 ```
 Now apply the changes with the command below or reboot your terminal.  
