@@ -30,7 +30,7 @@ function goCheck {
 }
 function goSetup {
   wget https://raw.githubusercontent.com/Staketab/node-tools/main/components/golang/go.sh \
-  && bash +x ./go.sh -v 1.17.2 \
+  && sudo bash +x ./go.sh -v 1.17.2 \
   && rm -rf go.sh \
   && . /etc/profile && . $HOME/.bashrc
   goVars
