@@ -109,13 +109,14 @@ if [ "$CHOISE" == "1" ]; then
       SEQ=$(${BINARY} query account ${SENDER} --output json | jq -r .sequence)
         for ((i = 0 ; i < ${COUNT} ; i++)); do
           AMOUNT=$(( $RANDOM %100000 ))
-          echo $SEQ
+          echo -e "$YELLOW Sequence$NORMAL$RED $SEQ $NORMAL"
           CUR_BLOCK=$(curl -s http://localhost:${RPC_PORT}/abci_info | jq -r .result.response.last_block_height)
           TX=$(echo $PASS | ${BINARY} tx peggy send-to-eth ${RECEIVER} ${AMOUNT}${COIN} 1uumee --from ${KEY_NAME} --chain-id=${CHAIN} --node http://localhost:${RPC_PORT} --sequence ${SEQ} --timeout-height $(($CUR_BLOCK + 5)) -y | jq -r '.txhash,.code')
           log_this_to_eth "$TX"
           SEQ=$(($SEQ+1))
           sleep ${STIME}
         done
+        echo -e "$GREEN done in file$NORMAL$RED $LOG_FILE_TO_ETH $NORMAL"
   elif [ "$ANSWER" == "no" ]; then
       echo -e "$RED Exited...$NORMAL"
       exit 0
@@ -135,6 +136,7 @@ checksEth
           rm -rf $HOME/tmp/dump.txt
           sleep ${STIME}
         done
+        echo -e "$GREEN done in file$NORMAL$RED $LOG_FILE_TO_COSMOS $NORMAL"
   elif [ "$ANSWER" == "no" ]; then
       echo -e "$RED Exited...$NORMAL"
       exit 0
