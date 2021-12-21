@@ -106,7 +106,7 @@ choises
 if [ "$CHOISE" == "1" ]; then
   checks
   if [ "$ANSWER" == "yes" ]; then
-      SEQ=$(${BINARY} query account ${SENDER} --output json | jq -r .sequence)
+      SEQ=$(${BINARY} query account ${SENDER} --node http://localhost:${RPC_PORT} --output json | jq -r .sequence)
         for ((i = 0 ; i < ${COUNT} ; i++)); do
           AMOUNT=$(( $RANDOM %100000 ))
           echo -e "$YELLOW Sequence$NORMAL$RED $SEQ $NORMAL"
