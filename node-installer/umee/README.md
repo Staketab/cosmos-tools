@@ -38,13 +38,13 @@ wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer
 `GIT_FOLDER = umee`  
 `BIN_NAME = umeed`  
 `CONFIG_FOLDER = umee`  
-`BIN_VER = v0.5.0-rc2`
+`BIN_VER = v0.5.0-rc3`
 
 The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g umee-network -f umee -b umeed -c umee -v v0.5.0-rc2 \
+&& ./install.sh -g umee-network -f umee -b umeed -c umee -v v0.5.0-rc3 \
 && rm -rf install.sh && . $HOME/.profile
 ```
 
@@ -56,15 +56,15 @@ none
 ```
 Chain-id:
 ```
-umee-alpha-mainnet-2
+umee-alpha-mainnet-3
 ```  
 Genesis file:
 ```
-https://raw.githubusercontent.com/umee-network/testnets/main/networks/umee-alpha-mainnet-2/genesis.json
+https://raw.githubusercontent.com/umee-network/testnets/main/networks/umee-alpha-mainnet-3/genesis.json
 ```
 Peers:
 ```
-308fccc6b1eb545d26b1021a56d2468eaf352066@134.209.194.97:26656,542a99d76a3598c9739d54f93dc9efb6743c17f7@134.122.70.132:26656,0c81c3a9796d0edf2aefde0e31521475de81a57f@143.198.139.198:26656
+b2bf71f20584fa63dbb4ca66f0533a58a7a4dcea@65.108.178.116:26656,dcbb9502e059f40b18c8fac2837b712340ad4727@161.97.159.64:26656,b5e533e6df886eb34a9d8e348124f400a77a33b6@146.59.55.100:26656,04fa2806127d971f1d23b2f8d116e4a8ddefc191@159.89.144.87:26656,0f5245bf2a9029676052043efd82e814ec5aece1@89.163.164.209:26656,db6ef36604edca1cb93c9b4dc3fad47dc3aa8989@135.181.165.110:26656
 ```
 Seed:
 ```
