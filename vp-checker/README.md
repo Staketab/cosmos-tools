@@ -18,7 +18,7 @@ tmux new -s checkvp
 ```
 And start this script:
 ```
-wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/vp_checker/vp_checker.sh \
+wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/vp-checker/vp_checker.sh \
 && chmod +x vp_checker.sh \
 && ./vp_checker.sh -b BINARY -s SLEEP_TIME -p RPC_PORT -t TG_TOKEN -c TG_CHANNEL -d DISCORD_HOOK
 ```
