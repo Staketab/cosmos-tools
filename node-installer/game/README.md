@@ -62,7 +62,7 @@ https://raw.githubusercontent.com/cosmos-gaminghub/testnets/master/nibiru-3000/g
 ```
 Peers:
 ```
-none
+e81d6d3e9e9166c5fa2098a06efd889f16c37d46@195.201.59.194:26656
 ```
 Seed:
 ```
