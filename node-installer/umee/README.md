@@ -60,13 +60,13 @@ none
 ```
 minimum-gas-prices:
 ```
-0uumee
+0.025uumee
 ```
 
 ## 4. Service commands.
-Reload configuration change - `systemctl daemon-reload`  
-Restart Cosmovisor service - `systemctl restart umeed.service`  
-Cosmovisor service logs - `journalctl -u umeed.service -f`  
-Stop Cosmovisor service - `systemctl stop umeed.service`  
+Reload configuration change - `sudo systemctl daemon-reload`  
+Restart Cosmovisor service - `sudo systemctl restart umeed.service`  
+Cosmovisor service logs - `sudo journalctl -u umeed.service -f`  
+Stop Cosmovisor service - `sudo systemctl stop umeed.service`  
 
 ## DONE

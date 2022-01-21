@@ -91,7 +91,7 @@ if [ "$ANSWER" == "yes" ]; then
         echo "-------------------------------------------------------------------"
         echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW Stake ${DELEGATE} ${COIN} $NORMAL"
         echo "-------------------------------------------------------------------"
-        echo $PASS | ${BINARY} tx staking delegate ${VALOPER} ${DELEGATE}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --fees ${FEE} --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
+        echo $PASS | ${BINARY} tx staking delegate ${VALOPER} ${DELEGATE}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --gas auto --fees ${FEE} --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
         sleep 30s
         echo "-------------------------------------------------------------------"
         echo -e "$GREEN Balance after delegation:$NORMAL"
