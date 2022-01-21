@@ -6,7 +6,7 @@ RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
-SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-2,impacthub-3,panacea-3,juno-1,comdex-1,kichain-2,SanfordNetwork"
+SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-2,impacthub-3,panacea-3,juno-1,comdex-1,kichain-2,SanfordNetwork,stargaze-1"
 
 function line {
 echo "-------------------------------------------------------------------"
@@ -88,6 +88,10 @@ elif [[ "${CHAIN}" == "kichain-2" ]]; then
 elif [[ "${CHAIN}" == "SanfordNetwork" ]]; then
     SNAP_LINK="http://cosmos-snap.staketab.com/idep/"
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">SanfordNetwork.*tar" | tr -d ">")
+    unpack
+elif [[ "${CHAIN}" == "stargaze-1" ]]; then
+    SNAP_LINK="http://cosmos-snap.staketab.com/stargaze/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">stargaze-1.*tar" | tr -d ">")
     unpack
 else
     line
