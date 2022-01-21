@@ -42,8 +42,8 @@ if [[ "${CHAIN}" == "akashnet-2" ]]; then
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">akashnet-2.*tar" | tr -d ">")
     unpack
 elif [[ "${CHAIN}" == "sifchain-1" ]]; then
-    SNAP_LINK="http://135.181.60.250:8081/sifchain/"
-    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">sifchain.*tar" | tail -n 1 | tr -d '>')
+    SNAP_LINK="http://cosmos-snap.staketab.com/sifchain/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">sifchain-1.*tar" | tr -d ">")
     unpack
 elif [[ "${CHAIN}" == "sentinelhub-2" ]]; then
     SNAP_LINK="http://135.181.60.250:8083/sentinel/"
