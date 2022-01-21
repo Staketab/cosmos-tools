@@ -6,7 +6,7 @@ RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
-SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-node,impacthub-3,panacea-3,juno-1,comdex-1,kichain-2,Test-Denali,SanfordNetwork"
+SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-2,impacthub-3,panacea-3,juno-1,comdex-1,kichain-2,SanfordNetwork"
 
 function line {
 echo "-------------------------------------------------------------------"
@@ -28,7 +28,7 @@ line
 echo -e "$YELLOW Using the Snapshot Services from:$NORMAL"
 echo -e "$GREEN c29r3:$NORMAL$RED https://github.com/c29r3/cosmos-snapshots$NORMAL"
 line
-echo -e "$GREEN Bambarello:$NORMAL$RED http://snapshots.alexvalidator.com:8081/$NORMAL"
+echo -e "$GREEN Bambarello:$NORMAL$RED http://snapshots.alexvalidator.com/$NORMAL"
 line
 echo -e "$GREEN Staketab:$NORMAL$RED https://github.com/Staketab/nginx-cosmos-snap$NORMAL"
 line
@@ -61,8 +61,8 @@ elif [[ "${CHAIN}" == "bitcanna-1" ]]; then
     SNAP_LINK="http://135.181.60.250:8086/bitcanna/"
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">bitcanna.*tar" | tr -d ">")
     unpack
-elif [[ "${CHAIN}" == "oasis-node" ]]; then
-    SNAP_LINK="http://95.216.45.250:8081/"
+elif [[ "${CHAIN}" == "oasis-2" ]]; then
+    SNAP_LINK="http://snapshots.alexvalidator.com/oasis/"
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">oasis.*tar" | tr -d ">")
     unpack
 elif [[ "${CHAIN}" == "impacthub-3" ]]; then
@@ -84,10 +84,6 @@ elif [[ "${CHAIN}" == "comdex-1" ]]; then
 elif [[ "${CHAIN}" == "kichain-2" ]]; then
     SNAP_LINK="https://mercury-nodes.net/kichain-snaps/"
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">kichain-2.*tar" | tr -d ">")
-    unpack
-elif [[ "${CHAIN}" == "Test-Denali" ]]; then
-    SNAP_LINK="http://cosmos-snap.staketab.com/idep/"
-    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">Test-Denali.*tar" | tr -d ">")
     unpack
 elif [[ "${CHAIN}" == "SanfordNetwork" ]]; then
     SNAP_LINK="http://cosmos-snap.staketab.com/idep/"
