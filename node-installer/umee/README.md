@@ -28,19 +28,7 @@ Now apply the changes with the command below or reboot your terminal.
 ```
 
 ### 2. Run Node setup:
-Enter Enviroments `-g GIT_NAME -f GIT_FOLDER -b BIN_NAME -c CONFIG_FOLDER -v BIN_VER` and run this script to setup and build.  
-```
-wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
-&& chmod +x install.sh \
-&& ./install.sh -g GIT_NAME -f GIT_FOLDER -b BIN_NAME -c CONFIG_FOLDER -v BIN_VER
-```
-`GIT_NAME = umee-network`  
-`GIT_FOLDER = umee`  
-`BIN_NAME = umeed`  
-`CONFIG_FOLDER = umee`  
-`BIN_VER = v0.5.0-rc3`
-
-The run command should look like this:
+The run command:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \

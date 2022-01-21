@@ -19,7 +19,7 @@ Example `./go.sh -v 1.17.2 -p /root/go`
 ```
 wget https://raw.githubusercontent.com/Staketab/node-tools/main/components/golang/go.sh \
 && chmod +x go.sh \
-&& ./go.sh -v 1.17.2 -p /root/go \
+&& ./go.sh -v 1.17.2 \
 && rm -rf go.sh
 ```
 Now apply the changes with the command below or reboot your terminal.  
@@ -28,18 +28,6 @@ Now apply the changes with the command below or reboot your terminal.
 ```
 
 ### 2. Run Node setup:
-Enter Enviroments `-g GIT_NAME -f GIT_FOLDER -b BIN_NAME -c CONFIG_FOLDER -v BIN_VER` and run this script to setup and build.  
-```
-wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
-&& chmod +x install.sh \
-&& ./install.sh -g GIT_NAME -f GIT_FOLDER -b BIN_NAME -c CONFIG_FOLDER -v BIN_VER
-```
-`GIT_NAME = IDEP-network`  
-`GIT_FOLDER = incentivized-testnet`  
-`BIN_NAME = iond`  
-`CONFIG_FOLDER = ion`  
-`BIN_VER = none`
-
 The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \

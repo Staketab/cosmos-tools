@@ -27,18 +27,6 @@ Now apply the changes with the command below or reboot your terminal.
 ```
 
 ### 2. Run Node setup:
-Enter Enviroments `-g GIT_NAME -f GIT_FOLDER -b BIN_NAME -c CONFIG_FOLDER -v BIN_VER` and run this script to setup and build.  
-```
-wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
-&& chmod +x install.sh \
-&& ./install.sh -g GIT_NAME -f GIT_FOLDER -b BIN_NAME -c CONFIG_FOLDER -v BIN_VER
-```
-`GIT_NAME = cosmos-gaminghub`  
-`GIT_FOLDER = nibiru`  
-`BIN_NAME = nibirud`  
-`CONFIG_FOLDER = nibiru`  
-`BIN_VER = v0.9`
-
 The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
