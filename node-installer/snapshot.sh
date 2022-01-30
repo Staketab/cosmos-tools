@@ -6,7 +6,8 @@ RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
-SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-2,impacthub-3,panacea-3,juno-1,comdex-1,kichain-2,SanfordNetwork,stargaze-1"
+SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-2,impacthub-3,juno-1,comdex-1,kichain-2,SanfordNetwork,stargaze-1,axelar-dojo-1"
+# panacea-3
 
 function line {
 echo "-------------------------------------------------------------------"
@@ -42,7 +43,7 @@ if [[ "${CHAIN}" == "akashnet-2" ]]; then
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">akashnet-2.*tar" | tr -d ">")
     unpack
 elif [[ "${CHAIN}" == "sifchain-1" ]]; then
-    SNAP_LINK="http://cosmos-snap.staketab.com/sifchain/"
+    SNAP_LINK="https://cosmos-snap.staketab.com/sifchain/"
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">sifchain-1.*tar" | tr -d ">")
     unpack
 elif [[ "${CHAIN}" == "sentinelhub-2" ]]; then
@@ -66,19 +67,19 @@ elif [[ "${CHAIN}" == "oasis-2" ]]; then
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">oasis.*tar" | tr -d ">")
     unpack
 elif [[ "${CHAIN}" == "impacthub-3" ]]; then
-    SNAP_LINK="http://cosmos-snap.staketab.com/ixo/"
+    SNAP_LINK="https://cosmos-snap.staketab.com/ixo/"
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">impacthub-3.*tar" | tr -d ">")
     unpack
-elif [[ "${CHAIN}" == "panacea-3" ]]; then
-    SNAP_LINK="http://cosmos-snap.staketab.com/medibloc/"
-    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">panacea-3.*tar" | tr -d ">")
-    unpack
+#elif [[ "${CHAIN}" == "panacea-3" ]]; then
+#    SNAP_LINK="https://cosmos-snap.staketab.com/medibloc/"
+#    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">panacea-3.*tar" | tr -d ">")
+#    unpack
 elif [[ "${CHAIN}" == "juno-1" ]]; then
     SNAP_LINK="https://snapshots.stakecraft.com/"
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">juno-1.*tar" | tr -d ">")
     unpack
 elif [[ "${CHAIN}" == "comdex-1" ]]; then
-    SNAP_LINK="http://cosmos-snap.staketab.com/comdex/"
+    SNAP_LINK="https://cosmos-snap.staketab.com/comdex/"
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">comdex-1.*tar" | tr -d ">")
     unpack
 elif [[ "${CHAIN}" == "kichain-2" ]]; then
@@ -86,12 +87,16 @@ elif [[ "${CHAIN}" == "kichain-2" ]]; then
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">kichain-2.*tar" | tr -d ">")
     unpack
 elif [[ "${CHAIN}" == "SanfordNetwork" ]]; then
-    SNAP_LINK="http://cosmos-snap.staketab.com/idep/"
+    SNAP_LINK="https://cosmos-snap.staketab.com/idep/"
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">SanfordNetwork.*tar" | tr -d ">")
     unpack
 elif [[ "${CHAIN}" == "stargaze-1" ]]; then
-    SNAP_LINK="http://cosmos-snap.staketab.com/stargaze/"
+    SNAP_LINK="https://cosmos-snap.staketab.com/stargaze/"
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">stargaze-1.*tar" | tr -d ">")
+    unpack
+elif [[ "${CHAIN}" == "axelar-dojo-1" ]]; then
+    SNAP_LINK="https://cosmos-snap.staketab.com/axelar/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">axelar-dojo-1.*tar" | tr -d ">")
     unpack
 else
     line

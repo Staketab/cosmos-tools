@@ -6,6 +6,8 @@ RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
+UPARROW="\U2B06\n"
+DOWNARROW="\U2B07\n"
 
 function line {
     echo "-------------------------------------------------------------------"
@@ -71,14 +73,14 @@ elif [ "$NEW_POWER" -gt "$POWER" ]; then
   CURRENT_VP="$((NEW_POWER - POWER))"
   echo -e "$YELLOW VP increased by:$NORMAL$GREEN $CURRENT_VP $NORMAL"
   line
-  MSG=$(echo -e "${BINARY} | $HOSTNAME | $(date +%F-%H-%M-%S) | VP increased: $CURRENT_VP")
+  MSG=$(echo -e "${BINARY} Voting Power $(printf ${UPARROW}) $CURRENT_VP")
   sendTg ${MSG}
   sendDiscord ${MSG}
 elif [ "$NEW_POWER" -lt "$POWER" ]; then
   CURRENT_VP="$((NEW_POWER - POWER))"
   echo -e "$YELLOW VP decreased by:$NORMAL$GREEN $CURRENT_VP $NORMAL"
   line
-  MSG=$(echo -e "${BINARY} | $HOSTNAME | $(date +%F-%H-%M-%S) | VP decreased: $CURRENT_VP")
+  MSG=$(echo -e "${BINARY} Voting Power $(printf ${DOWNARROW}) $CURRENT_VP")
   sendTg ${MSG}
   sendDiscord ${MSG}
 else
