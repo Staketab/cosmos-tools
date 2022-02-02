@@ -32,7 +32,7 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g Sifchain -f sifnode -b sifnoded -c sifnoded -v mainnet-genesis \
+&& ./install.sh -g Sifchain -f sifnode -b sifnoded -c sifnoded -v v0.9.0 \
 && rm -rf install.sh && . $HOME/.profile
 ```
 ## 3. Data for start the chain. 
@@ -46,11 +46,11 @@ sifchain-1
 ```  
 Genesis file:
 ```
-https://raw.githubusercontent.com/Staketab/cosmos-tools/main/cosmovisor/sifchain/genesis.json
+https://raw.githubusercontent.com/Sifchain/networks/master/betanet/sifchain-1/genesis.json.gz
 ```
 Peers:
 ```
-8c240f71f9e060277ce18dc09d82d3bbb05d1972@13.211.43.177:26656,0120f0a48e7e81cc98829ef4f5b39480f11ecd5a@52.76.185.17:26656,bcc2d07a14a8a0b3aa202e9ac106dec0bef91fda@13.55.247.60:26656,8c240f71f9e060277ce18dc09d82d3bbb05d1972@13.211.43.177:26656
+0d4981bdaf4d5d73bad00af3b1fa9d699e4d3bc0@44.235.108.41:26656,bcc2d07a14a8a0b3aa202e9ac106dec0bef91fda@13.55.247.60:26656,663dec65b754aceef5fcccb864048305208e7eb2@34.248.110.88:26656,0120f0a48e7e81cc98829ef4f5b39480f11ecd5a@52.76.185.17:26656
 ```
 Seed:
 ```
