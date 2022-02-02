@@ -345,7 +345,7 @@ function statesync-c {
     read -p "RPC Server 2: " RPC_STATE_2
     line
     LATEST_HEIGHT=$(curl -s $RPC_STATE_1/block | jq -r .result.block.header.height)
-    TRUST_HEIGHT=$((LATEST_HEIGHT - 2000))
+    TRUST_HEIGHT=$((LATEST_HEIGHT - 1000))
     TRUST_HASH=$(curl -s "$RPC_STATE_1/block?height=$TRUST_HEIGHT" | jq -r .result.block_id.hash)
     echo -e "$YELLOW RPC SERVERS:$NORMAL$RED ${RPC_STATE_1},${RPC_STATE_2}$NORMAL"
     echo -e "$YELLOW TRUST_HEIGHT:$NORMAL$RED ${TRUST_HEIGHT}$NORMAL"
