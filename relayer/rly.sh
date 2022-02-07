@@ -6,14 +6,20 @@ RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
-RELAYER_DIR="$HOME/.relayer"
 
 function setup {
-  rly_version "${1}"
+  port "${1}"
+  rly_version "${2}"
+}
+function port {
+  PORT=${1:-"transfer"}
 }
 function rly_version {
   RLY_VER=${1:-"v1.0.0"}
   export RLY_VER=${RLY_VER}
+}
+function rly_dir {
+  RELAYER_DIR="$HOME/.relayer-${PORT}"
 }
 function line {
   echo "-------------------------------------------------------------------"
@@ -143,7 +149,7 @@ function rlyRestoreKeys {
   rly keys restore ${CHAIN_2} ${KEY_2} "$MNEMONIC_2" --home $RELAYER_DIR
 }
 function rlyLink {
-  rly tx link transfer --home $RELAYER_DIR
+  rly tx link ${PORT} --home $RELAYER_DIR
   echo -e "$YELLOW transfer completed$NORMAL"
 }
 function rlyService {
@@ -153,13 +159,13 @@ After=network-online.target
 [Service]
 Type=simple
 User=$(whoami)
-ExecStart='$(which rly)' start transfer --home '${RELAYER_DIR}'
+ExecStart='$(which rly)' start '${PORT}' --home '${RELAYER_DIR}'
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
 [Install]
 WantedBy=multi-user.target
-" >/etc/systemd/system/rly.service'
+" >/etc/systemd/system/rly-'${PORT}'.service'
 
   sudo systemctl daemon-reload && sudo systemctl enable rly.service
 
@@ -181,7 +187,7 @@ RestartSec=3
 LimitNOFILE=65535
 [Install]
 WantedBy=multi-user.target
-" >/etc/systemd/system/rly-packets.service'
+" >/etc/systemd/system/rly-packets-'${PORT}'.service'
 
   sudo systemctl daemon-reload && sudo systemctl enable rly-packets.service
 
@@ -200,7 +206,7 @@ function chainsSetup {
       \"gas-adjustment\": 1.5,
       \"trusting-period\": \"'${TRUST_PERIOD_1}'\"
   }
-  " > $HOME/.relayer/chains/'${CHAIN_1}'.json'
+  " > '$RELAYER_DIR'/chains/'${CHAIN_1}'.json'
 
   sudo /bin/bash -c  'echo "{
       \"key\": \"'${KEY_2}'\",
@@ -211,20 +217,20 @@ function chainsSetup {
       \"gas-adjustment\": 1.5,
       \"trusting-period\": \"'${TRUST_PERIOD_2}'\"
   }
-  " > $HOME/.relayer/chains/'${CHAIN_2}'.json'
+  " > '$RELAYER_DIR'/chains/'${CHAIN_2}'.json'
   line
   echo -e "$GREEN Chains ${CHAIN_1} ${CHAIN_2} created.$NORMAL"
   line
 }
 function pathsSetup {
-  mkdir -p $HOME/.relayer/paths
+  mkdir -p $RELAYER_DIR/paths
   sudo /bin/bash -c  'echo "{
       \"src\": {
       \"chain-id\": \"'${CHAIN_1}'\",
       \"client-id\": \"\",
       \"connection-id\": \"\",
       \"channel-id\": \"\",
-      \"port-id\": \"transfer\",
+      \"port-id\": \"'${PORT}'\",
       \"order\": \"unordered\",
       \"version\": \"ics20-1\"
     },
@@ -233,7 +239,7 @@ function pathsSetup {
       \"client-id\": \"\",
       \"connection-id\": \"\",
       \"channel-id\": \"\",
-      \"port-id\": \"transfer\",
+      \"port-id\": \"'${PORT}'\",
       \"order\": \"unordered\",
       \"version\": \"ics20-1\"
     },
@@ -241,14 +247,14 @@ function pathsSetup {
       \"type\": \"naive\"
     }
   }
-  " > $HOME/.relayer/paths/transfer.json'
+  " > '$RELAYER_DIR'/paths/'${PORT}'.json'
 
   line
   echo -e "$GREEN Paths created.$NORMAL"
   line
 }
 function rlyServices {
-RLY="/etc/systemd/system/rly.service"
+RLY="/etc/systemd/system/rly-${PORT}.service"
 if [ -f "$RLY" ]; then
     line
     echo -e "$YELLOW Found an rly service. Choose an option:$NORMAL"
@@ -271,7 +277,7 @@ else
     line
 fi
 
-RLY_PACK="/etc/systemd/system/rly-packets.service"
+RLY_PACK="/etc/systemd/system/rly-packets-${PORT}.service"
 if [ -f "$RLY_PACK" ]; then
     line
     echo -e "$YELLOW Found an rly-packets service. Choose an option:$NORMAL"
@@ -295,18 +301,18 @@ else
 fi
 }
 function rlyRestart {
-  sudo systemctl restart rly.service
-  sudo systemctl restart rly-packets.service
+  sudo systemctl restart rly-${PORT}.service
+  sudo systemctl restart rly-packets-${PORT}.service
 }
 function log {
   line
-  echo -e "$GREEN sudo journalctl -u rly -f$NORMAL"
-  echo -e "$GREEN sudo journalctl -u rly-packets -f$NORMAL"
+  echo -e "$GREEN sudo journalctl -u rly-${PORT} -f && sudo journalctl -u rly-packets-${PORT} -f$NORMAL"
   line
 }
 function launch {
-  setup "${1}"
-
+  setup "${1}" "${2}"
+  
+  rly_dir
   goCheck
   rlyCheck
   varChains
@@ -319,8 +325,11 @@ function launch {
   rlyServices
   rlyRestart
 }
-while getopts ":v:" o; do
+while getopts ":p:v:" o; do
   case "${o}" in
+    p)
+      p=${OPTARG}
+      ;;
     v)
       v=${OPTARG}
       ;;
@@ -328,5 +337,5 @@ while getopts ":v:" o; do
 done
 shift $((OPTIND-1))
 
-launch "${v}"
+launch "${p}" "${v}"
 log

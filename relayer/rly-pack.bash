@@ -4,8 +4,8 @@ set -e
 
 while true
 do
-	sleep 5
-	$HOME/go/bin/rly tx relay-packets transfer
-	$HOME/go/bin/rly tx relay-acknowledgements transfer
-	sleep 25
+	$HOME/go/bin/rly tx relay-packets ${PORT}
+	sleep 6
+	$HOME/go/bin/rly tx relay-acknowledgements ${PORT}
+	sleep 3
 done
