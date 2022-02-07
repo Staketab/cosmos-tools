@@ -1,4 +1,4 @@
-# Auto-node-installer
+# Relayer setup
 Script for Relayer setup.  
 
 ```
