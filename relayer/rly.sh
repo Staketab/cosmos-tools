@@ -167,7 +167,7 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 " >/etc/systemd/system/rly-'${PORT}'.service'
 
-  sudo systemctl daemon-reload && sudo systemctl enable rly.service
+  sudo systemctl daemon-reload && sudo systemctl enable rly-${PORT}.service
 
   line
   echo -e "$GREEN Relayer service installed.$NORMAL"
@@ -189,7 +189,7 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 " >/etc/systemd/system/rly-packets-'${PORT}'.service'
 
-  sudo systemctl daemon-reload && sudo systemctl enable rly-packets.service
+  sudo systemctl daemon-reload && sudo systemctl enable rly-packets-${PORT}.service
 
   line
   echo -e "$GREEN Relayer-package service installed.$NORMAL"
