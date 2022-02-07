@@ -6,15 +6,20 @@ RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
-PORT="starscosm"
-RELAYER_DIR="$HOME/.relayer-${PORT}"
 
 function setup {
-  rly_version "${1}"
+  port "${1}"
+  rly_version "${2}"
+}
+function port {
+  PORT=${1:-"transfer"}
 }
 function rly_version {
   RLY_VER=${1:-"v1.0.0"}
   export RLY_VER=${RLY_VER}
+}
+function rly_dir {
+  RELAYER_DIR="$HOME/.relayer-${PORT}"
 }
 function line {
   echo "-------------------------------------------------------------------"
@@ -305,8 +310,9 @@ function log {
   line
 }
 function launch {
-  setup "${1}"
-
+  setup "${1}" "${2}"
+  
+  rly_dir
   goCheck
   rlyCheck
   varChains
@@ -319,8 +325,11 @@ function launch {
   rlyServices
   rlyRestart
 }
-while getopts ":v:" o; do
+while getopts ":p:v:" o; do
   case "${o}" in
+    p)
+      p=${OPTARG}
+      ;;
     v)
       v=${OPTARG}
       ;;
@@ -328,5 +337,5 @@ while getopts ":v:" o; do
 done
 shift $((OPTIND-1))
 
-launch "${v}"
+launch "${p}" "${v}"
 log
