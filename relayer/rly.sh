@@ -167,7 +167,7 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 " >/etc/systemd/system/rly-'${PORT}'.service'
 
-  sudo systemctl daemon-reload && sudo systemctl enable rly.service
+  sudo systemctl daemon-reload && sudo systemctl enable rly-${PORT}.service
 
   line
   echo -e "$GREEN Relayer service installed.$NORMAL"
@@ -181,6 +181,7 @@ Description=Relayer packets Service
 After=network-online.target
 [Service]
 User=$(whoami)
+Environment='${PORT}'
 ExecStart=/bin/bash +x '${RELAYER_DIR}'/rly-pack.bash
 Restart=always
 RestartSec=3
@@ -189,7 +190,7 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 " >/etc/systemd/system/rly-packets-'${PORT}'.service'
 
-  sudo systemctl daemon-reload && sudo systemctl enable rly-packets.service
+  sudo systemctl daemon-reload && sudo systemctl enable rly-packets-${PORT}.service
 
   line
   echo -e "$GREEN Relayer-package service installed.$NORMAL"
@@ -230,7 +231,7 @@ function pathsSetup {
       \"client-id\": \"\",
       \"connection-id\": \"\",
       \"channel-id\": \"\",
-      \"port-id\": \"'${PORT}'\",
+      \"port-id\": \"transfer\",
       \"order\": \"unordered\",
       \"version\": \"ics20-1\"
     },
@@ -239,7 +240,7 @@ function pathsSetup {
       \"client-id\": \"\",
       \"connection-id\": \"\",
       \"channel-id\": \"\",
-      \"port-id\": \"'${PORT}'\",
+      \"port-id\": \"transfer\",
       \"order\": \"unordered\",
       \"version\": \"ics20-1\"
     },
