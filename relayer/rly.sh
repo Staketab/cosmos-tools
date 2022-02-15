@@ -181,6 +181,7 @@ Description=Relayer packets Service
 After=network-online.target
 [Service]
 User=$(whoami)
+Environment='${PORT}'
 ExecStart=/bin/bash +x '${RELAYER_DIR}'/rly-pack.bash
 Restart=always
 RestartSec=3
@@ -230,7 +231,7 @@ function pathsSetup {
       \"client-id\": \"\",
       \"connection-id\": \"\",
       \"channel-id\": \"\",
-      \"port-id\": \"'${PORT}'\",
+      \"port-id\": \"transfer\",
       \"order\": \"unordered\",
       \"version\": \"ics20-1\"
     },
@@ -239,7 +240,7 @@ function pathsSetup {
       \"client-id\": \"\",
       \"connection-id\": \"\",
       \"channel-id\": \"\",
-      \"port-id\": \"'${PORT}'\",
+      \"port-id\": \"transfer\",
       \"order\": \"unordered\",
       \"version\": \"ics20-1\"
     },

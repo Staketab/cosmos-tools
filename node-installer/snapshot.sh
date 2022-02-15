@@ -6,7 +6,7 @@ RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
-SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-2,impacthub-3,juno-1,comdex-1,kichain-2,SanfordNetwork,stargaze-1,axelar-dojo-1"
+SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-2,impacthub-3,juno-1,comdex-1,kichain-2,SanfordNetwork,stargaze-1,axelar-dojo-1,umee-1"
 # panacea-3
 
 function line {
@@ -97,6 +97,10 @@ elif [[ "${CHAIN}" == "stargaze-1" ]]; then
 elif [[ "${CHAIN}" == "axelar-dojo-1" ]]; then
     SNAP_LINK="https://cosmos-snap.staketab.com/axelar/"
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">axelar-dojo-1.*tar" | tr -d ">")
+    unpack
+elif [[ "${CHAIN}" == "umee-1" ]]; then
+    SNAP_LINK="https://cosmos-snap.staketab.com/umee/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">umee-1.*tar" | tr -d ">")
     unpack
 else
     line
