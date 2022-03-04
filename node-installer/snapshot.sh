@@ -6,7 +6,7 @@ RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
-SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-2,impacthub-3,juno-1,comdex-1,kichain-2,SanfordNetwork,stargaze-1,axelar-dojo-1,umee-1"
+SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-2,impacthub-3,juno-1,comdex-1,kichain-2,SanfordNetwork,stargaze-1,axelar-dojo-1,axelar-testnet-lisbon-3,umee-1,evmos_9001-1,omniflixhub-1"
 # panacea-3
 
 function line {
@@ -101,6 +101,18 @@ elif [[ "${CHAIN}" == "axelar-dojo-1" ]]; then
 elif [[ "${CHAIN}" == "umee-1" ]]; then
     SNAP_LINK="https://cosmos-snap.staketab.com/umee/"
     SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">umee-1.*tar" | tr -d ">")
+    unpack
+elif [[ "${CHAIN}" == "evmos_9001-1" ]]; then
+    SNAP_LINK="https://cosmos-snap.staketab.com/evmos/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">evmos_9001-1.*tar" | tr -d ">")
+    unpack
+elif [[ "${CHAIN}" == "omniflixhub-1" ]]; then
+    SNAP_LINK="https://cosmos-snap.staketab.com/omniflix/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">omniflixhub-1.*tar" | tr -d ">")
+    unpack
+elif [[ "${CHAIN}" == "axelar-testnet-lisbon-3" ]]; then
+    SNAP_LINK="https://cosmos-snap.staketab.com/axelar/"
+    SNAP_NAME=$(curl -s ${SNAP_LINK} | egrep -o ">axelar-testnet-lisbon-3.*tar" | tr -d ">")
     unpack
 else
     line
