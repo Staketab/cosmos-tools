@@ -43,7 +43,7 @@ https://github.com/cosmos/gaia/releases/download/v6.0.0/gaiad-v6.0.0-linux-amd64
 ```
 Chain-id:
 ```
-vega-testnet
+theta-testnet-001
 ```  
 Genesis file:
 ```
