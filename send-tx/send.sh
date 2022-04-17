@@ -42,7 +42,7 @@ echo -e "$YELLOW Enter PASSWORD for your KEY $NORMAL"
 echo "-------------------------------------------------------------------"
 read -s PASS
 
-COIN=$(curl -s http://localhost:${RPC_PORT}/genesis | jq -r .result.genesis.app_state.crisis.constant_fee.denom)
+COIN=$(${BINARY} q staking params -o j | jq -r '.bond_denom')
 echo -e "$GREEN Enter Fees in ${COIN}.$NORMAL"
 read -p "FEES: " FEES
 echo -e "$GREEN Enter receiver address.$NORMAL"
