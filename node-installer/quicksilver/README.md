@@ -52,7 +52,7 @@ https://raw.githubusercontent.com/ingenuity-build/testnets/main/rhapsody/genesis
 ```
 Peers:
 ```
-none
+0e5f74c20ec3e90facdb4e4a5d20c21e01998345@65.108.204.119:26656
 ```
 Seed:
 ```
