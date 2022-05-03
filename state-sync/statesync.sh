@@ -27,9 +27,15 @@ backupQuestion() {
     backup
   elif [ "$ANSWERS" == "2" ]; then
     echo -e "$YELLOW The BACKUP setting is skipped. Сontinue...$NORMAL"
+    echo -e "$YELLOW Removing data...$NORMAL"
+    remove
   else
     echo -e "$YELLOW The BACKUP setting is skipped. Сontinue...$NORMAL"
   fi
+}
+remove() {
+  echo -e "$YELLOW Deleting old data...$NORMAL"
+  cd $HOME/${CONFIG_FOLDER}/data/; ls | grep -v 'priv_validator_state.json\|upgrade-info.json' | xargs rm -rf; cd
 }
 backup() {
   line
@@ -38,8 +44,7 @@ backup() {
   sudo systemctl stop ${SERVICE_NAME}
   echo -e "$YELLOW Creating backup...$NORMAL"
   cp -r $HOME/${CONFIG_FOLDER}/data $HOME/${CONFIG_FOLDER}/data_before_statesync
-  echo -e "$YELLOW Deleting old data...$NORMAL"
-  cd $HOME/${CONFIG_FOLDER}/data/; ls | grep -v 'priv_validator_state.json\|upgrade-info.json' | xargs rm -rf; cd
+  remove
 }
 statesync() {
   line
