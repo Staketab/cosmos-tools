@@ -15,22 +15,6 @@ SERVERIP="$(curl ifconfig.me)"
 line() {
   echo "-------------------------------------------------------------------"
 }
-# backupQuestion() {
-#   line
-#   echo -e "$GREEN BACKUP OPTION.$NORMAL"
-#   line
-#   echo -e "$RED 1$NORMAL -$YELLOW If you want to create backup and delete data folder.$NORMAL"
-#   echo -e "$RED 2$NORMAL -$YELLOW If you don't want to do anything with data folder.$NORMAL"
-#   line
-#   read -p "Your answer: " ANSWERS
-#   if [ "$ANSWERS" == "1" ]; then
-#     backup
-#   elif [ "$ANSWERS" == "2" ]; then
-#     echo -e "$YELLOW The BACKUP setting is skipped. Сontinue...$NORMAL"
-#   else
-#     echo -e "$YELLOW The BACKUP setting is skipped. Сontinue...$NORMAL"
-#   fi
-# }
 backup() {
   line
   echo -e "$YELLOW Stopping service...$NORMAL"
