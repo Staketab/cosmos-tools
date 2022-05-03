@@ -32,7 +32,6 @@ backupQuestion() {
     backup
   elif [ "$ANSWERS" == "2" ]; then
     echo -e "$YELLOW The BACKUP setting is skipped. Сontinue...$NORMAL"
-    echo -e "$YELLOW Removing data...$NORMAL"
     stopService
     remove
   else
