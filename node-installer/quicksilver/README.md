@@ -31,12 +31,12 @@ The run command should look like this:
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/node-installer/install.sh \
 && chmod +x install.sh \
-&& ./install.sh -g ingenuity-build -f quicksilver -b quicksilverd -c quicksilverd -v v0.1.1 \
+&& ./install.sh -g ingenuity-build -f quicksilver -b quicksilverd -c quicksilverd -v v0.1.10 \
 && rm -rf install.sh && . $HOME/.profile
 ```
 
 ## 3. Data for start the chain. 
-https://github.com/ingenuity-build/quicksilver/releases/tag/v0.1.1  
+https://github.com/ingenuity-build/quicksilver/releases/tag/v0.1.10  
 
 Binary link:
 ```
@@ -44,7 +44,7 @@ none
 ```
 Chain-id:
 ```
-quicktest-1
+quicktest-3
 ```  
 Genesis file:
 ```
