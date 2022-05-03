@@ -1,22 +1,13 @@
 # Statesync auto setup
 
-## Backup
-Backup your data if needed: (Example for Osmosis)
-```
-mkdir -p $HOME/.osmosisd/data_before_statesync
-sudo systemctl stop osmosisd
-cp -r $HOME/.osmosisd/data/* $HOME/.osmosisd/data_before_statesync
-```
-
 ## Statesync start:
-Specify HOST_PORT, CONFIG_FOLDER, SERVICE_NAME and BLOCKS in this line `bash -s HOST_PORT CONFIG_FOLDER SERVICE_NAME BLOCKS`  
-Example `bash -s http://111.222.333.444:26657 .osmosisd osmosisd 2000`  
+Specify HOST_PORT, CONFIG_FOLDER, SERVICE_NAME and BLOCKS in this line `./statesync.sh HOST_PORT CONFIG_FOLDER SERVICE_NAME BLOCKS`  
+Example `./statesync.sh http://111.222.333.444:26657 .osmosisd osmosisd 2000`  
 ```
-curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/state-sync/statesync.sh | bash -s \
-http://111.222.333.444:26657 \
-.osmosisd \
-osmosisd \
-2000
+wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/state-sync/statesync.sh \
+&& chmod +x statesync.sh \
+&& ./statesync.sh http://111.222.333.444:26657 .osmosisd osmosisd 2000 \
+&& rm -rf statesync.sh
 ```
 
 ## ! Important
