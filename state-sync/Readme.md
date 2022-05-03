@@ -2,12 +2,16 @@
 Specify HOST_PORT, CONFIG_FOLDER, SERVICE_NAME and BLOCKS in this line `bash -s HOST_PORT CONFIG_FOLDER SERVICE_NAME BLOCKS`  
 Example `bash -s http://111.222.333.444:26657 .osmosisd osmosisd 2000`  
 ```
-curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/state-sync/statesync.sh | bash -s http://111.222.333.444:26657 .osmosisd osmosisd 2000
+curl -s https://raw.githubusercontent.com/Staketab/cosmos-tools/main/state-sync/statesync.sh | bash -s \
+http://111.222.333.444:26657 \
+.osmosisd \
+osmosisd \
+2000
 ```
 
-## !Important
-## Next steps only for Osmosis, Stargaze
-After applying chunks and restoring state you need to change App version.
+### ! Important
+### Next steps only for Osmosis, Stargaze
+After applying chunks and restoring state you need to change App version. (Example for Osmosis)
 ### Stop the service.
 ```
 sudo systemctl stop osmosisd
