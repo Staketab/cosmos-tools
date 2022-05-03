@@ -15,6 +15,11 @@ SERVERIP="$(curl ifconfig.me)"
 line() {
   echo "-------------------------------------------------------------------"
 }
+stopService() {
+  line
+  echo -e "$YELLOW Stopping service...$NORMAL"
+  sudo systemctl stop ${SERVICE_NAME}
+}
 backupQuestion() {
   line
   echo -e "$GREEN BACKUP OPTION.$NORMAL"
@@ -28,6 +33,7 @@ backupQuestion() {
   elif [ "$ANSWERS" == "2" ]; then
     echo -e "$YELLOW The BACKUP setting is skipped. Сontinue...$NORMAL"
     echo -e "$YELLOW Removing data...$NORMAL"
+    stopService
     remove
   else
     echo -e "$YELLOW The BACKUP setting is skipped. Сontinue...$NORMAL"
@@ -38,10 +44,8 @@ remove() {
   cd $HOME/${CONFIG_FOLDER}/data/; ls | grep -v 'priv_validator_state.json\|upgrade-info.json' | xargs rm -rf; cd
 }
 backup() {
-  line
-  echo -e "$YELLOW Stopping service...$NORMAL"
+  stopService
   mkdir -p $HOME/${CONFIG_FOLDER}/data_before_statesync
-  sudo systemctl stop ${SERVICE_NAME}
   echo -e "$YELLOW Creating backup...$NORMAL"
   cp -r $HOME/${CONFIG_FOLDER}/data $HOME/${CONFIG_FOLDER}/data_before_statesync
   remove
