@@ -6,8 +6,7 @@ Example `./statesync.sh http://111.222.333.444:26657 .osmosisd osmosisd 2000`
 ```
 wget https://raw.githubusercontent.com/Staketab/cosmos-tools/main/state-sync/statesync.sh \
 && chmod +x statesync.sh \
-&& ./statesync.sh http://111.222.333.444:26657 .osmosisd osmosisd 2000 \
-&& rm -rf statesync.sh
+&& ./statesync.sh http://111.222.333.444:26657 .osmosisd osmosisd 2000
 ```
 
 ## ! Important
