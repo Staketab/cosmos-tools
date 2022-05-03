@@ -62,7 +62,7 @@ statesync() {
 }
 
 start() {
-  backupQuestion
+  backup
   statesync
   echo -e "$YELLOW Restarting...$NORMAL"
   sudo systemctl restart ${SERVICE_NAME}
