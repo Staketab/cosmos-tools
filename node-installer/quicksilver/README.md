@@ -62,6 +62,19 @@ minimum-gas-prices:
 ```
 0uqck
 ```
+State-sync RPC:
+```
+http://node01.quicktest-1.quicksilver.zone:26657
+```
+```
+http://node02.quicktest-1.quicksilver.zone:26657
+```
+```
+http://node03.quicktest-1.quicksilver.zone:26657
+```
+```
+http://node04.quicktest-1.quicksilver.zone:26657
+```
 
 ## 4. Service commands.
 Reload configuration change - `systemctl daemon-reload`  
