@@ -25,7 +25,7 @@ backupQuestion() {
   echo -e "$GREEN BACKUP OPTION.$NORMAL"
   line
   echo -e "$RED 1$NORMAL -$YELLOW If you want to create backup and delete data folder.$NORMAL"
-  echo -e "$RED 2$NORMAL -$YELLOW If you don't want to do anything with data folder.$NORMAL"
+  echo -e "$RED 2$NORMAL -$YELLOW If you don't want to do backup (! This point deletes the date folder anyway ).$NORMAL"
   line
   read -p "Your answer: " ANSWERS
   if [ "$ANSWERS" == "1" ]; then
@@ -36,6 +36,8 @@ backupQuestion() {
     remove
   else
     echo -e "$YELLOW The BACKUP setting is skipped. Сontinue...$NORMAL"
+    echo -e "$RED Process stopped...$NORMAL"
+    exit 1
   fi
 }
 remove() {
