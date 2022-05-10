@@ -24,8 +24,8 @@ backupQuestion() {
   line
   echo -e "$GREEN BACKUP OPTION.$NORMAL"
   line
-  echo -e "$RED 1$NORMAL -$YELLOW If you want to create backup and delete data folder.$NORMAL"
-  echo -e "$RED 2$NORMAL -$YELLOW If you don't want to do backup (! This point deletes the date folder anyway ).$NORMAL"
+  echo -e "$RED 1$NORMAL -$YELLOW If you want to create backup and delete DATA folder.$NORMAL"
+  echo -e "$RED 2$NORMAL -$YELLOW If you don't want to do backup (! This point deletes the DATA folder anyway ).$NORMAL"
   line
   read -p "Your answer: " ANSWERS
   if [ "$ANSWERS" == "1" ]; then
