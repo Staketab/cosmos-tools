@@ -6,7 +6,7 @@ RED="\033[31m"
 YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
-SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-2,impacthub-3,juno-1,kichain-2,stargaze-1,axelar-dojo-1,axelar-testnet-lisbon-3,umee-1,evmos_9001-2,omniflixhub-1,axelar-testnet-casablanca-1,gravity-bridge-3"
+SNAP_BINARIES="akashnet-2,sifchain-1,sentinelhub-2,desmos-mainnet,osmosis-1,bitcanna-1,oasis-2,impacthub-3,juno-1,kichain-2,stargaze-1,axelar-dojo-1,axelar-testnet-lisbon-3,umee-1,evmos_9001-2,omniflixhub-1,axelar-testnet-casablanca-1,gravity-bridge-3,Antora"
 # panacea-3
 
 function line {
@@ -118,6 +118,9 @@ elif [[ "${CHAIN}" == "axelar-testnet-casablanca-1" ]]; then
     unpackStaketab
 elif [[ "${CHAIN}" == "gravity-bridge-3" ]]; then
     SNAP_LINK=$(curl -s https://services.staketab.com/backend/gravity/ | jq -r .snap_link)
+    unpackStaketab
+elif [[ "${CHAIN}" == "Antora" ]]; then
+    SNAP_LINK=$(curl -s https://services.staketab.com/backend/idep/ | jq -r .snap_link)
     unpackStaketab
 else
     line
