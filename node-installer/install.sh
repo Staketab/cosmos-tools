@@ -102,7 +102,7 @@ function source {
     && git clone https://github.com/${GIT_NAME}/${GIT_FOLDER} \
     && cd ${GIT_FOLDER} \
     && git fetch \
-    && git checkout tags/${BIN_VER} \
+    && git checkout ${BIN_VER} \
     && make install
     if [ -f ${GOPATH}/bin/${BIN_NAME} ]; then
         echo -e "$GREEN ${BIN_NAME} found. Continue...$NORMAL"
