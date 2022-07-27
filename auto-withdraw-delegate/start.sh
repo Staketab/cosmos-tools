@@ -53,13 +53,13 @@ echo -e "$YELLOW Enter PASSWORD for your KEY $NORMAL"
 echo "-------------------------------------------------------------------"
 read -s PASS
 
-COIN=$(${BINARY} q staking params -o j | jq -r '.bond_denom')
+COIN=$(${BINARY} q staking params --node tcp://localhost:${RPC_PORT} -o j | jq -r '.bond_denom')
 echo -e "$GREEN Enter Fees in ${COIN}.$NORMAL"
 read -p "Fees: " FEES
 FEE=${FEES}${COIN}
 ADDRESS=$(echo $PASS | ${BINARY} keys show ${KEY_NAME} --output json | jq -r '.address')
 VALOPER=$(echo $PASS | ${BINARY} keys show ${ADDRESS} -a --bech val)
-CHAIN=$(${BINARY} status --node http://localhost:${RPC_PORT} 2>&1 | jq -r .NodeInfo.network)
+CHAIN=$(${BINARY} status --node tcp://localhost:${RPC_PORT} 2>&1 | jq -r .NodeInfo.network)
 
 echo "-------------------------------------------------------------------"
 echo -e "$YELLOW Check you Validator data: $NORMAL"
@@ -80,22 +80,22 @@ if [ "$ANSWER" == "yes" ]; then
     echo "-------------------------------------------------------------------"
     echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW Withdraw commission and rewards $NORMAL"
     echo "-------------------------------------------------------------------"
-    echo $PASS | ${BINARY} tx distribution withdraw-rewards ${VALOPER} --commission --from ${KEY_NAME} --gas auto --chain-id=${CHAIN} --fees ${FEE} --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
+    echo $PASS | ${BINARY} tx distribution withdraw-rewards ${VALOPER} --commission --from ${KEY_NAME} --gas auto --chain-id=${CHAIN} --fees ${FEE} --node tcp://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
 
     sleep 1m
 
-    AMOUNT=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node http://localhost:${RPC_PORT} --output json | jq -r '.balances[0].amount')
+    AMOUNT=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node tcp://localhost:${RPC_PORT} --output json | jq -r '.balances[0].amount')
     DELEGATE=$((AMOUNT - 1000000))
 
     if [[ $DELEGATE > 0 && $DELEGATE != "null" ]]; then
         echo "-------------------------------------------------------------------"
         echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW Stake ${DELEGATE} ${COIN} $NORMAL"
         echo "-------------------------------------------------------------------"
-        echo $PASS | ${BINARY} tx staking delegate ${VALOPER} ${DELEGATE}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --gas auto --fees ${FEE} --node http://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
+        echo $PASS | ${BINARY} tx staking delegate ${VALOPER} ${DELEGATE}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --gas auto --fees ${FEE} --node tcp://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
         sleep 30s
         echo "-------------------------------------------------------------------"
         echo -e "$GREEN Balance after delegation:$NORMAL"
-        BAL=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node http://localhost:${RPC_PORT} --output json | jq -r '.balances[0].amount')
+        BAL=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node tcp://localhost:${RPC_PORT} --output json | jq -r '.balances[0].amount')
         echo -e "$YELLOW ${BAL} ${COIN} $NORMAL"
         MSG=$(echo -e "${BINARY} | $(date +%F-%H-%M-%S) | Delegated: ${DELEGATE} ${COIN} | Balance after delegation: ${BAL} ${COIN}")
         sendTg ${MSG}
