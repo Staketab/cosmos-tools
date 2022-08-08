@@ -84,8 +84,7 @@ elif [ "$NEW_POWER" -lt "$POWER" ]; then
   sendTg ${MSG}
   sendDiscord ${MSG}
 else
-  echo -e "$RED Something wrong. Exited...$NORMAL"
-  exit 0
+  echo -e "$RED Something wrong. $NORMAL"
 fi
 done
 }
