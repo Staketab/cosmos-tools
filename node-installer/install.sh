@@ -508,10 +508,10 @@ function launch {
     line
     echo -e "$YELLOW Your Validator Moniker: $NORMAL$GREEN${MONIKER}$NORMAL$YELLOW, initialised.$NORMAL"
     echo -e "$YELLOW Your Validator NODE-ID: $NORMAL"
-    ${BIN_NAME} tendermint show-node-id
+    ${BIN_NAME} tendermint show-node-id --home $CONFIG_HOME
     line
     echo -e "$YELLOW Your full PEER: $NORMAL"
-    echo $(${BIN_NAME} tendermint show-node-id)'@'$(curl -s ifconfig.me)':'$(cat $HOME/.${CONFIG_FOLDER}/config/config.toml | sed -n '/Address to listen for incoming connection/{n;p;}' | sed 's/.*://; s/".*//')
+    echo $(${BIN_NAME} tendermint show-node-id --home $CONFIG_HOME)'@'$(curl -s ifconfig.me)':'$(cat $CONFIG_HOME/config/config.toml | sed -n '/Address to listen for incoming connection/{n;p;}' | sed 's/.*://; s/".*//')
     line
 
     sleep 5
