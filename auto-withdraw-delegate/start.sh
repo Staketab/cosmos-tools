@@ -57,6 +57,8 @@ COIN=$(${BINARY} q staking params --node tcp://localhost:${RPC_PORT} -o j | jq -
 echo -e "$GREEN Enter Fees in ${COIN}.$NORMAL"
 read -p "Fees: " FEES
 FEE=${FEES}${COIN}
+echo -e "$GREEN Enter how much tokens to leave at the address afted delegation.$NORMAL$RED Example: 1000000$NORMAL"
+read -p "Tokens: " COINS
 ADDRESS=$(echo $PASS | ${BINARY} keys show ${KEY_NAME} --output json | jq -r '.address')
 VALOPER=$(echo $PASS | ${BINARY} keys show ${ADDRESS} -a --bech val)
 CHAIN=$(${BINARY} status --node tcp://localhost:${RPC_PORT} 2>&1 | jq -r .NodeInfo.network)
@@ -80,18 +82,18 @@ if [ "$ANSWER" == "yes" ]; then
     echo "-------------------------------------------------------------------"
     echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW Withdraw commission and rewards $NORMAL"
     echo "-------------------------------------------------------------------"
-    echo $PASS | ${BINARY} tx distribution withdraw-rewards ${VALOPER} --commission --from ${KEY_NAME} --gas auto --chain-id=${CHAIN} --fees ${FEE} --node tcp://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
+    echo $PASS | ${BINARY} tx distribution withdraw-rewards ${VALOPER} --commission --from ${KEY_NAME} --gas auto --gas-adjustment 1.5 --chain-id=${CHAIN} --fees ${FEE} --node tcp://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
 
     sleep 1m
 
     AMOUNT=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node tcp://localhost:${RPC_PORT} --output json | jq -r '.balances[0].amount')
-    DELEGATE=$((AMOUNT - 1000000))
+    DELEGATE=$((AMOUNT - ${COINS}))
 
     if [[ $DELEGATE > 0 && $DELEGATE != "null" ]]; then
         echo "-------------------------------------------------------------------"
         echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW Stake ${DELEGATE} ${COIN} $NORMAL"
         echo "-------------------------------------------------------------------"
-        echo $PASS | ${BINARY} tx staking delegate ${VALOPER} ${DELEGATE}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --gas auto --fees ${FEE} --node tcp://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
+        echo $PASS | ${BINARY} tx staking delegate ${VALOPER} ${DELEGATE}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --gas auto --gas-adjustment 1.5 --fees ${FEE} --node tcp://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
         sleep 30s
         echo "-------------------------------------------------------------------"
         echo -e "$GREEN Balance after delegation:$NORMAL"
