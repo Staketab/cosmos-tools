@@ -7,9 +7,10 @@ YELLOW="\033[33m"
 GREEN="\033[32m"
 NORMAL="\033[0m"
 RPC=${1}
-CONFIG_FOLDER=${2}
-SERVICE_NAME=${3}
-BLOCKS=${4}
+BINARY=${2}
+CONFIG_FOLDER=${3}
+SERVICE_NAME=${4}
+BLOCKS=${5}
 SERVERIP="$(curl ifconfig.me)"
 
 line() {
@@ -41,8 +42,14 @@ backupQuestion() {
   fi
 }
 remove() {
-  echo -e "$YELLOW Deleting old data...$NORMAL"
-  cd $HOME/${CONFIG_FOLDER}/data/; ls | grep -v 'priv_validator_state.json\|upgrade-info.json' | xargs rm -rf; cd
+  cp -r $HOME/${CONFIG_FOLDER}/data/priv_validator_state.json $HOME/${CONFIG_FOLDER}/priv_validator_state.json
+  if [ -e $HOME/${CONFIG_FOLDER}/priv_validator_state.json ]; then
+    echo -e "$YELLOW Resetting chain data...$NORMAL"
+    ${BINARY} tendermint unsafe-reset-all --home $HOME/${CONFIG_FOLDER} --keep-addr-book
+  else
+    echo -e "$RED Process stopped...$NORMAL"
+    exit 1
+  fi
 }
 backup() {
   stopService
@@ -50,6 +57,9 @@ backup() {
   echo -e "$YELLOW Creating backup...$NORMAL"
   cp -r $HOME/${CONFIG_FOLDER}/data $HOME/${CONFIG_FOLDER}/data_before_statesync
   remove
+}
+copyJson() {
+  mv $HOME/${CONFIG_FOLDER}/priv_validator_state.json $HOME/${CONFIG_FOLDER}/data/priv_validator_state.json
 }
 statesync() {
   line
@@ -74,6 +84,7 @@ statesync() {
 start() {
   backupQuestion
   statesync
+  copyJson
   echo -e "$YELLOW Restarting...$NORMAL"
   sudo systemctl restart ${SERVICE_NAME}
   echo -e "$YELLOW Checking logs...$NORMAL"
