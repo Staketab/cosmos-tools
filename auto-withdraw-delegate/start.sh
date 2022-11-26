@@ -57,7 +57,7 @@ COIN=$(${BINARY} q staking params --node tcp://localhost:${RPC_PORT} -o j | jq -
 echo -e "$GREEN Enter Fees in ${COIN}.$NORMAL"
 read -p "Fees: " FEES
 FEE=${FEES}${COIN}
-echo -e "$GREEN Enter how much tokens to leave at the address afted delegation.$NORMAL$RED Example: 1000000$NORMAL"
+echo -e "$GREEN Enter how much tokens to leave at the address after delegation.$NORMAL$RED Example: 1000000$NORMAL"
 read -p "Tokens: " COINS
 ADDRESS=$(echo $PASS | ${BINARY} keys show ${KEY_NAME} --output json | jq -r '.address')
 VALOPER=$(echo $PASS | ${BINARY} keys show ${ADDRESS} -a --bech val)
