@@ -54,21 +54,25 @@ echo "-------------------------------------------------------------------"
 read -s PASS
 
 COIN=$(${BINARY} q staking params --node tcp://localhost:${RPC_PORT} -o j | jq -r '.bond_denom')
+BASE_DENOM=$(${BINARY} q staking params --node tcp://localhost:${RPC_PORT} -o j | jq -r '.bond_denom' | sed -e 's/^.\{1\}//')
+EXPONENT=$(${BINARY} q bank denom-metadata --node tcp://localhost:${RPC_PORT} --output json | jq -r '.metadatas[].denom_units[] | select(.denom=="'${BASE_DENOM}'") | .exponent')
 echo -e "$GREEN Enter Fees in ${COIN}.$NORMAL"
 read -p "Fees: " FEES
 FEE=${FEES}${COIN}
-echo -e "$GREEN Enter how much tokens to leave at the address after delegation.$NORMAL$RED Example: 1000000$NORMAL"
+echo -e "$GREEN Enter how much tokens to leave at the address after delegation (Exponent = ${EXPONENT}).$NORMAL$RED Example: 1000000$NORMAL"
 read -p "Tokens: " COINS
 ADDRESS=$(echo $PASS | ${BINARY} keys show ${KEY_NAME} --output json | jq -r '.address')
 VALOPER=$(echo $PASS | ${BINARY} keys show ${ADDRESS} -a --bech val)
 CHAIN=$(${BINARY} status --node tcp://localhost:${RPC_PORT} 2>&1 | jq -r .NodeInfo.network)
 
 echo "-------------------------------------------------------------------"
-echo -e "$YELLOW Check you Validator data: $NORMAL"
+echo -e "$YELLOW Check you Validator and Chain data: $NORMAL"
 echo -e "$GREEN Address: $ADDRESS $NORMAL"
 echo -e "$GREEN Valoper: $VALOPER $NORMAL"
 echo -e "$GREEN Chain: $CHAIN $NORMAL"
 echo -e "$GREEN Coin: $COIN $NORMAL"
+echo -e "$GREEN Exponent: $EXPONENT $NORMAL"
+echo -e "$GREEN Fee: $FEE $NORMAL"
 echo -e "$GREEN Key Name: $KEY_NAME $NORMAL"
 echo -e "$GREEN Sleep Time: $STIME $NORMAL"
 echo "-------------------------------------------------------------------"
@@ -86,18 +90,20 @@ if [ "$ANSWER" == "yes" ]; then
 
     sleep 1m
 
-    AMOUNT=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node tcp://localhost:${RPC_PORT} --output json | jq -r '.balances[0].amount')
+    AMOUNT=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node tcp://localhost:${RPC_PORT} --output json | jq -r '.balances[] | select(.denom=="'${COIN}'") | .amount')
+    echo "-------------------------------------------------------------------"
+    echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW Balance = ${AMOUNT} ${COIN} $NORMAL"
     DELEGATE=$((AMOUNT - ${COINS}))
 
     if [[ $DELEGATE > 0 && $DELEGATE != "null" ]]; then
         echo "-------------------------------------------------------------------"
-        echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW Stake ${DELEGATE} ${COIN} $NORMAL"
+        echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW To Stake = ${DELEGATE} ${COIN} $NORMAL"
         echo "-------------------------------------------------------------------"
         echo $PASS | ${BINARY} tx staking delegate ${VALOPER} ${DELEGATE}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --gas auto --gas-adjustment 1.5 --fees ${FEE} --node tcp://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
         sleep 30s
         echo "-------------------------------------------------------------------"
         echo -e "$GREEN Balance after delegation:$NORMAL"
-        BAL=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node tcp://localhost:${RPC_PORT} --output json | jq -r '.balances[0].amount')
+        BAL=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node tcp://localhost:${RPC_PORT} --output json | jq -r '.balances[] | select(.denom=="'${COIN}'") | .amount')
         echo -e "$YELLOW ${BAL} ${COIN} $NORMAL"
         MSG=$(echo -e "${BINARY} | $(date +%F-%H-%M-%S) | Delegated: ${DELEGATE} ${COIN} | Balance after delegation: ${BAL} ${COIN}")
         sendTg ${MSG}
