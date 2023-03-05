@@ -22,7 +22,7 @@ binary() {
 }
 configfolder() {
     CONFIG_FOLDER=${1}
-    export DAEMON_HOME="${HOME}/.${CONFIG_FOLDER}"
+    export DAEMON_HOME="${HOME}/${CONFIG_FOLDER}"
 }
 cosmovisor_version() {
     COSMOVISOR_VER=${1:-"v1.3.0"}
@@ -42,8 +42,8 @@ Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=true
 Environment=DAEMON_RESTART_AFTER_UPGRADE=true
 Environment=DAEMON_LOG_BUFFER_SIZE=512
 Environment=UNSAFE_SKIP_BACKUP=true
-Environment=DAEMON_HOME='${HOME}'/.'${CONFIG_FOLDER}'
-ExecStart='$(which cosmovisor)' run start '${FLAG}' --home '${HOME}'/.'${CONFIG_FOLDER}'
+Environment=DAEMON_HOME='${HOME}'/'${CONFIG_FOLDER}'
+ExecStart='$(which cosmovisor)' run start '${FLAG}' --home '${HOME}'/'${CONFIG_FOLDER}'
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
@@ -57,16 +57,16 @@ WantedBy=multi-user.target
     line
 }
 cosmVars() {
-    sudo /bin/bash -c  'echo "export PATH=$HOME/.'${CONFIG_FOLDER}'/cosmovisor/current/bin:\$PATH" >> $HOME/.profile'
+    sudo /bin/bash -c  'echo "export PATH=$HOME/'${CONFIG_FOLDER}'/cosmovisor/current/bin:\$PATH" >> $HOME/.profile'
     sudo /bin/bash -c  'echo "export BIN_NAME='${BIN_NAME}'" >> $HOME/.profile'
     sudo /bin/bash -c  'echo "export CONFIG_FOLDER='${CONFIG_FOLDER}'" >> $HOME/.profile'
     sudo /bin/bash -c  'echo "export DAEMON_NAME='${BIN_NAME}'" >> $HOME/.profile'
-    sudo /bin/bash -c  'echo "export DAEMON_HOME=$HOME/.'${CONFIG_FOLDER}'" >> $HOME/.profile'
+    sudo /bin/bash -c  'echo "export DAEMON_HOME=$HOME/'${CONFIG_FOLDER}'" >> $HOME/.profile'
     sudo /bin/bash -c  'echo "export DAEMON_ALLOW_DOWNLOAD_BINARIES=true" >> $HOME/.profile'
     sudo /bin/bash -c  'echo "export DAEMON_RESTART_AFTER_UPGRADE=true" >> $HOME/.profile'
     sudo /bin/bash -c  'echo "export DAEMON_LOG_BUFFER_SIZE=512" >> $HOME/.profile'
     export DAEMON_NAME="${BIN_NAME}"
-    export DAEMON_HOME="${HOME}/.${CONFIG_FOLDER}"
+    export DAEMON_HOME="${HOME}/${CONFIG_FOLDER}"
     . $HOME/.profile
 }
 versCosmovisor() {
@@ -94,7 +94,7 @@ versCosmovisor() {
 initCosmovisor() {
     cosmVars
     NAME=$(echo ${BIN_NAME})
-    PATHS=$(echo ${HOME}/.${CONFIG_FOLDER})
+    PATHS=$(echo ${HOME}/${CONFIG_FOLDER})
     if [ "$DAEMON_NAME" == "${NAME}" ] && [ "$DAEMON_HOME" == "${PATHS}" ]; then
         echo -e "$GREEN:: Checking vars:$NORMAL"
         line
@@ -128,8 +128,8 @@ compCosmovisor() {
     line
     read -p "Answer: " COSM_INSTALL_ANSWER
     if [ "$COSM_INSTALL_ANSWER" == "1" ]; then
-        LS_CUR="${HOME}/.${CONFIG_FOLDER}/cosmovisor/current"
-        UPGLS="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades"
+        LS_CUR="${HOME}/${CONFIG_FOLDER}/cosmovisor/current"
+        UPGLS="${HOME}/${CONFIG_FOLDER}/cosmovisor/upgrades"
         COSMBIN="$GOPATH/bin/cosmovisor"
         if [ -e $COSMBIN ]; then
             line
