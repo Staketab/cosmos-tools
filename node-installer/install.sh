@@ -57,7 +57,7 @@ After=network-online.target
 [Service]
 Type=simple
 User=$(whoami)
-ExecStart='${GOPATH}'/bin/'${BIN_NAME}' start '${FLAG}' --home '${HOME}'/.'${CONFIG_FOLDER}'
+ExecStart='${GOPATH}'/bin/'${BIN_NAME}' start '${FLAG}' --home '${HOME}'/'${CONFIG_FOLDER}'
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
@@ -82,8 +82,8 @@ Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=true
 Environment=DAEMON_RESTART_AFTER_UPGRADE=true
 Environment=DAEMON_LOG_BUFFER_SIZE=512
 Environment=UNSAFE_SKIP_BACKUP=true
-Environment=DAEMON_HOME='${HOME}'/.'${CONFIG_FOLDER}'
-ExecStart='$(which cosmovisor)' start '${FLAG}' --home '${HOME}'/.'${CONFIG_FOLDER}'
+Environment=DAEMON_HOME='${HOME}'/'${CONFIG_FOLDER}'
+ExecStart='$(which cosmovisor)' start '${FLAG}' --home '${HOME}'/'${CONFIG_FOLDER}'
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
@@ -228,7 +228,7 @@ function genesis {
     line
     read -p "Genesis link: " LINK2
     mkdir -p $HOME/tmp && cd $HOME/tmp
-    GENESIS_PATH="$HOME/.${CONFIG_FOLDER}/config/"
+    GENESIS_PATH="$HOME/${CONFIG_FOLDER}/config/"
     FILE="genesis.json"
     
     echo -e "$YELLOW :: Downloading file with Genesis...$NORMAL"
@@ -268,7 +268,7 @@ function genesis {
 
     line
     echo -e "$GREEN Checking genesis SHASUM -a 256:$NORMAL"
-    shasum -a 256 $HOME/.${CONFIG_FOLDER}/config/genesis.json
+    shasum -a 256 $HOME/${CONFIG_FOLDER}/config/genesis.json
     sleep 3
 }
 function seeds {
@@ -276,21 +276,21 @@ function seeds {
     echo -e "$GREEN Enter Seeds (Example: be3db0fe5ee7f764902dbcc75126a2e082cbf00c@seed-1.morpheus.desmos.network:26656)$NORMAL"
     line
     read -p "Seed: " SEED
-    sed -i.bak -E 's#^(seeds[[:space:]]+=[[:space:]]+).*$#\1"'$SEED'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
+    sed -i.bak -E 's#^(seeds[[:space:]]+=[[:space:]]+).*$#\1"'$SEED'"#' $HOME/${CONFIG_FOLDER}/config/config.toml
 }
 function peers {
     line
     echo -e "$GREEN Enter Peers (Validator or Sentry PEER) (Example: 728d59298dce64c72f13001f67a5b3e7fc080f91@135.181.201.2:26656)$NORMAL"
     line
     read -p "Persistent_peers: " PEERS
-    sed -i.bak -E 's#^(persistent_peers[[:space:]]+=[[:space:]]+).*$#\1"'$PEERS'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
+    sed -i.bak -E 's#^(persistent_peers[[:space:]]+=[[:space:]]+).*$#\1"'$PEERS'"#' $HOME/${CONFIG_FOLDER}/config/config.toml
 }
 function gas {
     line
     echo -e "$GREEN Enter minimum-gas-prices (Example: 0.025udaric)$NORMAL"
     line
     read -p "minimum-gas-prices: " GAS_PRICE
-    sed -i.bak -E 's#^(minimum-gas-prices[[:space:]]+=[[:space:]]+).*$#\1"'$GAS_PRICE'"#' $HOME/.${CONFIG_FOLDER}/config/app.toml
+    sed -i.bak -E 's#^(minimum-gas-prices[[:space:]]+=[[:space:]]+).*$#\1"'$GAS_PRICE'"#' $HOME/${CONFIG_FOLDER}/config/app.toml
 }
 function snapshot {
     sleep 2
@@ -353,21 +353,19 @@ function statesync-c {
     line
     sleep 3
 
-    #sed -i.bak -E 's#^(external_address[[:space:]]+=[[:space:]]+).*$#\1"'$SERVERIP':26656"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
-    sed -i.bak -E 's#^(rpc_servers[[:space:]]+=[[:space:]]+).*$#\1"'$RPC_STATE_1','$RPC_STATE_2'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
-    sed -i.bak -E 's#^(trust_height[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_HEIGHT'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
-    sed -i.bak -E 's#^(trust_hash[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_HASH'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
-    #sed -i.bak -E 's#^(trust_period[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_PERIOD'"#' $HOME/.${CONFIG_FOLDER}/config/config.toml
+    sed -i.bak -E 's#^(rpc_servers[[:space:]]+=[[:space:]]+).*$#\1"'$RPC_STATE_1','$RPC_STATE_2'"#' $HOME/${CONFIG_FOLDER}/config/config.toml
+    sed -i.bak -E 's#^(trust_height[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_HEIGHT'"#' $HOME/${CONFIG_FOLDER}/config/config.toml
+    sed -i.bak -E 's#^(trust_hash[[:space:]]+=[[:space:]]+).*$#\1"'$TRUST_HASH'"#' $HOME/${CONFIG_FOLDER}/config/config.toml
 
     # STATESYNC enabled
-    sed -i.bak -E 's#^(enable[[:space:]]+=[[:space:]]+).*$#\1'true'#' $HOME/.${CONFIG_FOLDER}/config/config.toml
+    sed -i.bak -E 's#^(enable[[:space:]]+=[[:space:]]+).*$#\1'true'#' $HOME/${CONFIG_FOLDER}/config/config.toml
 }
 function cosmVars {
-    sudo /bin/bash -c  'echo "export PATH=$HOME/.'${CONFIG_FOLDER}'/cosmovisor/current/bin:\$PATH" >> $HOME/.profile'
+    sudo /bin/bash -c  'echo "export PATH=$HOME/'${CONFIG_FOLDER}'/cosmovisor/current/bin:\$PATH" >> $HOME/.profile'
     sudo /bin/bash -c  'echo "export BIN_NAME='${BIN_NAME}'" >> $HOME/.profile'
     sudo /bin/bash -c  'echo "export CONFIG_FOLDER='${CONFIG_FOLDER}'" >> $HOME/.profile'
     sudo /bin/bash -c  'echo "export DAEMON_NAME='${BIN_NAME}'" >> $HOME/.profile'
-    sudo /bin/bash -c  'echo "export DAEMON_HOME=${HOME}/.'${CONFIG_FOLDER}'" >> $HOME/.profile'
+    sudo /bin/bash -c  'echo "export DAEMON_HOME=${HOME}/'${CONFIG_FOLDER}'" >> $HOME/.profile'
     sudo /bin/bash -c  'echo "export DAEMON_ALLOW_DOWNLOAD_BINARIES=true" >> $HOME/.profile'
     sudo /bin/bash -c  'echo "export DAEMON_RESTART_AFTER_UPGRADE=true" >> $HOME/.profile'
     sudo /bin/bash -c  'echo "export DAEMON_LOG_BUFFER_SIZE=512" >> $HOME/.profile'
@@ -409,10 +407,10 @@ function compCosmovisor {
     line
     read -p "Answer: " COSM_INSTALL_ANSWER
     if [ "$COSM_INSTALL_ANSWER" == "1" ]; then
-        LS_CUR="${HOME}/.${CONFIG_FOLDER}/cosmovisor/current"
-        GENBIN="${HOME}/.${CONFIG_FOLDER}/cosmovisor/genesis/bin"
-        UPGBIN="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades/bin"
-        UPGLS="${HOME}/.${CONFIG_FOLDER}/cosmovisor/upgrades"
+        LS_CUR="${HOME}/${CONFIG_FOLDER}/cosmovisor/current"
+        GENBIN="${HOME}/${CONFIG_FOLDER}/cosmovisor/genesis/bin"
+        UPGBIN="${HOME}/${CONFIG_FOLDER}/cosmovisor/upgrades/bin"
+        UPGLS="${HOME}/${CONFIG_FOLDER}/cosmovisor/upgrades"
         COSMBIN="$GOPATH/bin/cosmovisor"
         if [ -e $COSMBIN ]; then
             mkdir -p ${GENBIN} ${UPGBIN}
@@ -495,8 +493,8 @@ function launch {
     echo -e "$GREEN Enter your Moniker$NORMAL"
     line
     read -p "Moniker: " MONIKER
-    GENESIS_FILE="$HOME/.${CONFIG_FOLDER}/config/genesis.json"
-    CONFIG_HOME="$HOME/.${CONFIG_FOLDER}"
+    GENESIS_FILE="$HOME/${CONFIG_FOLDER}/config/genesis.json"
+    CONFIG_HOME="$HOME/${CONFIG_FOLDER}"
         if [ "$CHAIN" == "" ]; then
             rm -rf ${GENESIS_FILE}
             ${BIN_NAME} init $MONIKER --home $CONFIG_HOME
