@@ -97,7 +97,7 @@ if [ "$ANSWER" == "yes" ]; then
     echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW Balance = ${AMOUNT} ${COIN} $NORMAL"
     DELEGATE=$((AMOUNT - COINS))
 
-    if [[ $DELEGATE > 0 && $DELEGATE != "null" ]]; then
+    if [[ $DELEGATE > 0 ]] && [[ $DELEGATE != "null" ]] && [[ $DELEGATE -ge 0 ]]; then
         echo "-------------------------------------------------------------------"
         echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW To Stake = ${DELEGATE} ${COIN} $NORMAL"
         echo "-------------------------------------------------------------------"
