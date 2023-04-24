@@ -56,6 +56,8 @@ read -s PASS
 COIN=$(${BINARY} q staking params --node tcp://localhost:${RPC_PORT} -o j | jq -r '.bond_denom')
 BASE_DENOM=$(${BINARY} q staking params --node tcp://localhost:${RPC_PORT} -o j | jq -r '.bond_denom' | sed -e 's/^.\{1\}//')
 EXPONENT=$(${BINARY} q bank denom-metadata --node tcp://localhost:${RPC_PORT} --output json | jq -r '.metadatas[].denom_units[] | select(.denom=="'${BASE_DENOM}'") | .exponent')
+echo -e "$GREEN Enter Gas value. Example:$NORMAL$RED auto$NORMAL$GREEN or$NORMAL$RED 100000$NORMAL"
+read -p "Fees: " GAS
 echo -e "$GREEN Enter Fees in ${COIN}.$NORMAL"
 read -p "Fees: " FEES
 FEE=${FEES}${COIN}
@@ -86,20 +88,20 @@ if [ "$ANSWER" == "yes" ]; then
     echo "-------------------------------------------------------------------"
     echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW Withdraw commission and rewards $NORMAL"
     echo "-------------------------------------------------------------------"
-    echo $PASS | ${BINARY} tx distribution withdraw-rewards ${VALOPER} --commission --from ${KEY_NAME} --gas auto --gas-adjustment 1.5 --chain-id=${CHAIN} --fees ${FEE} --node tcp://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
+    echo $PASS | ${BINARY} tx distribution withdraw-rewards ${VALOPER} --commission --from ${KEY_NAME} --gas ${GAS} --gas-adjustment 1.5 --chain-id=${CHAIN} --fees ${FEE} --node tcp://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
 
-    sleep 1m
+    sleep 30s
 
     AMOUNT=$(${BINARY} query bank balances ${ADDRESS} --chain-id=${CHAIN} --node tcp://localhost:${RPC_PORT} --output json | jq -r '.balances[] | select(.denom=="'${COIN}'") | .amount')
     echo "-------------------------------------------------------------------"
     echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW Balance = ${AMOUNT} ${COIN} $NORMAL"
-    DELEGATE=$((AMOUNT - ${COINS}))
+    DELEGATE=$((AMOUNT - COINS))
 
     if [[ $DELEGATE > 0 && $DELEGATE != "null" ]]; then
         echo "-------------------------------------------------------------------"
         echo -e "$RED$(date +%F-%H-%M-%S)$NORMAL $YELLOW To Stake = ${DELEGATE} ${COIN} $NORMAL"
         echo "-------------------------------------------------------------------"
-        echo $PASS | ${BINARY} tx staking delegate ${VALOPER} ${DELEGATE}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --gas auto --gas-adjustment 1.5 --fees ${FEE} --node tcp://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
+        echo $PASS | ${BINARY} tx staking delegate ${VALOPER} ${DELEGATE}${COIN} --chain-id=${CHAIN} --from ${KEY_NAME} --gas ${GAS} --gas-adjustment 1.5 --fees ${FEE} --node tcp://localhost:${RPC_PORT} -y | grep "raw_log\|txhash"
         sleep 30s
         echo "-------------------------------------------------------------------"
         echo -e "$GREEN Balance after delegation:$NORMAL"
