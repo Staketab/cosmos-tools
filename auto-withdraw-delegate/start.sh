@@ -57,9 +57,9 @@ COIN=$(${BINARY} q staking params --node tcp://localhost:${RPC_PORT} -o j | jq -
 BASE_DENOM=$(${BINARY} q staking params --node tcp://localhost:${RPC_PORT} -o j | jq -r '.bond_denom' | sed -e 's/^.\{1\}//')
 EXPONENT=$(${BINARY} q bank denom-metadata --node tcp://localhost:${RPC_PORT} --output json | jq -r '.metadatas[].denom_units[] | select(.denom=="'${BASE_DENOM}'") | .exponent')
 echo -e "$GREEN Enter Gas value. Example:$NORMAL$RED auto$NORMAL$GREEN or$NORMAL$RED 100000$NORMAL"
-read -p "Fees: " GAS
+read -p "Gas value: " GAS
 echo -e "$GREEN Enter Fees in ${COIN}.$NORMAL"
-read -p "Fees: " FEES
+read -p "Fee: " FEES
 FEE=${FEES}${COIN}
 echo -e "$GREEN Enter how much tokens to leave at the address after delegation (Exponent = ${EXPONENT}).$NORMAL$RED Example: 1000000$NORMAL"
 read -p "Tokens: " COINS
