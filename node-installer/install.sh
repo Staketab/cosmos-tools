@@ -495,6 +495,15 @@ function launch {
     read -p "Moniker: " MONIKER
     GENESIS_FILE="$HOME/${CONFIG_FOLDER}/config/genesis.json"
     CONFIG_HOME="$HOME/${CONFIG_FOLDER}"
+    if [ "$BIN_NAME" == "uniond" ]; then
+        if [ "$CHAIN" == "" ]; then
+            rm -rf ${GENESIS_FILE}
+            ${BIN_NAME} init $MONIKER bn254 --home $CONFIG_HOME
+        else
+            rm -rf ${GENESIS_FILE}
+            ${BIN_NAME} init $MONIKER bn254 --chain-id $CHAIN --home $CONFIG_HOME
+        fi
+    else
         if [ "$CHAIN" == "" ]; then
             rm -rf ${GENESIS_FILE}
             ${BIN_NAME} init $MONIKER --home $CONFIG_HOME
@@ -502,6 +511,7 @@ function launch {
             rm -rf ${GENESIS_FILE}
             ${BIN_NAME} init $MONIKER --chain-id $CHAIN --home $CONFIG_HOME
         fi
+    fi
 
     line
     echo -e "$YELLOW Your Validator Moniker: $NORMAL$GREEN${MONIKER}$NORMAL$YELLOW, initialised.$NORMAL"
