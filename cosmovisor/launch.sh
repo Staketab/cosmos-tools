@@ -73,15 +73,15 @@ versCosmovisor() {
     line
     echo -e "$GREEN CHOOSE COSMOSVISOR VERSION: $NORMAL"
     line
-    echo -e "$RED 1$NORMAL -$YELLOW Cosmosvisor$NORMAL$RED v1.3.0 (Recommended)$NORMAL"
-    echo -e "$RED 2$NORMAL -$YELLOW Cosmosvisor$NORMAL$RED v1.2.0$NORMAL"
+    echo -e "$RED 1$NORMAL -$YELLOW Cosmosvisor$NORMAL$RED v1.6.0 (Recommended)$NORMAL"
+    echo -e "$RED 2$NORMAL -$YELLOW Cosmosvisor$NORMAL$RED v1.3.0$NORMAL"
     echo -e "$RED 3$NORMAL -$YELLOW Cosmosvisor$NORMAL$RED latest$NORMAL"
     line
     read -p "Answer: " COSM_VERSION
     if [ "$COSM_VERSION" == "1" ]; then
-        go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.3.0
+        go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.6.0
     elif [ "$COSM_VERSION" == "2" ]; then
-        go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.2.0
+        go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.3.0
     elif [ "$COSM_VERSION" == "3" ]; then
         go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@latest
     else
